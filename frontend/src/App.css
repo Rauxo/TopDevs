@@ -1,8 +1,8 @@
 /*Universal CSS*/
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* ===============================Design Navbar=============================== */
@@ -10,21 +10,24 @@
   height: 80px;
   display: flex;
   padding-left: 50px;
-  background-color: #b4aaec;
+  background-color: #0ff4ce;
   align-items: center;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
 }
 .NavLogo {
   width: 200px;
   height: 40px;
   object-fit: cover;
 }
-.searchBar{
+.searchBar {
   width: 100%;
   display: flex;
   justify-content: right;
   align-items: center;
 }
-.searchBar input{
+.searchBar input {
   height: 50px;
   width: 50%;
   border-top-left-radius: 10px;
@@ -32,14 +35,14 @@
   border: none;
   padding: 20px;
 }
-.navList{
-    display: flex;
-    list-style-type: none;
-    gap: 20px;
-    justify-content: right;
-    padding: 50px;
+.navList {
+  display: flex;
+  list-style-type: none;
+  gap: 20px;
+  justify-content: right;
+  padding: 50px;
 }
-.searchIcon_div{
+.searchIcon_div {
   background-color: rgb(35, 122, 202);
   height: 50px;
   border-top-right-radius: 10px;
@@ -49,19 +52,71 @@
   justify-content: center;
   align-items: center;
 }
-.searchIcon_div:hover{
+.searchIcon_div:hover {
   cursor: pointer;
-  background-color:  rgba(40, 129, 212, 0.824);
-  .searchIcon{
+  background-color: rgba(40, 129, 212, 0.824);
+  .searchIcon {
     width: 23px;
     height: 23px;
   }
 }
-.searchIcon{
+.searchIcon {
   width: 24px;
   height: 24px;
 }
-.navList li:hover{
+.navList li:hover {
   color: white;
+  cursor: pointer;
+}
+
+/*Design Home Page*/
+.HomeContainer {
+  background-image: url("./assets/HomeBg.jpg");
+  height: 100vh;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.secondContainer {
+  margin-top: 250px;
+  position: absolute;
+  width: 60%;
+  font-family: "Roboto", sans-serif;
+  color: rgb(6, 133, 88);
+  padding-left: 100px;
+  text-shadow: 2px 2px 6px gray;
+}
+.secondContainer h1 {
+  font-size: 50px;
+}
+.container-animation{
+  display: flex;
+  justify-content: right;
+}
+.HomeAnimation {
+  width: 600px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+}
+.HomeAnimationSource{
+  height: 550px;
+  width: 700px;
+}
+.getStarted{
+  margin-top: 50px;
+}
+.getStarted button{
+  height: 50px;
+  width: 150px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  background-color: rgb(35, 122, 202);
+  color: white;
+}
+.getStarted button:hover{
+  background-color: rgba(40, 129, 212, 0.824);
   cursor: pointer;
 }

@@ -1,5 +1,5 @@
-import React from 'react'
 import HomeScree from './pages/home/HomeScree'
+import "./App.css"
 
 function App() {
   return (

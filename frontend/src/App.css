@@ -1,0 +1,67 @@
+/*Universal CSS*/
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===============================Design Navbar=============================== */
+.navBar {
+  height: 80px;
+  display: flex;
+  padding-left: 50px;
+  background-color: #b4aaec;
+  align-items: center;
+}
+.NavLogo {
+  width: 200px;
+  height: 40px;
+  object-fit: cover;
+}
+.searchBar{
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+.searchBar input{
+  height: 50px;
+  width: 50%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: none;
+  padding: 20px;
+}
+.navList{
+    display: flex;
+    list-style-type: none;
+    gap: 20px;
+    justify-content: right;
+    padding: 50px;
+}
+.searchIcon_div{
+  background-color: rgb(35, 122, 202);
+  height: 50px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.searchIcon_div:hover{
+  cursor: pointer;
+  background-color:  rgba(40, 129, 212, 0.824);
+  .searchIcon{
+    width: 23px;
+    height: 23px;
+  }
+}
+.searchIcon{
+  width: 24px;
+  height: 24px;
+}
+.navList li:hover{
+  color: white;
+  cursor: pointer;
+}

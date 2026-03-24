@@ -1,8 +1,9 @@
 import React from 'react'
+import HomeScree from './pages/home/HomeScree'
 
 function App() {
   return (
-    <div>App</div>
+    <HomeScree/>
   )
 }
 

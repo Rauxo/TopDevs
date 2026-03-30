@@ -121,7 +121,33 @@
   cursor: pointer;
 }
 
+/*=======================================Design Our Goal Component========================================*/
+.OurGoalContainer{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background-color: rgba(168, 193, 189, 0.42);
+}
 
+.GoalTitle{
+  padding-top: 100px;
+}
+.GoalTitle h1{
+  font-size: 45px;
+  color: rgb(6, 133, 88);
+  text-shadow: 2px 2px 6px gray;
+}
+.goalParagraph{
+  padding-top: 20px;
+  padding-right: 50px;
+  text-align: justify;
+
+}
+.goalParagraph p{
+  font-size: 20px;
+  color: rgb(6, 133, 88);
+  text-shadow: 2px 2px 6px gray;
+}
 /*=======================================Design Footer========================================*/
 .footerContainer{
   display: flex;

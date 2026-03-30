@@ -68,6 +68,15 @@
   color: white;
   cursor: pointer;
 }
+.navList .li {
+  color: white;
+  text-decoration: none;
+  color: #000;
+}
+.navList .li:hover {
+  color: white;
+  cursor: pointer;
+}
 
 /*Design Home Page*/
 .HomeContainer {
@@ -215,4 +224,11 @@
   color: rgb(6, 133, 88);
   text-decoration: underline;
   cursor: pointer;
+}
+.notFountContainer{
+  height: 100%;
+  display: flex;
+  padding: 100px;
+  justify-content: center;
+  align-items: center;
 }

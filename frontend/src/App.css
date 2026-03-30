@@ -124,11 +124,18 @@
 /*=======================================Design Our Goal Component========================================*/
 .OurGoalContainer{
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   background-color: rgba(168, 193, 189, 0.42);
 }
-
+.goalImageContainer{
+  height: 100%;
+  width: 100%;
+}
+.goalCodingAnimation{
+  height: 500px;
+  width: 650px;
+}
 .GoalTitle{
   padding-top: 100px;
 }
@@ -144,10 +151,45 @@
 
 }
 .goalParagraph p{
-  font-size: 20px;
+  font-size: 22px;
   color: rgb(6, 133, 88);
   text-shadow: 2px 2px 6px gray;
 }
+
+
+/*=======================================Design Who We Are Component========================================*/
+.whoWeAreContainer{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  background-color: rgba(168, 193, 189, 0.42);
+}
+.whoWeAreTextContainer{
+  padding-top: 100px;
+  padding-left: 100px;
+}
+.whoWeAreTextContainer h1{
+  font-size: 45px;
+  color: rgb(6, 133, 88);
+  text-shadow: 2px 2px 6px gray;
+}
+.whoWeAreTextContainer p{
+  padding-top: 20px;
+  padding-right: 50px;
+  text-align: justify;
+  font-size: 22px;
+  color: rgb(6, 133, 88);
+  text-shadow: 2px 2px 6px gray;
+}
+.whoWeAreAnimation{
+  height: 100%;
+  width: 100%;
+}
+.whoWeAreLottieAnimation{
+  height: 500px;
+  width: 650px;
+}
+
 /*=======================================Design Footer========================================*/
 .footerContainer{
   display: flex;

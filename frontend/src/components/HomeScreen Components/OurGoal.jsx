@@ -16,11 +16,11 @@ function OurGoal() {
         <h1>Our Goal</h1>
         <div className="goalParagraph">
           <p>
-            Our goal is to simplify and digitize institute management by
-            providing a powerful and easy-to-use platform. We aim to help
-            administrators, staff, and students manage academic activities
-            efficiently, reduce manual work, and improve transparency in
-            attendance, fees, exams, and overall performance tracking.
+            Our goal is to bridge the gap between learning and hiring by
+            creating a platform where users can learn programming, practice
+            real-world coding problems, and showcase their skills. We aim to
+            build a system where talent is measured by performance, helping
+            developers grow and get hired based on their actual abilities.
           </p>
         </div>
       </div>

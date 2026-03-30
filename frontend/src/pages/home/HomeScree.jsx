@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../../Layout/Layout";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import OurGoal from "../../components/HomeScreen Components/OurGoal";
+import WhoWeAre from "../../components/HomeScreen Components/WhoWeAre";
 
 function HomeScree() {
   return (
@@ -22,6 +23,7 @@ function HomeScree() {
       </div>
       <div>
         <OurGoal/>
+        <WhoWeAre/>
       </div>
     </Layout>
   );

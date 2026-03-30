@@ -4,7 +4,7 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import OurGoal from "../../components/HomeScreen Components/OurGoal";
 import WhoWeAre from "../../components/HomeScreen Components/WhoWeAre";
 
-function HomeScree() {
+function HomeScreen() {
   return (
     <Layout>
       <div className="HomeContainer">
@@ -29,4 +29,4 @@ function HomeScree() {
   );
 }
 
-export default HomeScree;
+export default HomeScreen;

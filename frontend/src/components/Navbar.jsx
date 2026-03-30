@@ -13,6 +13,7 @@ function Navbar() {
       </div>
       <ul className='navList'>
         <li><Link to="/" className='li'>Home</Link></li>
+        <li><Link to="/jobs" className='li'>Jobs</Link></li>
         <li><Link to="/leaderboard" className='li'>Leaderboard</Link></li>
         <li><Link to="/profile" className='li'>Profile</Link></li>
       </ul>

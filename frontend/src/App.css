@@ -120,3 +120,31 @@
   background-color: rgba(40, 129, 212, 0.824);
   cursor: pointer;
 }
+
+
+/*=======================================Design Footer========================================*/
+.footerContainer{
+  display: flex;
+  background-color: #0ff4ce;
+}
+.legalLinks{
+  display: flex;
+  padding: 20px;
+}
+.copyRight{
+  padding: 20px;
+  color: rgb(6, 133, 88);
+}
+.legalLinks li{
+  list-style-type: none;
+  color: rgb(6, 133, 88);
+}
+.legalLinks ul {
+  display: flex;
+  gap: 20px;
+}
+.legalLinks li:hover{
+  color: rgb(6, 133, 88);
+  text-decoration: underline;
+  cursor: pointer;
+}

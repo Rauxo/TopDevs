@@ -19,6 +19,9 @@ function HomeScree() {
           </div>
         </div>
       </div>
+      <div>
+        Who We Are
+      </div>
     </Layout>
   );
 }

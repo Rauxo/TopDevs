@@ -1,6 +1,7 @@
 const userModel = require("../models/user.models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const blacklistModel = require("../models/blacklist.model");
 
 //controller to create account
 exports.createAccount = async (req, res) => {
@@ -99,6 +100,31 @@ exports.login = async (req, res) => {
     console.log(error);
     return res.status(500).json({
       message: "Something went wrong.",
+    });
+  }
+};
+
+//logout functionality
+exports.logout = async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
+
+    if (!token) {
+      return res.status(400).json({
+        message: "Token not found",
+      });
+    }
+
+    // Save token in blacklist
+    await blacklistModel.create({ token });
+
+    return res.status(200).json({
+      message: "Logged out successfully",
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      message: "Something went wrong",
     });
   }
 };

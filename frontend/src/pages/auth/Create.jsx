@@ -1,7 +1,29 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../API/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function Create() {
-    
+  const {register} = useContext(AuthContext)
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    email: "",
+    username: "",
+    password: "",
+  });
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await register(form);
+      alert("Account created successfully, please login");
+      navigate("/");
+    } catch (err) {
+      alert("Account Creation failed");
+    }
+  };
   return (
     <main className="px-4 md:px-8 min-h-screen flex flex-col items-center justify-center">
       <div className="max-w-md w-full">
@@ -10,7 +32,7 @@ function Create() {
             Create an account
           </h1>
 
-          <form className="space-y-6 mt-10">
+          <form onSubmit={handleSubmit} className="space-y-6 mt-10">
             <div>
               <label
                 htmlFor="email"
@@ -22,6 +44,8 @@ function Create() {
                 type="email"
                 id="email"
                 name="email"
+                value={form.email}
+                onChange={handleChange}
                 placeholder="john@readymadeui.com"
                 required
                 className="px-3 py-2.5 text-sm text-slate-900 rounded-md bg-white w-full outline-1 -outline-offset-1 outline-slate-300 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 dark:text-slate-50 dark:bg-neutral-700 dark:outline-neutral-600"
@@ -38,6 +62,8 @@ function Create() {
                 type="text"
                 id="username"
                 name="username"
+                value={form.username}
+                onChange={handleChange}
                 placeholder="username"
                 required
                 className="px-3 py-2.5 text-sm text-slate-900 rounded-md bg-white w-full outline-1 -outline-offset-1 outline-slate-300 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 dark:text-slate-50 dark:bg-neutral-700 dark:outline-neutral-600"
@@ -54,6 +80,8 @@ function Create() {
                 type="password"
                 id="password"
                 name="password"
+                value={form.password}
+                onChange={handleChange}
                 placeholder="••••••••"
                 required
                 className="px-3 py-2.5 text-sm text-slate-900 rounded-md bg-white w-full outline-1 -outline-offset-1 outline-slate-300 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 dark:text-slate-50 dark:bg-neutral-700 dark:outline-neutral-600"

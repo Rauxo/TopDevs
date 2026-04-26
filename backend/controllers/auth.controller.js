@@ -58,6 +58,7 @@ exports.createAccount = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { username, password } = req.body;
+    // console.log(`Useername is ${username} and password is ${password}`)
     //check all fields or not
     if (!username || !password) {
       return res.status(400).json({
@@ -85,10 +86,13 @@ exports.login = async (req, res) => {
       expiresIn: "7d",
     });
 
-    // Send response (without password)
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "strict",
+    });
+
     return res.status(200).json({
       message: "Login successful",
-      token,
       user: {
         _id: user._id,
         username: user.username,
@@ -107,7 +111,7 @@ exports.login = async (req, res) => {
 //logout functionality
 exports.logout = async (req, res) => {
   try {
-    const token = req.headers.authorization?.split(" ")[1];
+    const token = req.cookies.token;
 
     if (!token) {
       return res.status(400).json({
@@ -115,13 +119,15 @@ exports.logout = async (req, res) => {
       });
     }
 
-    // Save token in blacklist
+    // optional blacklist
     await blacklistModel.create({ token });
+
+    // clear cookie
+    res.clearCookie("token");
 
     return res.status(200).json({
       message: "Logged out successfully",
     });
-
   } catch (error) {
     return res.status(500).json({
       message: "Something went wrong",

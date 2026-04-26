@@ -5,28 +5,33 @@ const blacklistModel = require("../models/blacklist.model");
 exports.authMiddleware = async (req, res, next) => {
   try {
     //Token extract
-    const authHeader = req.headers.authorization;
+    // const authHeader = req.headers.authorization;
 
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    // if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    //   return res.status(401).json({
+    //     message: "Unauthorized: Token missing",
+    //   });
+    // }
+
+    const token = req.cookies.token;
+
+    if (!token) {
       return res.status(401).json({
         message: "Unauthorized: Token missing",
       });
     }
 
-    const token = authHeader.split(" ")[1];
-    //  BLACKLIST CHECK
+    // blacklist check
     const blacklisted = await blacklistModel.findOne({ token });
-
     if (blacklisted) {
       return res.status(401).json({
-        message: "Token is blacklisted. Please login again",
+        message: "Token is blacklisted",
       });
     }
 
-    //  Verify token
+    // verify
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // Check user exists
     const user = await userModel.findById(decoded.id).select("-password");
 
     if (!user) {
@@ -35,9 +40,7 @@ exports.authMiddleware = async (req, res, next) => {
       });
     }
 
-    // Attach user
     req.user = user;
-
     next();
   } catch (error) {
     return res.status(401).json({

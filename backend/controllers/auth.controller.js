@@ -6,46 +6,49 @@ const blacklistModel = require("../models/blacklist.model");
 //controller to create account
 exports.createAccount = async (req, res) => {
   try {
-    const { username, profileImg, email, password } = req.body;
+    const { username, email, password } = req.body;
 
-    //check all fields or not
+    // file se image milega
+   const profileImg = req.file ? req.file.path.replace(/\\/g, "/") : "";
+
     if (!username || !email || !password) {
       return res.status(400).json({
         message: "All fields are required",
       });
     }
-    //check is  existing
-    const Emailexisting = await userModel.findOne({ email: email });
-    const Usernameexisting = await userModel.findOne({ username: username });
+
+    const Emailexisting = await userModel.findOne({ email });
+    const Usernameexisting = await userModel.findOne({ username });
+
     if (Emailexisting) {
       return res.status(400).json({
-        message: "User email is already exist",
-      });
-    } else if (Usernameexisting) {
-      return res.status(400).json({
-        message: "username is already exist",
+        message: "User email already exists",
       });
     }
 
-    //Hash Password
+    if (Usernameexisting) {
+      return res.status(400).json({
+        message: "Username already exists",
+      });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
+
     const newUser = await userModel.create({
       username,
-      profileImg: profileImg || "",
-      email: email,
+      email,
       password: hashedPassword,
+      profileImg,
     });
-
-    const userResponse = {
-      _id: newUser._id,
-      username: newUser.username,
-      email: newUser.email,
-      profileImg: newUser.profileImg,
-    };
 
     return res.status(201).json({
       message: "User registered successfully",
-      user: userResponse,
+      user: {
+        _id: newUser._id,
+        username: newUser.username,
+        email: newUser.email,
+        profileImg: `http://localhost:5000/${newUser.profileImg}`,
+      },
     });
   } catch (error) {
     return res.status(500).json({

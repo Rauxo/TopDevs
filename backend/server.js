@@ -29,6 +29,7 @@ app.use(cors({
   origin: "http://localhost:5173",
   credentials: true
 }));
+app.use("/uploads", express.static("uploads"));
 //Routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/user",userRoutes)

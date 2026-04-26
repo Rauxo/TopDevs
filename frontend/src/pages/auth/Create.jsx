@@ -3,7 +3,7 @@ import { AuthContext } from "../../API/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 function Create() {
-  const {register} = useContext(AuthContext)
+  const { register } = useContext(AuthContext);
   const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
@@ -13,17 +13,23 @@ function Create() {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      await register(form);
-      alert("Account created successfully, please login");
-      navigate("/");
-    } catch (err) {
-      alert("Account Creation failed");
-    }
-  };
+  const formData = new FormData();
+  formData.append("email", form.email);
+  formData.append("username", form.username);
+  formData.append("password", form.password);
+  formData.append("profilePic", form.profilePic);
+
+  try {
+    await register(formData);
+    alert("Account created successfully");
+    navigate("/");
+  } catch (err) {
+    alert("Account Creation failed");
+  }
+};
   return (
     <main className="px-4 md:px-8 min-h-screen flex flex-col items-center justify-center">
       <div className="max-w-md w-full">
@@ -33,6 +39,13 @@ function Create() {
           </h1>
 
           <form onSubmit={handleSubmit} className="space-y-6 mt-10">
+            <input
+              type="file"
+              name="profilePic"
+              onChange={(e) =>
+                setForm({ ...form, profilePic: e.target.files[0] })
+              }
+            />
             <div>
               <label
                 htmlFor="email"

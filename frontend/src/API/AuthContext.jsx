@@ -31,7 +31,11 @@ export const AuthProvider = ({ children }) => {
     setUser(res.data.user);
   };
   const register = async (formData) => {
-    const res = await API.post("/auth/create", formData);
+    const res = await API.post("/auth/create", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return res.data;
   };
 

@@ -1,6 +1,6 @@
 const express = require("express");
 const { createAccount, login, logout } = require("../controllers/auth.controller");
-const upload = require("../middlewares/upload");
+const { uploadUserProfile } = require("../middlewares/upload");
 
 const router = express.Router();
 
@@ -8,7 +8,7 @@ const router = express.Router();
 router.post("/login",login);
 
 //register
-router.post("/create",upload.single("profilePic"),createAccount);
+router.post("/create", uploadUserProfile, createAccount);
 
 //logout
 router.post("/logout",logout)

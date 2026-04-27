@@ -1,6 +1,6 @@
 exports.getProfile = async (req, res) => {
   try {
-    const user = req.user;
+    const user = req.account;
 
     return res.status(200).json({
       message: "User profile",

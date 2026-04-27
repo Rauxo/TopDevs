@@ -7,6 +7,7 @@ const cors = require("cors")
 //import Routes
 const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes")
+const companyRoutes = require("./routes/company.routes")
 
 
 //config env
@@ -33,6 +34,7 @@ app.use("/uploads", express.static("uploads"));
 //Routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/user",userRoutes)
+app.use("/api/v1/company",companyRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}`);

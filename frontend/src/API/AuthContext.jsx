@@ -6,32 +6,60 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const hasFetched = useRef(false);
   const [user, setUser] = useState(null);
+  const [company, setCompany] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (hasFetched.current) return;
     hasFetched.current = true;
 
-    const loadUser = async () => {
+    const loadData = async () => {
       try {
-        const res = await API.get("/user/me");
-        setUser(res.data.user);
-      } catch (err) {
-        setUser(null);
+        // Try to load user
+        try {
+          const userRes = await API.get("/user/me");
+          setUser(userRes.data.user);
+        } catch (err) {
+          // If not user, try to load company
+          try {
+            const companyRes = await API.get("/company/myCompany");
+            setCompany(companyRes.data.company);
+          } catch (companyErr) {
+            setUser(null);
+            setCompany(null);
+          }
+        }
       } finally {
         setLoading(false);
       }
     };
 
-    loadUser();
+    loadData();
   }, []);
 
   const login = async (formData) => {
     const res = await API.post("/auth/login", formData);
     setUser(res.data.user);
+    setCompany(null);
   };
+
+  const companyLogin = async (formData) => {
+    const res = await API.post("/company/login", formData);
+    setCompany(res.data.company);
+    setUser(null);
+  };
+
   const register = async (formData) => {
     const res = await API.post("/auth/create", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return res.data;
+  };
+
+  const companyRegister = async (formData) => {
+    const res = await API.post("/company/create", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -43,13 +71,24 @@ export const AuthProvider = ({ children }) => {
     try {
       await API.post("/auth/logout");
       setUser(null);
+      setCompany(null);
+    } catch (err) {
+      console.error("Logout error", err);
+    }
+  };
+
+  const companyLogout = async () => {
+    try {
+      await API.post("/company/logout");
+      setCompany(null);
+      setUser(null);
     } catch (err) {
       console.error("Logout error", err);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, register, loading }}>
+    <AuthContext.Provider value={{ user, company, login, companyLogin, logout, companyLogout, register, companyRegister, loading }}>
       {children}
     </AuthContext.Provider>
   );

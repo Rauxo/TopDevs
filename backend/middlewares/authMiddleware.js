@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/user.models");
-const companyModel = require("../models/company.model");
 const blacklistModel = require("../models/blacklist.model");
 
 exports.authMiddleware = async (req, res, next) => {
@@ -21,27 +20,18 @@ exports.authMiddleware = async (req, res, next) => {
       });
     }
 
-    // verify token
+    // verify
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    let account = null;
+    const user = await userModel.findById(decoded.id).select("-password");
 
-    //  check user 
-    account = await userModel.findById(decoded.id).select("-password");
-
-    // check company
-    if (!account) {
-      account = await companyModel.findById(decoded.id).select("-password");
-    }
-
-    if (!account) {
+    if (!user) {
       return res.status(401).json({
-        message: "Account not found",
+        message: "User not found",
       });
     }
 
-    req.account = account;
-
+    req.user = user;
     next();
   } catch (error) {
     return res.status(401).json({

@@ -8,6 +8,7 @@ import CompanyCreate from "./pages/company/auth/CompanyCreate";
 import CompanyDashboard from "./pages/company/CompanyDashboard";
 import CompanyProtectedRoute from "./Protected Routes/CompanyProtectedRoute";
 import HomeScreen from "./pages/HomeScreen/HomeScreen";
+import NotFound from "./NotFound";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
             </CompanyProtectedRoute>
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

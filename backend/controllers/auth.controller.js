@@ -133,3 +133,28 @@ exports.logout = async (req, res) => {
     });
   }
 };
+
+exports.getProfile = async (req, res) => {
+  try {
+    return res.status(200).json({ user: req.user });
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+exports.updateUserProfile = async (req, res) => {
+  try {
+    const { username, email, about } = req.body;
+    const updateData = { username, email, about };
+    
+    if (req.file) {
+      updateData.profileImg = req.file.path.replace(/\\/g, "/");
+    }
+
+    const updatedUser = await userModel.findByIdAndUpdate(req.user._id, updateData, { new: true }).select("-password");
+    res.status(200).json({ message: "Profile updated successfully", user: updatedUser });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to update profile" });
+  }
+};
+

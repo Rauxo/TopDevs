@@ -3,13 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import OurGoal from "../../components/HomeScreen Components/OurGoal";
 import WhoWeAre from "../../components/HomeScreen Components/WhoWeAre";
-import Layout from "../../Layout/Layout";
-
 function HomeScreen() {
   const navigate = useNavigate();
 
   return (
-    <Layout>
+    <>
       {/* ── Hero Section ── */}
       <section className="relative min-h-screen w-full flex items-center overflow-hidden bg-gradient-to-br from-emerald-50 via-cyan-50 to-sky-100">
         {/* Decorative background blobs */}
@@ -66,7 +64,7 @@ function HomeScreen() {
       {/* ── Content Sections ── */}
       <OurGoal />
       <WhoWeAre />
-    </Layout>
+    </>
   );
 }
 

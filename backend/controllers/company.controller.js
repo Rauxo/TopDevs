@@ -116,3 +116,31 @@ exports.companyGetProfile = async (req, res) => {
     return res.status(500).json({ message: "Something went wrong" });
   }
 };
+
+exports.companyGetPublicProfile = async (req, res) => {
+  try {
+    const company = await companyModel.findById(req.params.id).select("-password");
+    if (!company) return res.status(404).json({ message: "Company not found" });
+    res.status(200).json({ company });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch company profile" });
+  }
+};
+
+exports.updateCompanyProfile = async (req, res) => {
+  try {
+    const { name, email, phone, address, about, founded, teamSize } = req.body;
+    const updateData = { name, email, phone, address, about, founded, teamSize };
+    
+    if (req.files && req.files.companyIcon) {
+      updateData.companyIcon = req.files.companyIcon[0].path.replace(/\\/g, "/");
+    }
+
+    const updatedCompany = await companyModel.findByIdAndUpdate(req.company._id, updateData, { new: true }).select("-password");
+    res.status(200).json({ message: "Profile updated successfully", company: updatedCompany });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to update profile" });
+  }
+};
+
+

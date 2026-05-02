@@ -52,6 +52,18 @@ const companySchema = new mongoose.Schema(
         },
       ],
     },
+    about: {
+      type: String,
+      default: "Leading tech innovation with a focus on delivering high-quality solutions.",
+    },
+    founded: {
+      type: String,
+      default: "2015",
+    },
+    teamSize: {
+      type: String,
+      default: "50-200",
+    },
   },
   {
     timestamps: true,

@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  about: {
+    type: String,
+    default: "Developer passionate about building beautiful and functional web applications. 🚀",
+  },
 },{
     timestamps:true
 });

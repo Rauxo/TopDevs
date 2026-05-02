@@ -126,6 +126,16 @@ function Navbar() {
               Jobs
             </Link>
           </li>
+          <li>
+            <Link to="/learn" className={isActive("/learn")}>
+              Learn
+            </Link>
+          </li>
+          <li>
+            <Link to="/leaderboard" className={isActive("/leaderboard")}>
+              Leaderboard
+            </Link>
+          </li>
 
           {/* Languages dropdown — learner only */}
           {isAuthenticated && role === "learner" && (
@@ -281,6 +291,18 @@ function Navbar() {
             className="block px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
           >
             💼 Jobs
+          </Link>
+          <Link
+            to="/learn"
+            className="block px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+          >
+            📚 Learn
+          </Link>
+          <Link
+            to="/leaderboard"
+            className="block px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+          >
+            🏆 Leaderboard
           </Link>
 
           {isAuthenticated && role === "learner" && (

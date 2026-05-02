@@ -39,14 +39,12 @@ exports.companyCreateAccount = async (req, res) => {
       isVerified: false, 
     });
 
+    const companyObj = newCompany.toObject();
+    delete companyObj.password;
+
     return res.status(201).json({
       message: "Company registered successfully",
-      company: {
-        _id: newCompany._id,
-        name: newCompany.name,
-        email: newCompany.email,
-        isVerified: newCompany.isVerified
-      },
+      company: companyObj,
     });
   } catch (error) {
     console.error(error);
@@ -81,15 +79,12 @@ exports.companyLogin = async (req, res) => {
       sameSite: "strict",
     });
 
+    const companyObj = company.toObject();
+    delete companyObj.password;
+
     return res.status(200).json({
       message: "Login successful",
-      company: {
-        _id: company._id,
-        name: company.name,
-        email: company.email,
-        isVerified: company.isVerified,
-        companyIcon: company.companyIcon
-      },
+      company: companyObj,
     });
   } catch (error) {
     console.error(error);

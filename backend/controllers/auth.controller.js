@@ -41,14 +41,12 @@ exports.createAccount = async (req, res) => {
       profileImg,
     });
 
+    const userObj = newUser.toObject();
+    delete userObj.password;
+
     return res.status(201).json({
       message: "User registered successfully",
-      user: {
-        _id: newUser._id,
-        username: newUser.username,
-        email: newUser.email,
-        profileImg: `http://localhost:5000/${newUser.profileImg}`,
-      },
+      user: userObj,
     });
   } catch (error) {
     return res.status(500).json({
@@ -94,14 +92,12 @@ exports.login = async (req, res) => {
       sameSite: "strict",
     });
 
+    const userObj = user.toObject();
+    delete userObj.password;
+
     return res.status(200).json({
       message: "Login successful",
-      user: {
-        _id: user._id,
-        username: user.username,
-        email: user.email,
-        profileImg: user.profileImg,
-      },
+      user: userObj,
     });
   } catch (error) {
     console.log(error);

@@ -7,14 +7,16 @@ import CompanyLogin from "./pages/company/auth/CompanyLogin";
 import CompanyCreate from "./pages/company/auth/CompanyCreate";
 import CompanyDashboard from "./pages/company/CompanyDashboard";
 import CompanyProtectedRoute from "./Protected Routes/CompanyProtectedRoute";
+import HomeScreen from "./pages/HomeScreen/HomeScreen";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<HomeScreen />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/create" element={<Create />} />
-        
+
         {/* User Protected Routes */}
         <Route
           path="/UserDashboard"

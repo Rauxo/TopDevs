@@ -74,12 +74,6 @@ function UserDashboard() {
               <div className="text-center md:text-left">
                 <span className="font-bold block md:inline">{applications.length}</span> <span className="text-slate-500">applications</span>
               </div>
-              <div className="text-center md:text-left">
-                <span className="font-bold block md:inline">0</span> <span className="text-slate-500">projects</span>
-              </div>
-              <div className="text-center md:text-left">
-                <span className="font-bold block md:inline">0</span> <span className="text-slate-500">certificates</span>
-              </div>
             </div>
 
             <div>

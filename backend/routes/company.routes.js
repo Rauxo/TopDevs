@@ -1,5 +1,5 @@
 const express = require("express");
-const { companyLogin, companyCreateAccount, companyLogout, companyGetProfile, companyGetPublicProfile, updateCompanyProfile } = require("../controllers/company.controller");
+const { companyLogin, companyCreateAccount, companyLogout, companyGetProfile, companyGetPublicProfile, updateCompanyProfile, searchCompanies } = require("../controllers/company.controller");
 const upload = require("../middlewares/upload");
 const { companyAuthMiddleware } = require("../middlewares/companyAuthMiddleware");
 
@@ -18,5 +18,6 @@ router.post("/logout", companyLogout);
 router.get("/myCompany", companyAuthMiddleware, companyGetProfile);
 router.put("/update-profile", companyAuthMiddleware, upload.fields([{ name: "companyIcon", maxCount: 1 }]), updateCompanyProfile);
 router.get("/public-profile/:id", companyGetPublicProfile);
+router.get("/search", searchCompanies);
 
 module.exports = router;

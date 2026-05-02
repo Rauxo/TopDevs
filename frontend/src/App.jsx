@@ -3,6 +3,7 @@ import Login from "./pages/auth/Login";
 import Create from "./pages/auth/Create";
 import UserDashboard from "./pages/userProfile/UserDashboard";
 import EditProfile from "./pages/userProfile/EditProfile";
+import PublicUserProfile from "./pages/userProfile/PublicUserProfile";
 import ProtectedRoute from "./Protected Routes/ProtectedRoute";
 import CompanyLogin from "./pages/company/auth/CompanyLogin";
 import CompanyCreate from "./pages/company/auth/CompanyCreate";
@@ -36,6 +37,7 @@ function App() {
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/search" element={<Search />} />
           <Route path="/company/profile/:id" element={<CompanyProfile />} />
+          <Route path="/user/profile/:id" element={<PublicUserProfile />} />
 
           {/* User Protected Routes */}
           <Route

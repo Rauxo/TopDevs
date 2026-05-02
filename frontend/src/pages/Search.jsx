@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import API from "../API/api";
-import Layout from "../Layout/Layout";
 
 const Search = () => {
-  const [results, setResults] = useState({ users: [], jobs: [] });
+  const [results, setResults] = useState({ users: [] });
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+  const navigate = useNavigate();
   const query = new URLSearchParams(location.search).get("q");
 
   useEffect(() => {
@@ -18,17 +18,10 @@ const Search = () => {
   const handleSearch = async () => {
     setLoading(true);
     try {
-      // Assuming we have a search endpoint or we search manually
-      // For now, let's fetch all jobs and filter, and maybe we need a user search endpoint
-      const jobRes = await API.get("/job/all");
-      const filteredJobs = jobRes.data.jobs.filter(job => 
-        job.jobTitle.toLowerCase().includes(query.toLowerCase()) ||
-        job.company?.name.toLowerCase().includes(query.toLowerCase()) ||
-        job.location.toLowerCase().includes(query.toLowerCase())
-      );
-      
-      // Placeholder for user search
-      setResults({ users: [], jobs: filteredJobs });
+      // Search Users Only
+      const userRes = await API.get(`/auth/search?q=${query}`);
+      const foundUsers = userRes.data.users || [];
+      setResults({ users: foundUsers });
     } catch (err) {
       console.error("Search error", err);
     } finally {
@@ -39,49 +32,57 @@ const Search = () => {
   return (
     <div className="min-h-screen bg-slate-50 py-12 px-6">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-extrabold text-slate-900 mb-8">
-          Search results for "{query}"
-        </h1>
+        <div className="mb-12">
+           <h1 className="text-3xl md:text-4xl font-black text-slate-900 mb-2">User Search</h1>
+           <p className="text-slate-500 font-medium">Showing people matching "{query}"</p>
+        </div>
 
         {loading ? (
-          <div className="flex justify-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+          <div className="flex flex-col items-center justify-center py-32 gap-4">
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-emerald-600 border-t-transparent"></div>
+            <p className="text-slate-500 font-bold animate-pulse text-sm uppercase tracking-widest">Searching platform...</p>
           </div>
         ) : (
-          <div className="space-y-12">
-            {/* Jobs Results */}
+          <div className="space-y-16">
             <section>
-              <h2 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-                <span>💼</span> Jobs ({results.jobs.length})
+              <h2 className="text-xl font-bold text-slate-800 mb-8 flex items-center gap-3">
+                <span className="p-2 bg-blue-100 rounded-lg">👤</span> 
+                Users Found ({results.users.length})
               </h2>
-              {results.jobs.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {results.jobs.map((job) => (
-                    <Link
-                      to={`/jobs/${job._id}`}
-                      key={job._id}
-                      className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all no-underline text-inherit"
+              {results.users.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {results.users.map((u) => (
+                    <div
+                      key={u._id}
+                      className="bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col items-center text-center group"
                     >
-                      <h3 className="font-bold text-slate-900 mb-1">{job.jobTitle}</h3>
-                      <p className="text-xs text-slate-500 mb-4">{job.company?.name}</p>
-                      <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-50">
-                        <span className="text-xs text-slate-400">{job.location}</span>
-                        <span className="text-xs font-bold text-emerald-600">View →</span>
+                      <div className="relative mb-6">
+                        <div className="w-24 h-24 rounded-full p-1 bg-gradient-to-tr from-emerald-400 to-blue-500 transition-transform group-hover:scale-105">
+                           <img
+                            src={u.profileImg ? `http://localhost:5000/${u.profileImg}` : "https://via.placeholder.com/150"}
+                            alt={u.username}
+                            className="w-full h-full rounded-full object-cover bg-white"
+                          />
+                        </div>
                       </div>
-                    </Link>
+                      <h3 className="font-black text-slate-900 text-lg mb-1">{u.username || "Unknown User"}</h3>
+                      <p className="text-xs text-slate-400 font-medium mb-6 line-clamp-1">{u.about || "No bio yet."}</p>
+                      <button
+                        onClick={() => navigate(`/user/profile/${u._id}`)}
+                        className="w-full py-3 bg-slate-900 text-white font-bold text-xs rounded-2xl hover:bg-emerald-600 shadow-lg shadow-slate-100 transition-all cursor-pointer border-none"
+                      >
+                        View Profile
+                      </button>
+                    </div>
                   ))}
                 </div>
               ) : (
-                <p className="text-slate-500 italic">No jobs found matching "{query}"</p>
+                <div className="bg-white rounded-[32px] py-20 px-6 text-center border border-slate-100">
+                   <div className="text-5xl mb-4">🔍</div>
+                  <p className="text-slate-500 font-bold">No users matched your query.</p>
+                  <p className="text-slate-400 text-sm mt-2">Try searching for a different name or username.</p>
+                </div>
               )}
-            </section>
-
-            {/* User Results Placeholder */}
-            <section>
-              <h2 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-                <span>👤</span> Users
-              </h2>
-              <p className="text-slate-500 italic">User search is coming soon!</p>
             </section>
           </div>
         )}

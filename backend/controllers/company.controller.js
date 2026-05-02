@@ -143,4 +143,23 @@ exports.updateCompanyProfile = async (req, res) => {
   }
 };
 
+exports.searchCompanies = async (req, res) => {
+  try {
+    const { q } = req.query;
+    if (!q) return res.status(200).json({ companies: [] });
+    
+    const companies = await companyModel.find({
+      $or: [
+        { name: { $regex: q, $options: "i" } },
+        { address: { $regex: q, $options: "i" } }
+      ]
+    }).select("name companyIcon about address");
+    
+    res.status(200).json({ companies });
+  } catch (error) {
+    res.status(500).json({ message: "Search failed" });
+  }
+};
+
+
 

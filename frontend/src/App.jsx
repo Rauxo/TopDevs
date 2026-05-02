@@ -22,6 +22,9 @@ import Search from "./pages/Search";
 import Layout from "./Layout/Layout";
 import Learn from "./pages/learn/Learn";
 import Leaderboard from "./pages/leaderboard/Leaderboard";
+import TermsConditions from "./pages/legal/TermsConditions";
+import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
+import ContactUs from "./pages/ContactUs";
 
 function App() {
   return (
@@ -38,6 +41,9 @@ function App() {
           <Route path="/search" element={<Search />} />
           <Route path="/company/profile/:id" element={<CompanyProfile />} />
           <Route path="/user/profile/:id" element={<PublicUserProfile />} />
+          <Route path="/terms" element={<TermsConditions />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/contact" element={<ContactUs />} />
 
           {/* User Protected Routes */}
           <Route

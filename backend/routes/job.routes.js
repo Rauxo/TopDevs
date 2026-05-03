@@ -8,6 +8,7 @@ const {
   getCompanyJobs,
   getJobApplications,
   getUserApplications,
+  updateApplicationStatus,
 } = require("../controllers/job.controller");
 const { authMiddleware } = require("../middlewares/authMiddleware");
 const { companyAuthMiddleware } = require("../middlewares/companyAuthMiddleware");
@@ -21,6 +22,7 @@ router.get("/detail/:id", getJobById);
 router.post("/create", companyAuthMiddleware, createJob);
 router.get("/company-jobs", companyAuthMiddleware, getCompanyJobs);
 router.get("/applications/:jobId", companyAuthMiddleware, getJobApplications);
+router.put("/update-status/:id", companyAuthMiddleware, updateApplicationStatus);
 
 // User routes
 router.post("/apply", authMiddleware, upload.single("resume"), applyJob);

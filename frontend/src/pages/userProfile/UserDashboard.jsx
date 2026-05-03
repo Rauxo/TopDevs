@@ -1,13 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../API/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
-import { ClipboardList, Bookmark, Users } from "lucide-react";
+import { ClipboardList, FolderGit2, Zap, CheckCircle2 } from "lucide-react";
 import API from "../../API/api";
 
 function UserDashboard() {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("applications");
+  const [activeTab, setActiveTab] = useState("active");
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -43,7 +43,7 @@ function UserDashboard() {
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-20 mb-12">
           {/* Avatar */}
           <div className="relative group">
-            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600">
+            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-tr from-emerald-400 via-emerald-500 to-cyan-500">
               <div className="w-full h-full rounded-full p-1 bg-white">
                 <img
                   src={`http://localhost:5000/${user.profileImg}`}
@@ -89,50 +89,82 @@ function UserDashboard() {
 
         {/* Tabs */}
         <div className="border-t border-slate-200">
-          <div className="flex justify-center gap-12 -mt-px">
+          <div className="flex justify-center gap-8 md:gap-12 -mt-px flex-wrap">
             <button
-              onClick={() => setActiveTab("applications")}
-              className={`flex items-center gap-2 py-4 text-xs font-bold uppercase tracking-widest transition-colors border-t ${
-                activeTab === "applications" ? "border-slate-800 text-slate-800" : "border-transparent text-slate-400"
+              onClick={() => setActiveTab("projects")}
+              className={`flex items-center gap-2 py-4 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors border-t ${
+                activeTab === "projects" ? "border-emerald-600 text-emerald-600" : "border-transparent text-slate-400"
               }`}
             >
-              <ClipboardList size={14} /> Applications
+              <FolderGit2 size={14} /> Projects
             </button>
             <button
-              onClick={() => setActiveTab("saved")}
-              className={`flex items-center gap-2 py-4 text-xs font-bold uppercase tracking-widest transition-colors border-t ${
-                activeTab === "saved" ? "border-slate-800 text-slate-800" : "border-transparent text-slate-400"
+              onClick={() => setActiveTab("active")}
+              className={`flex items-center gap-2 py-4 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors border-t ${
+                activeTab === "active" ? "border-emerald-600 text-emerald-600" : "border-transparent text-slate-400"
               }`}
             >
-              <Bookmark size={14} /> Saved
+              <Zap size={14} /> Active Applications
             </button>
             <button
-              onClick={() => setActiveTab("tagged")}
-              className={`flex items-center gap-2 py-4 text-xs font-bold uppercase tracking-widest transition-colors border-t ${
-                activeTab === "tagged" ? "border-slate-800 text-slate-800" : "border-transparent text-slate-400"
+              onClick={() => setActiveTab("status")}
+              className={`flex items-center gap-2 py-4 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors border-t ${
+                activeTab === "status" ? "border-emerald-600 text-emerald-600" : "border-transparent text-slate-400"
               }`}
             >
-              <Users size={14} /> Tagged
+              <CheckCircle2 size={14} /> Application Status
             </button>
           </div>
         </div>
 
         {/* Tab Content */}
         <div className="mt-8">
-          {activeTab === "applications" && (
+          {activeTab === "projects" && (
+             <div className="text-center py-20 bg-slate-50 rounded-[32px] border border-dashed border-slate-200">
+               <div className="text-slate-300 mb-4 flex justify-center">
+                 <FolderGit2 size={48} />
+               </div>
+               <p className="text-slate-400 italic">No projects showcased yet.</p>
+             </div>
+          )}
+
+          {(activeTab === "active" || activeTab === "status") && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {loading ? (
                 <div className="col-span-full text-center py-10">Loading applications...</div>
-              ) : applications.length > 0 ? (
-                applications.map((app) => (
-                  <div key={app._id} className="p-5 border border-slate-100 rounded-xl bg-slate-50 hover:bg-white hover:shadow-md transition-all">
+              ) : (activeTab === "active" ? applications.filter(a => !a.status || a.status === "Applied" || a.status === "Pending") : applications).length > 0 ? (
+                (activeTab === "active" ? applications.filter(a => !a.status || a.status === "Applied" || a.status === "Pending") : applications).map((app) => (
+                  <div key={app._id} className="p-5 border border-slate-100 rounded-xl bg-slate-50 hover:bg-white hover:shadow-md transition-all flex flex-col">
                     <div className="flex justify-between items-start mb-3">
-                      <h3 className="font-bold text-slate-900">{app.job?.jobTitle}</h3>
-                      <span className="px-2 py-1 bg-emerald-100 text-emerald-700 text-[10px] font-bold uppercase rounded">Applied</span>
+                      <h3 className="font-bold text-slate-900 text-base">{app.job?.jobTitle}</h3>
+                      <span className={`px-2 py-1 text-[10px] font-bold uppercase rounded ${
+                        app.status === "Accepted" ? "bg-emerald-100 text-emerald-700" :
+                        app.status === "Rejected" ? "bg-red-100 text-red-700" :
+                        "bg-blue-100 text-blue-700"
+                      }`}>
+                        {app.status || "Applied"}
+                      </span>
                     </div>
-                    <p className="text-xs text-slate-500 mb-4">{new Date(app.createdAt).toLocaleDateString()}</p>
-                    <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-full bg-slate-200"></div>
+
+                    <div className="flex items-center gap-2 mb-3">
+                      {app.job?.company?.companyIcon ? (
+                        <img 
+                          src={`http://localhost:5000/${app.job.company.companyIcon}`} 
+                          alt="company" 
+                          className="w-5 h-5 rounded object-cover border border-slate-100"
+                        />
+                      ) : (
+                        <div className="w-5 h-5 rounded bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold text-[10px]">
+                          {app.job?.company?.name?.charAt(0) || "J"}
+                        </div>
+                      )}
+                      <span className="text-xs font-bold text-slate-500">{app.job?.company?.name || "Unknown Company"}</span>
+                    </div>
+
+                    <p className="text-[10px] text-slate-400 mb-4">{new Date(app.createdAt).toLocaleDateString()}</p>
+                    
+                    <div className="mt-auto pt-3 border-t border-slate-100 flex items-center gap-2">
+                      <Zap size={14} className="text-slate-400" />
                       <span className="text-xs font-medium text-slate-600">{app.job?.location}</span>
                     </div>
                   </div>
@@ -142,15 +174,12 @@ function UserDashboard() {
                   <div className="mb-4">
                     <ClipboardList size={64} />
                   </div>
-                  <p className="text-xl font-light">No job applications yet</p>
-                  <button onClick={() => navigate("/jobs")} className="mt-4 text-blue-500 font-bold text-sm">Find your first job</button>
+                  <p className="text-xl font-light">No applications found</p>
+                  {activeTab === "active" && (
+                    <button onClick={() => navigate("/jobs")} className="mt-4 text-emerald-600 font-bold text-sm hover:underline">Find your first job</button>
+                  )}
                 </div>
               )}
-            </div>
-          )}
-          {activeTab !== "applications" && (
-            <div className="text-center py-20 text-slate-400">
-              <p className="text-xl font-light">Nothing to show here yet</p>
             </div>
           )}
         </div>

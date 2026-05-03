@@ -39,6 +39,11 @@ const jobApplicationSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    status: {
+      type: String,
+      enum: ["Applied", "Pending", "Accepted", "Rejected"],
+      default: "Applied",
+    },
   },
   { timestamps: true }
 );

@@ -112,9 +112,41 @@ exports.getJobApplications = async (req, res) => {
 
 exports.getUserApplications = async (req, res) => {
   try {
-    const applications = await jobApplicationModel.find({ user: req.user._id }).populate("job");
+    const applications = await jobApplicationModel
+      .find({ user: req.user._id })
+      .populate({
+        path: "job",
+        populate: {
+          path: "company",
+          select: "name email companyIcon",
+        },
+      });
     res.status(200).json({ applications });
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch your applications" });
+  }
+};
+
+exports.updateApplicationStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    if (!["Applied", "Pending", "Accepted", "Rejected"].includes(status)) {
+      return res.status(400).json({ message: "Invalid status" });
+    }
+
+    const application = await jobApplicationModel.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+
+    if (!application) return res.status(404).json({ message: "Application not found" });
+
+    res.status(200).json({ message: "Status updated successfully", application });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to update status" });
   }
 };

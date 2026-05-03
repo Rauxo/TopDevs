@@ -40,7 +40,7 @@ const PublicUserProfile = () => {
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-20 mb-12">
           {/* Avatar */}
           <div className="relative group">
-            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600">
+            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-tr from-emerald-400 via-emerald-500 to-cyan-500">
               <div className="w-full h-full rounded-full p-1 bg-white">
                 <img
                   src={`http://localhost:5000/${user.profileImg}`}
@@ -56,12 +56,7 @@ const PublicUserProfile = () => {
             <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">
               <h1 className="text-2xl font-light text-slate-800">{user.username}</h1>
               <div className="flex gap-2 justify-center">
-                <button className="px-6 py-1.5 bg-emerald-600 text-white font-bold text-sm rounded-lg transition-colors">
-                  Follow
-                </button>
-                <button className="px-6 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-sm rounded-lg transition-colors">
-                  Message
-                </button>
+                {/* Follow and Message buttons removed as requested */}
               </div>
             </div>
 
@@ -79,17 +74,10 @@ const PublicUserProfile = () => {
           </div>
         </div>
 
-        {/* Tabs Placeholder */}
         <div className="border-t border-slate-200">
-          <div className="flex justify-center gap-12 -mt-px">
-            <div className="flex items-center gap-2 py-4 text-xs font-bold uppercase tracking-widest border-t border-slate-800 text-slate-800">
+          <div className="flex justify-center -mt-px">
+            <div className="flex items-center gap-2 py-4 text-xs font-bold uppercase tracking-widest border-t border-emerald-600 text-emerald-600">
               <Image size={14} /> Posts
-            </div>
-            <div className="flex items-center gap-2 py-4 text-xs font-bold uppercase tracking-widest border-t border-transparent text-slate-400">
-              <Film size={14} /> Reels
-            </div>
-            <div className="flex items-center gap-2 py-4 text-xs font-bold uppercase tracking-widest border-t border-transparent text-slate-400">
-              <Users size={14} /> Tagged
             </div>
           </div>
         </div>

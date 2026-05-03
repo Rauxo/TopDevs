@@ -6,7 +6,7 @@ import { AuthContext } from "../../API/AuthContext";
 const JobDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
+  const { user, loading: authLoading } = useContext(AuthContext);
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
   const [applying, setApplying] = useState(false);
@@ -82,7 +82,7 @@ const JobDetail = () => {
     }
   };
 
-  if (loading) return (
+  if (loading || authLoading) return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
     </div>
@@ -120,17 +120,29 @@ const JobDetail = () => {
                   </div>
                 </div>
               </div>
-              <button
-                onClick={() => !alreadyApplied && setShowModal(true)}
-                disabled={alreadyApplied}
-                className={`px-10 py-4 font-bold rounded-2xl shadow-lg transition-all ${
-                  alreadyApplied 
-                    ? "bg-slate-200 text-slate-500 cursor-not-allowed shadow-none" 
-                    : "bg-emerald-600 text-white hover:bg-emerald-700 shadow-emerald-200 hover:-translate-y-1"
-                }`}
-              >
-                {alreadyApplied ? "Already Applied" : "Apply for this Job"}
-              </button>
+              {user ? (
+                <button
+                  onClick={() => !alreadyApplied && setShowModal(true)}
+                  disabled={alreadyApplied}
+                  className={`px-10 py-4 font-bold rounded-2xl shadow-lg transition-all ${
+                    alreadyApplied 
+                      ? "bg-slate-200 text-slate-500 cursor-not-allowed shadow-none" 
+                      : "bg-emerald-600 text-white hover:bg-emerald-700 shadow-emerald-200 hover:-translate-y-1"
+                  }`}
+                >
+                  {alreadyApplied ? "Already Applied" : "Apply for this Job"}
+                </button>
+              ) : (
+                <div className="flex flex-col items-center md:items-end gap-3">
+                  <p className="text-slate-600 font-semibold text-sm">Please Login to Apply for the Job</p>
+                  <button
+                    onClick={() => navigate("/login")}
+                    className="px-10 py-4 bg-emerald-600 text-white font-bold rounded-2xl hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-200 hover:-translate-y-1"
+                  >
+                    Login
+                  </button>
+                </div>
+              )}
             </div>
           </div>
 

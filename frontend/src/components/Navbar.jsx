@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../API/AuthContext";
 import logo from "../assets/TopDevs.png";
-import { Home, Briefcase, GraduationCap, Trophy, Terminal, LogOut, Key, Sparkles, ChevronUp, ChevronDown, Check, Search as SearchIcon } from "lucide-react";
+import { Home, Briefcase, Building2, GraduationCap, Trophy, Terminal, LogOut, Key, Sparkles, ChevronUp, ChevronDown, Check, Search as SearchIcon } from "lucide-react";
 
 function Navbar() {
   const { user, company, logout, companyLogout } = useContext(AuthContext);
@@ -116,6 +116,11 @@ function Navbar() {
           <li>
             <Link to="/jobs" className={isActive("/jobs")}>
               Jobs
+            </Link>
+          </li>
+          <li>
+            <Link to="/companies" className={isActive("/companies")}>
+              Companies
             </Link>
           </li>
           <li>
@@ -274,6 +279,12 @@ function Navbar() {
             className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
           >
             <Briefcase size={18} /> Jobs
+          </Link>
+          <Link
+            to="/companies"
+            className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+          >
+            <Building2 size={18} /> Companies
           </Link>
           <Link
             to="/learn"

@@ -161,5 +161,14 @@ exports.searchCompanies = async (req, res) => {
   }
 };
 
+exports.getAllCompanies = async (req, res) => {
+  try {
+    const companies = await companyModel.find().select("name companyIcon about address isVerified");
+    res.status(200).json({ companies });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch companies" });
+  }
+};
+
 
 

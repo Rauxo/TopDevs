@@ -18,6 +18,7 @@ import CreateJob from "./pages/company/CreateJob";
 import ViewApplicants from "./pages/company/ViewApplicants";
 import EditCompanyProfile from "./pages/company/EditCompanyProfile";
 import CompanyProfile from "./pages/company/CompanyProfile";
+import Companies from "./pages/company/Companies";
 import Search from "./pages/Search";
 import Layout from "./Layout/Layout";
 import Learn from "./pages/learn/Learn";
@@ -35,6 +36,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/create" element={<Create />} />
           <Route path="/jobs" element={<Jobs />} />
+          <Route path="/companies" element={<Companies />} />
           <Route path="/jobs/:id" element={<JobDetail />} />
           <Route path="/learn" element={<Learn />} />
           <Route path="/leaderboard" element={<Leaderboard />} />

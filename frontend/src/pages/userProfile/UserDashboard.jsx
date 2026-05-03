@@ -1,13 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../API/AuthContext";
-import { useNavigate, Link } from "react-router-dom";
-import { ClipboardList, FolderGit2, Zap, CheckCircle2 } from "lucide-react";
+import { useLocation, useNavigate, Link } from "react-router-dom";
+import { ClipboardList, FolderGit2, Zap, CheckCircle2, MessageSquare } from "lucide-react";
 import API from "../../API/api";
+import ChatSystem from "../../components/ChatSystem";
 
 function UserDashboard() {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState("active");
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState(location.state?.activeTab || "active");
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -114,6 +116,14 @@ function UserDashboard() {
             >
               <CheckCircle2 size={14} /> Application Status
             </button>
+            <button
+              onClick={() => setActiveTab("messages")}
+              className={`flex items-center gap-2 py-4 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors border-t ${
+                activeTab === "messages" ? "border-emerald-600 text-emerald-600" : "border-transparent text-slate-400"
+              }`}
+            >
+              <MessageSquare size={14} /> Messages
+            </button>
           </div>
         </div>
 
@@ -181,6 +191,10 @@ function UserDashboard() {
                 </div>
               )}
             </div>
+          )}
+
+          {activeTab === "messages" && (
+            <ChatSystem type="user" />
           )}
         </div>
       </div>

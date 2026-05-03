@@ -1,15 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../API/AuthContext";
-import { useNavigate, Link } from "react-router-dom";
-import { LayoutDashboard, Briefcase, PlusCircle, LogOut, AlertTriangle } from "lucide-react";
+import { useLocation, useNavigate, Link } from "react-router-dom";
+import { LayoutDashboard, Briefcase, PlusCircle, LogOut, AlertTriangle, MessageSquare } from "lucide-react";
 import API from "../../API/api";
+import ChatSystem from "../../components/ChatSystem";
 
 function CompanyDashboard() {
   const { company, companyLogout } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState(location.state?.activeTab || "overview");
 
   useEffect(() => {
     if (company) {
@@ -76,6 +78,14 @@ function CompanyDashboard() {
               }`}
             >
               <Briefcase size={18} /> Manage Jobs
+            </button>
+            <button
+              onClick={() => setActiveTab("messages")}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
+                activeTab === "messages" ? "bg-emerald-600 text-white shadow-lg shadow-emerald-100" : "text-slate-600 hover:bg-slate-50"
+              }`}
+            >
+              <MessageSquare size={18} /> Messages
             </button>
             <button
               onClick={(e) => checkVerification(e, "/company/create-job")}
@@ -255,6 +265,10 @@ function CompanyDashboard() {
               {jobs.length === 0 && <div className="text-center py-20 text-slate-400 italic">No jobs found. Start by posting one!</div>}
             </div>
           </div>
+        )}
+
+        {activeTab === "messages" && (
+           <ChatSystem type="company" />
         )}
       </main>
     </div>

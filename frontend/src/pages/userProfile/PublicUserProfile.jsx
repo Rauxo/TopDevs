@@ -1,13 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Image, Film, Users } from "lucide-react";
+import { Image, Film, Users, MessageSquare } from "lucide-react";
 import API from "../../API/api";
+import { AuthContext } from "../../API/AuthContext";
 
 const PublicUserProfile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { company } = React.useContext(AuthContext);
+
+  const handleMessage = async () => {
+    if (!company) return alert("Only companies can message developers directly");
+    try {
+      await API.post("/message/send", {
+        receiverId: user._id,
+        receiverType: "User",
+        text: `Hi ${user.username}, we viewed your profile and would like to connect!`
+      });
+      navigate("/company/dashboard", { state: { activeTab: "messages" } });
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -56,7 +72,14 @@ const PublicUserProfile = () => {
             <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">
               <h1 className="text-2xl font-light text-slate-800">{user.username}</h1>
               <div className="flex gap-2 justify-center">
-                {/* Follow and Message buttons removed as requested */}
+                {company && (
+                  <button 
+                    onClick={handleMessage}
+                    className="px-6 py-1.5 bg-emerald-600 text-white font-bold text-sm rounded-lg hover:bg-emerald-700 transition-colors border-none cursor-pointer shadow-lg shadow-emerald-50"
+                  >
+                    <MessageSquare size={16} className="inline mr-2" /> Message Developer
+                  </button>
+                )}
               </div>
             </div>
 

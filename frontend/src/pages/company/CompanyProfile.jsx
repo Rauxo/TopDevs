@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { MapPin, Mail, Phone, CheckCircle2, ArrowRight, AlertTriangle, ShieldX } from "lucide-react";
+import { MapPin, Mail, Phone, CheckCircle2, ArrowRight, AlertTriangle, ShieldX, MessageSquare } from "lucide-react";
 import API from "../../API/api";
+import { AuthContext } from "../../API/AuthContext";
 
 const CompanyProfile = () => {
   const { id } = useParams();
@@ -9,6 +10,21 @@ const CompanyProfile = () => {
   const [company, setCompany] = useState(null);
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { user } = React.useContext(AuthContext);
+
+  const handleMessage = async () => {
+    if (!user) return alert("Please login to message the company");
+    try {
+      await API.post("/message/send", {
+        receiverId: company._id,
+        receiverType: "Company",
+        text: "Hi, I'm interested in your company!"
+      });
+      navigate("/UserDashboard", { state: { activeTab: "messages" } });
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
     const fetchCompanyData = async () => {
@@ -73,6 +89,16 @@ const CompanyProfile = () => {
                  </span>
                )}
             </div>
+            {user && (
+              <div className="pb-2">
+                <button 
+                  onClick={handleMessage}
+                  className="px-6 py-2.5 bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-all flex items-center gap-2 border-none cursor-pointer"
+                >
+                  <MessageSquare size={18} /> Message
+                </button>
+              </div>
+            )}
           </div>
         </div>
 

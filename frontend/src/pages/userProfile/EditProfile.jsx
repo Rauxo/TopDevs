@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../API/AuthContext";
+import { ArrowLeft, Camera } from "lucide-react";
 import API from "../../API/api";
 
 const EditProfile = () => {
@@ -67,8 +68,8 @@ const EditProfile = () => {
       <div className="max-w-2xl mx-auto">
         <div className="bg-white p-8 md:p-12 rounded-[32px] shadow-sm border border-slate-100">
           <div className="flex items-center gap-4 mb-8">
-            <button onClick={() => navigate(-1)} className="p-2 hover:bg-slate-100 rounded-full transition-colors">
-              ⬅️
+            <button onClick={() => navigate(-1)} className="p-2 hover:bg-slate-100 rounded-full transition-colors flex items-center justify-center">
+              <ArrowLeft size={24} />
             </button>
             <h1 className="text-3xl font-extrabold text-slate-900">Edit Profile</h1>
           </div>
@@ -83,8 +84,8 @@ const EditProfile = () => {
                     className="w-full h-full object-cover"
                    />
                 </div>
-                <label htmlFor="profile-upload" className="absolute bottom-0 right-0 p-2 bg-emerald-600 text-white rounded-full cursor-pointer shadow-lg hover:bg-emerald-700 transition-all">
-                  📷
+                <label htmlFor="profile-upload" className="absolute bottom-0 right-0 p-2.5 bg-emerald-600 text-white rounded-full cursor-pointer shadow-lg hover:bg-emerald-700 transition-all flex items-center justify-center">
+                  <Camera size={18} />
                 </label>
                 <input type="file" id="profile-upload" name="profileImg" onChange={handleChange} className="hidden" accept="image/*" />
               </div>

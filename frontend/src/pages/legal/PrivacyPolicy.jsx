@@ -1,4 +1,5 @@
 import React from "react";
+import { User, Mail, ShieldCheck } from "lucide-react";
 
 const PrivacyPolicy = () => {
   return (
@@ -37,12 +38,12 @@ const PrivacyPolicy = () => {
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm">
-                    <span className="text-xl mb-3 block">👤</span>
+                    <span className="text-emerald-500 mb-3 block"><User size={24} /></span>
                     <h3 className="font-bold text-slate-900 mb-1">Identity Data</h3>
                     <p className="text-xs text-slate-400">Username, full name, and profile images.</p>
                   </div>
                   <div className="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm">
-                    <span className="text-xl mb-3 block">✉️</span>
+                    <span className="text-emerald-500 mb-3 block"><Mail size={24} /></span>
                     <h3 className="font-bold text-slate-900 mb-1">Contact Data</h3>
                     <p className="text-xs text-slate-400">Email address and phone number.</p>
                   </div>
@@ -71,7 +72,9 @@ const PrivacyPolicy = () => {
             </section>
 
             <section id="security" className="p-10 bg-slate-900 rounded-[48px] text-white overflow-hidden relative">
-              <div className="absolute top-0 right-0 p-10 opacity-10 text-9xl font-black">🔒</div>
+              <div className="absolute top-0 right-0 p-10 opacity-10 text-white relative">
+                <ShieldCheck size={120} />
+              </div>
               <h2 className="text-2xl font-black mb-6 relative z-10">03. Security First</h2>
               <p className="text-slate-400 leading-relaxed font-medium relative z-10">
                 We implement industry-standard encryption and security protocols to protect your personal data from unauthorized access, disclosure, or destruction. Your data is stored on secure servers with restricted access.

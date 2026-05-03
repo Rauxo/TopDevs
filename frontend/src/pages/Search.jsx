@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { User, Search as SearchIcon } from "lucide-react";
 import API from "../API/api";
 
 const Search = () => {
@@ -46,7 +47,7 @@ const Search = () => {
           <div className="space-y-16">
             <section>
               <h2 className="text-xl font-bold text-slate-800 mb-8 flex items-center gap-3">
-                <span className="p-2 bg-blue-100 rounded-lg">👤</span> 
+                <span className="p-2 bg-blue-100 rounded-lg text-blue-600"><User size={20} /></span> 
                 Users Found ({results.users.length})
               </h2>
               {results.users.length > 0 ? (
@@ -77,8 +78,10 @@ const Search = () => {
                   ))}
                 </div>
               ) : (
-                <div className="bg-white rounded-[32px] py-20 px-6 text-center border border-slate-100">
-                   <div className="text-5xl mb-4">🔍</div>
+                <div className="bg-white rounded-[32px] py-20 px-6 text-center border border-slate-100 flex flex-col items-center">
+                   <div className="text-slate-200 mb-4">
+                     <SearchIcon size={48} />
+                   </div>
                   <p className="text-slate-500 font-bold">No users matched your query.</p>
                   <p className="text-slate-400 text-sm mt-2">Try searching for a different name or username.</p>
                 </div>

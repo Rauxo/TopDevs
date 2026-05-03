@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { ArrowLeft, User, FileText, Mail, FolderOpen } from "lucide-react";
 import API from "../../API/api";
 
 const ViewApplicants = () => {
@@ -27,8 +28,8 @@ const ViewApplicants = () => {
       <div className="min-h-screen bg-slate-50 py-12 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 flex items-center gap-4">
-            <button onClick={() => navigate(-1)} className="p-2 hover:bg-slate-200 rounded-full transition-colors">
-              ⬅️
+            <button onClick={() => navigate(-1)} className="p-2 hover:bg-slate-200 rounded-full transition-colors flex items-center justify-center">
+              <ArrowLeft size={24} />
             </button>
             <h1 className="text-3xl font-extrabold text-slate-900">Job Applicants</h1>
           </div>
@@ -42,8 +43,8 @@ const ViewApplicants = () => {
               {applicants.map((app) => (
                 <div key={app._id} className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 hover:shadow-md transition-all">
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center text-2xl">
-                      👤
+                    <div className="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center">
+                      <User size={28} className="text-emerald-600" />
                     </div>
                     <div>
                       <h3 className="font-bold text-slate-900">{app.name}</h3>
@@ -71,20 +72,22 @@ const ViewApplicants = () => {
                       href={`http://localhost:5000/${app.resume}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex-1 text-center py-3 bg-emerald-600 text-white text-xs font-bold rounded-xl hover:bg-emerald-700 transition-colors no-underline"
+                      className="flex-1 text-center py-3 bg-emerald-600 text-white text-xs font-bold rounded-xl hover:bg-emerald-700 transition-colors no-underline flex items-center justify-center gap-2"
                     >
-                      📄 View Resume
+                      <FileText size={16} /> View Resume
                     </a>
-                    <button className="flex-1 py-3 bg-slate-100 text-slate-700 text-xs font-bold rounded-xl hover:bg-slate-200 transition-colors">
-                      ✉️ Contact
+                    <button className="flex-1 py-3 bg-slate-100 text-slate-700 text-xs font-bold rounded-xl hover:bg-slate-200 transition-colors flex items-center justify-center gap-2">
+                      <Mail size={16} /> Contact
                     </button>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="bg-white p-20 rounded-[32px] text-center border border-slate-100">
-              <div className="text-6xl mb-6">📂</div>
+            <div className="bg-white p-20 rounded-[32px] text-center border border-slate-100 flex flex-col items-center">
+              <div className="text-slate-200 mb-6">
+                <FolderOpen size={80} />
+              </div>
               <h2 className="text-2xl font-bold text-slate-800">No applicants yet</h2>
               <p className="text-slate-500 mt-2">When someone applies for this job, their details will appear here.</p>
             </div>

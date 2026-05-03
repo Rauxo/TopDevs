@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { MapPin, Mail, PartyPopper } from "lucide-react";
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
@@ -28,8 +29,8 @@ const ContactUs = () => {
 
             <div className="space-y-8">
                <div className="flex items-center gap-6 group cursor-pointer">
-                  <div className="w-16 h-16 rounded-3xl bg-white shadow-xl flex items-center justify-center text-2xl group-hover:bg-emerald-600 group-hover:text-white transition-all">
-                    📍
+                  <div className="w-16 h-16 rounded-3xl bg-white shadow-xl flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                    <MapPin size={24} />
                   </div>
                   <div>
                     <h3 className="font-black text-slate-900">Our Studio</h3>
@@ -37,8 +38,8 @@ const ContactUs = () => {
                   </div>
                </div>
                <div className="flex items-center gap-6 group cursor-pointer">
-                  <div className="w-16 h-16 rounded-3xl bg-white shadow-xl flex items-center justify-center text-2xl group-hover:bg-blue-600 group-hover:text-white transition-all">
-                    ✉️
+                  <div className="w-16 h-16 rounded-3xl bg-white shadow-xl flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
+                    <Mail size={24} />
                   </div>
                   <div>
                     <h3 className="font-black text-slate-900">Email Us</h3>
@@ -52,7 +53,9 @@ const ContactUs = () => {
           <div className="bg-white p-10 md:p-16 rounded-[48px] shadow-[0_32px_80px_rgba(0,0,0,0.08)] border border-slate-100">
             {submitted ? (
               <div className="text-center py-20 animate-bounce-in">
-                 <div className="text-7xl mb-6">🎉</div>
+                 <div className="text-emerald-500 mb-6 flex justify-center">
+                    <PartyPopper size={64} />
+                  </div>
                  <h2 className="text-3xl font-black text-slate-900 mb-4">Message Sent!</h2>
                  <p className="text-slate-500 font-medium">We'll get back to you within 24 hours.</p>
               </div>

@@ -2,6 +2,7 @@ import React, { useContext, useState, useRef } from "react";
 import { AuthContext } from "../../API/AuthContext";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/TopDevs.png";
+import { Sparkles, Target, Trophy, Briefcase, Users, Camera, Mail, User, Lock, Eye, EyeOff, Building2, ArrowRight } from "lucide-react";
 
 function Create() {
   const { register } = useContext(AuthContext);
@@ -74,7 +75,7 @@ function Create() {
       {/* Left Panel */}
       <div style={styles.leftPanel}>
         <div style={styles.leftContent}>
-          <span style={styles.badge}>✨ Join the Community</span>
+          <span style={styles.badge}><Sparkles size={12} style={{ marginRight: "6px" }} /> Join the Community</span>
           <h1 style={styles.heroTitle}>
             Start your journey on{" "}
             <span style={styles.heroGradient}>TopDevs</span>
@@ -85,13 +86,15 @@ function Create() {
           </p>
           <ul style={styles.featureList}>
             {[
-              "🎯 Personalized learning roadmap",
-              "🏆 Rank up & earn badges",
-              "💼 Direct job applications",
-              "🤝 Connect with top companies",
+              { text: "Personalized learning roadmap", icon: <Target size={18} className="text-emerald-500" /> },
+              { text: "Rank up & earn badges", icon: <Trophy size={18} className="text-emerald-500" /> },
+              { text: "Direct job applications", icon: <Briefcase size={18} className="text-emerald-500" /> },
+              { text: "Connect with top companies", icon: <Users size={18} className="text-emerald-500" /> },
             ].map((f) => (
-              <li key={f} style={styles.featureItem}>
-                {f}
+              <li key={f.text} style={styles.featureItem}>
+                <span style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                  {f.icon} {f.text}
+                </span>
               </li>
             ))}
           </ul>
@@ -119,7 +122,7 @@ function Create() {
               {preview ? (
                 <img src={preview} alt="preview" style={styles.avatarImg} />
               ) : (
-                <span style={styles.avatarPlaceholder}>📷</span>
+                <span style={styles.avatarPlaceholder}><Camera size={24} color="#64748b" /></span>
               )}
               <div style={styles.avatarOverlay}>Change</div>
             </div>
@@ -147,7 +150,7 @@ function Create() {
                 Email Address
               </label>
               <div style={styles.inputWrapper}>
-                <span style={styles.inputIcon}>✉️</span>
+                <span style={styles.inputIcon}><Mail size={18} color="#64748b" /></span>
                 <input
                   id="email"
                   name="email"
@@ -174,7 +177,7 @@ function Create() {
                 Username
               </label>
               <div style={styles.inputWrapper}>
-                <span style={styles.inputIcon}>👤</span>
+                <span style={styles.inputIcon}><User size={18} color="#64748b" /></span>
                 <input
                   id="username"
                   name="username"
@@ -201,7 +204,7 @@ function Create() {
                 Password
               </label>
               <div style={styles.inputWrapper}>
-                <span style={styles.inputIcon}>🔒</span>
+                <span style={styles.inputIcon}><Lock size={18} color="#64748b" /></span>
                 <input
                   id="password"
                   name="password"
@@ -224,7 +227,7 @@ function Create() {
                   onClick={() => setShowPassword(!showPassword)}
                   style={styles.eyeBtn}
                 >
-                  {showPassword ? "🙈" : "👁️"}
+                  {showPassword ? <EyeOff size={18} color="#64748b" /> : <Eye size={18} color="#64748b" />}
                 </button>
               </div>
               {/* Strength bar */}
@@ -258,7 +261,7 @@ function Create() {
                 loading ? { ...styles.submitBtn, opacity: 0.7 } : styles.submitBtn
               }
             >
-              {loading ? "Creating account…" : "Create Account →"}
+              {loading ? "Creating account…" : <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>Create Account <ArrowRight size={20} /></span>}
             </button>
           </form>
 
@@ -272,7 +275,9 @@ function Create() {
             onClick={() => navigate("/company/create")}
             style={styles.altBtn}
           >
-            🏢 Register as a Company
+            <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+              <Building2 size={18} /> Register as a Company
+            </span>
           </button>
         </div>
       </div>
@@ -323,7 +328,8 @@ const styles = {
   },
   leftContent: { maxWidth: "420px" },
   badge: {
-    display: "inline-block",
+    display: "inline-flex",
+    alignItems: "center",
     fontSize: "11px",
     fontWeight: "700",
     letterSpacing: "0.1em",
@@ -413,7 +419,7 @@ const styles = {
     border: "2px solid rgba(16,185,129,0.3)",
   },
   avatarImg: { width: "100%", height: "100%", objectFit: "cover" },
-  avatarPlaceholder: { fontSize: "22px" },
+  avatarPlaceholder: { display: "flex", alignItems: "center", justifyContent: "center" },
   avatarOverlay: {
     position: "absolute",
     inset: 0,
@@ -450,7 +456,7 @@ const styles = {
     borderRadius: "12px",
     transition: "box-shadow 0.2s, border-color 0.2s",
   },
-  inputIcon: { position: "absolute", left: "14px", fontSize: "14px", pointerEvents: "none" },
+  inputIcon: { position: "absolute", left: "14px", display: "flex", alignItems: "center", pointerEvents: "none" },
   input: {
     width: "100%",
     padding: "12px 14px 12px 40px",
@@ -468,7 +474,8 @@ const styles = {
     background: "none",
     border: "none",
     cursor: "pointer",
-    fontSize: "15px",
+    display: "flex",
+    alignItems: "center",
     padding: "0",
     lineHeight: "1",
   },

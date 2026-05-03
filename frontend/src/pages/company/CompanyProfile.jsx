@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { MapPin, Mail, Phone, CheckCircle2, ArrowRight } from "lucide-react";
 import API from "../../API/api";
 
 const CompanyProfile = () => {
@@ -55,15 +56,15 @@ const CompanyProfile = () => {
             </div>
             <div className="flex-1 text-center md:text-left pb-2">
               <h1 className="text-4xl font-black text-slate-900 mb-2">{company.name}</h1>
-              <div className="flex flex-wrap justify-center md:justify-start gap-4 text-slate-500 font-medium">
-                <span>📍 {company.address}</span>
-                <span>✉️ {company.email}</span>
-                <span>📞 {company.phone}</span>
+              <div className="flex flex-wrap justify-center md:justify-start gap-6 text-slate-500 font-medium mt-2">
+                <span className="flex items-center gap-1.5"><MapPin size={16} className="text-emerald-500" /> {company.address}</span>
+                <span className="flex items-center gap-1.5"><Mail size={16} className="text-emerald-500" /> {company.email}</span>
+                <span className="flex items-center gap-1.5"><Phone size={16} className="text-emerald-500" /> {company.phone}</span>
               </div>
             </div>
             <div className="pb-2">
-               <span className="px-4 py-2 bg-emerald-100 text-emerald-700 font-bold rounded-full text-sm">
-                 ✓ Verified Company
+               <span className="px-4 py-2 bg-emerald-100 text-emerald-700 font-bold rounded-full text-sm flex items-center gap-2">
+                 <CheckCircle2 size={16} /> Verified Company
                </span>
             </div>
           </div>
@@ -86,7 +87,9 @@ const CompanyProfile = () => {
                           <h3 className="font-bold text-slate-800 group-hover:text-emerald-600 transition-colors">{job.jobTitle}</h3>
                           <p className="text-sm text-slate-500 mt-1">{job.location} • {job.jobType || "Full-time"}</p>
                         </div>
-                        <span className="text-emerald-600 font-bold">View →</span>
+                        <span className="text-emerald-600 font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                          View <ArrowRight size={16} />
+                        </span>
                       </div>
                     </div>
                   ))

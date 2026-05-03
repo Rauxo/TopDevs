@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import API from "../../API/api";
 import { useNavigate } from "react-router-dom";
+import { Trophy, Crown } from "lucide-react";
 
 const Leaderboard = () => {
   const [players, setPlayers] = useState([]);
@@ -32,13 +33,15 @@ const Leaderboard = () => {
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-extrabold text-slate-900 mb-4">Community Leaderboard</h1>
-          <p className="text-lg text-slate-600">See the top developers in our community! 🏆</p>
+          <p className="text-lg text-slate-600 flex items-center justify-center gap-2">See the top developers in our community! <Trophy size={20} className="text-yellow-500" /></p>
         </div>
 
         {players.length > 0 ? (
           <div className="bg-white rounded-[32px] shadow-sm border border-slate-100 overflow-hidden">
-            <div className="bg-emerald-600 p-8 text-white text-center">
-              <div className="text-5xl mb-4">👑</div>
+            <div className="bg-emerald-600 p-8 text-white text-center flex flex-col items-center">
+              <div className="text-yellow-400 mb-4">
+                <Crown size={64} />
+              </div>
               <p className="text-sm font-bold uppercase tracking-widest opacity-80">Top Developer</p>
               <h2 className="text-3xl font-extrabold">{players[0].username}</h2>
               <p className="mt-2 text-emerald-100">Joined {new Date(players[0].createdAt).toLocaleDateString()}</p>

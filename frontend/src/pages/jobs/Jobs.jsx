@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import API from "../../API/api";
 import { Link } from "react-router-dom";
+import { Search, MapPin, Briefcase, DollarSign, ArrowRight } from "lucide-react";
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -38,7 +39,9 @@ const Jobs = () => {
           {/* Search/Filter Bar */}
           <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 mb-10 flex flex-col md:flex-row gap-4 items-center">
             <div className="relative flex-1 w-full">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">🔍</span>
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+                <Search size={20} />
+              </span>
               <input
                 type="text"
                 placeholder="Search by title, company, or location..."
@@ -86,15 +89,15 @@ const Jobs = () => {
                     </div>
                     
                     <div className="flex flex-wrap gap-2 mb-4">
-                      <span className="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-full">
-                        📍 {job.location}
+                      <span className="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-full flex items-center gap-1">
+                        <MapPin size={12} /> {job.location}
                       </span>
-                      <span className="px-3 py-1 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-full">
-                        💼 {job.jobType || "Full-time"}
+                      <span className="px-3 py-1 bg-emerald-50 text-emerald-600 text-xs font-bold rounded-full flex items-center gap-1">
+                        <Briefcase size={12} /> {job.jobType || "Full-time"}
                       </span>
                       {job.salary && (
-                        <span className="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded-full">
-                          💰 {job.salary}
+                        <span className="px-3 py-1 bg-blue-50 text-blue-600 text-xs font-bold rounded-full flex items-center gap-1">
+                          <DollarSign size={12} /> {job.salary}
                         </span>
                       )}
                     </div>
@@ -107,8 +110,8 @@ const Jobs = () => {
                       <span className="text-xs text-slate-400 font-medium">
                         Posted {new Date(job.createdAt).toLocaleDateString()}
                       </span>
-                      <span className="text-sm font-bold text-emerald-600 group-hover:translate-x-1 transition-transform">
-                        Apply Now →
+                      <span className="text-sm font-bold text-emerald-600 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        Apply Now <ArrowRight size={16} />
                       </span>
                     </div>
                   </Link>

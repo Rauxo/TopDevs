@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import logo from "../../../assets/TopDevs.png";
 import { AuthContext } from "../../../API/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { Building2, Check, Mail, Phone, Lock, MapPin, Image, FileText, Camera, ArrowRight, ArrowLeft } from "lucide-react";
 
 function CompanyCreate() {
   const { companyRegister } = useContext(AuthContext);
@@ -79,7 +80,7 @@ function CompanyCreate() {
         <div style={styles.header}>
           <img src={logo} alt="TopDevs" style={styles.logo} />
           <div style={styles.headerText}>
-            <span style={styles.badge}>🏢 Company Portal</span>
+            <span style={styles.badge}><Building2 size={12} style={{ marginRight: "6px" }} /> Company Portal</span>
             <h1 style={styles.pageTitle}>Register Your Company</h1>
             <p style={styles.pageSub}>
               Join TopDevs and hire the best developers.{" "}
@@ -102,7 +103,7 @@ function CompanyCreate() {
                 onClick={() => s.n < step && setStep(s.n)}
               >
                 <div style={s.n === step ? styles.stepCircleActive : s.n < step ? styles.stepCircleDone : styles.stepCircleInactive}>
-                  {s.n < step ? "✓" : s.n}
+                  {s.n < step ? <Check size={16} /> : s.n}
                 </div>
                 <span style={styles.stepLabel}>{s.label}</span>
               </div>
@@ -122,10 +123,10 @@ function CompanyCreate() {
               {/* Icon preview */}
               <div style={styles.iconRow}>
                 <div style={styles.iconCircle}>
-                  {iconPreview ? (
+                   {iconPreview ? (
                     <img src={iconPreview} alt="icon" style={styles.iconImg} />
                   ) : (
-                    <span style={styles.iconPlaceholder}>🏢</span>
+                    <span style={styles.iconPlaceholder}><Building2 size={24} color="#64748b" /></span>
                   )}
                 </div>
                 <div style={styles.iconInfo}>
@@ -138,28 +139,28 @@ function CompanyCreate() {
                 <div style={styles.fieldGroup}>
                   <label style={styles.label}>Company Name *</label>
                   <div style={styles.inputWrapper}>
-                    <span style={styles.inputIcon}>🏢</span>
+                    <span style={styles.inputIcon}><Building2 size={18} color="#64748b" /></span>
                     <input name="name" type="text" value={form.name} onChange={handleChange} placeholder="Acme Corp" required style={styles.input} onFocus={inputFocus} onBlur={inputBlur} />
                   </div>
                 </div>
                 <div style={styles.fieldGroup}>
                   <label style={styles.label}>Company Email *</label>
                   <div style={styles.inputWrapper}>
-                    <span style={styles.inputIcon}>✉️</span>
+                    <span style={styles.inputIcon}><Mail size={18} color="#64748b" /></span>
                     <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="hr@company.com" required style={styles.input} onFocus={inputFocus} onBlur={inputBlur} />
                   </div>
                 </div>
                 <div style={styles.fieldGroup}>
                   <label style={styles.label}>Phone Number *</label>
                   <div style={styles.inputWrapper}>
-                    <span style={styles.inputIcon}>📞</span>
+                    <span style={styles.inputIcon}><Phone size={18} color="#64748b" /></span>
                     <input name="phone" type="text" value={form.phone} onChange={handleChange} placeholder="+91 98765 43210" required style={styles.input} onFocus={inputFocus} onBlur={inputBlur} />
                   </div>
                 </div>
                 <div style={styles.fieldGroup}>
                   <label style={styles.label}>Password *</label>
                   <div style={styles.inputWrapper}>
-                    <span style={styles.inputIcon}>🔒</span>
+                    <span style={styles.inputIcon}><Lock size={18} color="#64748b" /></span>
                     <input name="password" type="password" value={form.password} onChange={handleChange} placeholder="Min 8 characters" required style={styles.input} onFocus={inputFocus} onBlur={inputBlur} />
                   </div>
                 </div>
@@ -168,7 +169,7 @@ function CompanyCreate() {
               <div style={{ ...styles.fieldGroup, marginTop: "16px" }}>
                 <label style={styles.label}>Company Address *</label>
                 <div style={{ ...styles.inputWrapper, alignItems: "flex-start" }}>
-                  <span style={{ ...styles.inputIcon, top: "14px", position: "absolute" }}>📍</span>
+                  <span style={{ ...styles.inputIcon, top: "14px", position: "absolute" }}><MapPin size={18} color="#64748b" /></span>
                   <textarea
                     name="address"
                     value={form.address}
@@ -195,7 +196,9 @@ function CompanyCreate() {
                 }}
                 style={styles.submitBtn}
               >
-                Continue to Documents →
+                <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+                  Continue to Documents <ArrowRight size={20} />
+                </span>
               </button>
             </div>
           )}
@@ -210,7 +213,7 @@ function CompanyCreate() {
                   name: "companyIcon",
                   label: "Company Logo / Icon",
                   hint: "PNG or JPG recommended",
-                  icon: "🖼️",
+                  icon: <Image size={24} className="text-emerald-600" />,
                   multiple: false,
                   required: true,
                 },
@@ -218,7 +221,7 @@ function CompanyCreate() {
                   name: "legalDocument",
                   label: "Legal Document (Proof of Business)",
                   hint: "PDF, PNG or JPG — GST cert, trade licence, etc.",
-                  icon: "📄",
+                  icon: <FileText size={24} className="text-emerald-600" />,
                   multiple: false,
                   required: true,
                 },
@@ -226,7 +229,7 @@ function CompanyCreate() {
                   name: "companyImages",
                   label: "Company Images (2–5 photos)",
                   hint: "Office, team, workspace — any 2 to 5 images",
-                  icon: "📸",
+                  icon: <Camera size={24} className="text-emerald-600" />,
                   multiple: true,
                   required: true,
                 },
@@ -241,9 +244,9 @@ function CompanyCreate() {
                   </div>
                   <label style={styles.fileUploadBtn}>
                     {files[f.name] && !Array.isArray(files[f.name])
-                      ? "✅ " + files[f.name].name.slice(0, 20) + (files[f.name].name.length > 20 ? "…" : "")
+                      ? <span className="flex items-center gap-1"><Check size={14} /> {files[f.name].name.slice(0, 15) + (files[f.name].name.length > 15 ? "…" : "")}</span>
                       : Array.isArray(files[f.name]) && files[f.name].length > 0
-                      ? `✅ ${files[f.name].length} file(s) selected`
+                      ? <span className="flex items-center gap-1"><Check size={14} /> {files[f.name].length} file(s) selected</span>
                       : "Choose file"}
                     <input
                       type="file"
@@ -263,14 +266,16 @@ function CompanyCreate() {
                   onClick={() => setStep(1)}
                   style={styles.backBtn}
                 >
-                  ← Back
+                  <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "6px" }}>
+                    <ArrowLeft size={18} /> Back
+                  </span>
                 </button>
                 <button
                   type="submit"
                   disabled={loading}
                   style={loading ? { ...styles.submitBtn, opacity: 0.7, flex: 1 } : { ...styles.submitBtn, flex: 1 }}
                 >
-                  {loading ? "Registering…" : "Register Company →"}
+                  {loading ? "Registering…" : <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>Register Company <ArrowRight size={20} /></span>}
                 </button>
               </div>
             </form>
@@ -337,7 +342,8 @@ const styles = {
   logo: { height: "52px", flexShrink: 0 },
   headerText: { display: "flex", flexDirection: "column", gap: "4px" },
   badge: {
-    display: "inline-block",
+    display: "inline-flex",
+    alignItems: "center",
     fontSize: "10px",
     fontWeight: "700",
     letterSpacing: "0.08em",
@@ -447,7 +453,7 @@ const styles = {
     border: "2px solid rgba(16,185,129,0.2)",
   },
   iconImg: { width: "100%", height: "100%", objectFit: "cover" },
-  iconPlaceholder: { fontSize: "24px" },
+  iconPlaceholder: { display: "flex", alignItems: "center", justifyContent: "center" },
   iconTitle: { margin: 0, fontSize: "13px", fontWeight: "600", color: "#374151" },
   iconHint: { margin: "2px 0 0", fontSize: "11px", color: "#94a3b8" },
   iconInfo: {},
@@ -467,7 +473,7 @@ const styles = {
     borderRadius: "12px",
     transition: "box-shadow 0.2s, border-color 0.2s",
   },
-  inputIcon: { position: "absolute", left: "14px", fontSize: "14px", pointerEvents: "none" },
+  inputIcon: { position: "absolute", left: "14px", display: "flex", alignItems: "center", pointerEvents: "none" },
   input: {
     width: "100%",
     padding: "12px 14px 12px 40px",
@@ -492,7 +498,7 @@ const styles = {
     marginBottom: "12px",
   },
   fileCardLeft: { display: "flex", alignItems: "center", gap: "12px" },
-  fileCardIcon: { fontSize: "26px", flexShrink: 0 },
+  fileCardIcon: { flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" },
   fileCardLabel: { margin: 0, fontSize: "13px", fontWeight: "600", color: "#0f172a" },
   fileCardHint: { margin: "2px 0 0", fontSize: "11px", color: "#64748b" },
   fileUploadBtn: {
@@ -508,6 +514,9 @@ const styles = {
     maxWidth: "180px",
     overflow: "hidden",
     textOverflow: "ellipsis",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   submitBtn: {
     marginTop: "24px",

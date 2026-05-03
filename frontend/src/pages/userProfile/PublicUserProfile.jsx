@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { Image, Film, Users } from "lucide-react";
 import API from "../../API/api";
 
 const PublicUserProfile = () => {
@@ -82,13 +83,13 @@ const PublicUserProfile = () => {
         <div className="border-t border-slate-200">
           <div className="flex justify-center gap-12 -mt-px">
             <div className="flex items-center gap-2 py-4 text-xs font-bold uppercase tracking-widest border-t border-slate-800 text-slate-800">
-              <span>🖼️</span> Posts
+              <Image size={14} /> Posts
             </div>
             <div className="flex items-center gap-2 py-4 text-xs font-bold uppercase tracking-widest border-t border-transparent text-slate-400">
-              <span>🎞️</span> Reels
+              <Film size={14} /> Reels
             </div>
             <div className="flex items-center gap-2 py-4 text-xs font-bold uppercase tracking-widest border-t border-transparent text-slate-400">
-              <span>👥</span> Tagged
+              <Users size={14} /> Tagged
             </div>
           </div>
         </div>

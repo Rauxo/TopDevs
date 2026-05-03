@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import API from "../../API/api";
 import { useNavigate } from "react-router-dom";
+import { Briefcase, Send } from "lucide-react";
 
 const CreateJob = () => {
   const navigate = useNavigate();
@@ -40,8 +41,8 @@ const CreateJob = () => {
         <div className="max-w-3xl mx-auto">
           <div className="bg-white p-8 md:p-12 rounded-[32px] shadow-sm border border-slate-100">
             <div className="mb-10 text-center">
-              <span className="inline-block px-4 py-1.5 bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
-                💼 Hiring Portal
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+                <Briefcase size={14} /> Hiring Portal
               </span>
               <h1 className="text-3xl font-extrabold text-slate-900">Post a New Job</h1>
               <p className="text-slate-500 mt-2">Fill in the details to find the best talent for your company.</p>
@@ -140,7 +141,7 @@ const CreateJob = () => {
                 disabled={loading}
                 className="w-full py-5 bg-emerald-600 text-white font-bold text-lg rounded-2xl hover:bg-emerald-700 shadow-xl shadow-emerald-100 transition-all hover:-translate-y-1 active:scale-[0.98]"
               >
-                {loading ? "Posting Job..." : "Publish Job Posting →"}
+                {loading ? "Posting Job..." : <span className="flex items-center justify-center gap-2">Publish Job Posting <Send size={20} /></span>}
               </button>
             </form>
           </div>

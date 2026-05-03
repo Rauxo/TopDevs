@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import logo from "../../assets/TopDevs.png";
 import { AuthContext } from "../../API/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { User, Lock, Eye, EyeOff, ArrowRight, Building2, Rocket } from "lucide-react";
 
 function Login() {
   const { login } = useContext(AuthContext);
@@ -39,7 +40,7 @@ function Login() {
       {/* Left panel */}
       <div style={styles.leftPanel}>
         <div style={styles.leftContent}>
-          <span style={styles.badge}>🚀 Developer Platform</span>
+          <span style={styles.badge}><Rocket size={12} style={{ marginRight: "6px" }} /> Developer Platform</span>
           <h1 style={styles.heroTitle}>
             Welcome back to{" "}
             <span style={styles.heroGradient}>TopDevs</span>
@@ -83,7 +84,7 @@ function Login() {
                 Username
               </label>
               <div style={styles.inputWrapper}>
-                <span style={styles.inputIcon}>👤</span>
+                <span style={styles.inputIcon}><User size={18} color="#64748b" /></span>
                 <input
                   id="username"
                   name="username"
@@ -109,7 +110,7 @@ function Login() {
                 Password
               </label>
               <div style={styles.inputWrapper}>
-                <span style={styles.inputIcon}>🔒</span>
+                <span style={styles.inputIcon}><Lock size={18} color="#64748b" /></span>
                 <input
                   id="password"
                   name="password"
@@ -133,7 +134,7 @@ function Login() {
                   onClick={() => setShowPassword(!showPassword)}
                   style={styles.eyeBtn}
                 >
-                  {showPassword ? "🙈" : "👁️"}
+                  {showPassword ? <EyeOff size={20} color="#64748b" /> : <Eye size={20} color="#64748b" />}
                 </button>
               </div>
             </div>
@@ -143,7 +144,7 @@ function Login() {
               disabled={loading}
               style={loading ? { ...styles.submitBtn, opacity: 0.7 } : styles.submitBtn}
             >
-              {loading ? "Signing in…" : "Sign In →"}
+              {loading ? "Signing in…" : <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>Sign In <ArrowRight size={20} /></span>}
             </button>
           </form>
 
@@ -157,7 +158,9 @@ function Login() {
             onClick={() => navigate("/company/login")}
             style={styles.altBtn}
           >
-            🏢 Sign in as Company
+            <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+              <Building2 size={18} /> Sign in as Company
+            </span>
           </button>
         </div>
       </div>
@@ -209,7 +212,8 @@ const styles = {
     maxWidth: "420px",
   },
   badge: {
-    display: "inline-block",
+    display: "inline-flex",
+    alignItems: "center",
     fontSize: "11px",
     fontWeight: "700",
     letterSpacing: "0.1em",
@@ -347,7 +351,8 @@ const styles = {
   inputIcon: {
     position: "absolute",
     left: "14px",
-    fontSize: "15px",
+    display: "flex",
+    alignItems: "center",
     pointerEvents: "none",
   },
   input: {

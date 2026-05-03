@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../API/AuthContext";
 import logo from "../assets/TopDevs.png";
+import { Home, Briefcase, GraduationCap, Trophy, Terminal, LogOut, Key, Sparkles, ChevronUp, ChevronDown, Check, Search as SearchIcon } from "lucide-react";
 
 function Navbar() {
   const { user, company, logout, companyLogout } = useContext(AuthContext);
@@ -101,16 +102,7 @@ function Navbar() {
             aria-label="Search"
             className="w-11 h-11 bg-[#2376ca] hover:bg-[#1d68b8] flex-shrink-0 flex items-center justify-center transition-colors cursor-pointer"
           >
-            <svg
-              className="w-4 h-4 text-white"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2.5}
-              viewBox="0 0 24 24"
-            >
-              <circle cx="11" cy="11" r="8" />
-              <path d="m21 21-4.35-4.35" strokeLinecap="round" />
-            </svg>
+            <SearchIcon size={16} color="white" strokeWidth={2.5} />
           </button>
         </form>
 
@@ -145,8 +137,8 @@ function Navbar() {
                 onClick={() => setShowLangDropdown((v) => !v)}
               >
                 Languages{" "}
-                <span className="text-[0.7rem] ml-0.5">
-                  {showLangDropdown ? "▲" : "▾"}
+                <span className="ml-1 text-slate-500">
+                  {showLangDropdown ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
                 </span>
               </button>
               {showLangDropdown && (
@@ -163,7 +155,7 @@ function Navbar() {
                       >
                         <span>{lang.name}</span>
                         {isEnrolled(lang._id) && (
-                          <span className="text-emerald-500 font-bold text-base">✓</span>
+                          <span className="text-emerald-500"><Check size={16} /></span>
                         )}
                       </div>
                     ))
@@ -267,50 +259,41 @@ function Navbar() {
               type="submit"
               className="w-11 h-11 bg-[#2376ca] flex items-center justify-center flex-shrink-0 cursor-pointer"
             >
-              <svg
-                className="w-4 h-4 text-white"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2.5}
-                viewBox="0 0 24 24"
-              >
-                <circle cx="11" cy="11" r="8" />
-                <path d="m21 21-4.35-4.35" strokeLinecap="round" />
-              </svg>
+              <SearchIcon size={16} color="white" strokeWidth={2.5} />
             </button>
           </form>
 
           <Link
             to="/"
-            className="block px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+            className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
           >
-            🏠 Home
+            <Home size={18} /> Home
           </Link>
           <Link
             to="/jobs"
-            className="block px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+            className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
           >
-            💼 Jobs
+            <Briefcase size={18} /> Jobs
           </Link>
           <Link
             to="/learn"
-            className="block px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+            className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
           >
-            📚 Learn
+            <GraduationCap size={18} /> Learn
           </Link>
           <Link
             to="/leaderboard"
-            className="block px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+            className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
           >
-            🏆 Leaderboard
+            <Trophy size={18} /> Leaderboard
           </Link>
 
           {isAuthenticated && role === "learner" && (
             <Link
               to="/learning"
-              className="block px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+              className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
             >
-              💻 Sandbox
+              <Terminal size={18} /> Sandbox
             </Link>
           )}
 
@@ -318,30 +301,30 @@ function Navbar() {
             <>
               <Link
                 to={dashboardLink}
-                className="block px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+                className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
               >
-                {role === "admin" ? "Admin Panel" : "Dashboard"}
+                <Terminal size={18} /> {role === "admin" ? "Admin Panel" : "Dashboard"}
               </Link>
               <button
-                className="block w-full text-left px-4 py-3 text-red-500 font-semibold text-[0.95rem] rounded-xl hover:bg-red-50 transition-colors cursor-pointer border-none bg-none font-[inherit] mb-0.5"
+                className="flex items-center gap-3 w-full text-left px-4 py-3 text-red-500 font-semibold text-[0.95rem] rounded-xl hover:bg-red-50 transition-colors cursor-pointer border-none bg-none font-[inherit] mb-0.5"
                 onClick={handleLogout}
               >
-                🚪 Logout
+                <LogOut size={18} /> Logout
               </button>
             </>
           ) : (
             <>
               <Link
                 to="/login"
-                className="block px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+                className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
               >
-                🔑 Login
+                <Key size={18} /> Login
               </Link>
               <Link
                 to="/create"
-                className="block px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+                className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
               >
-                ✨ Register
+                <Sparkles size={18} /> Register
               </Link>
             </>
           )}

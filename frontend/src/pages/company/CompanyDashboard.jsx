@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../API/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
+import { LayoutDashboard, Briefcase, PlusCircle, LogOut, AlertTriangle } from "lucide-react";
 import API from "../../API/api";
 
 function CompanyDashboard() {
@@ -56,7 +57,7 @@ function CompanyDashboard() {
                 activeTab === "overview" ? "bg-emerald-600 text-white shadow-lg shadow-emerald-100" : "text-slate-600 hover:bg-slate-50"
               }`}
             >
-              📊 Overview
+              <LayoutDashboard size={18} /> Overview
             </button>
             <button
               onClick={() => setActiveTab("jobs")}
@@ -64,20 +65,20 @@ function CompanyDashboard() {
                 activeTab === "jobs" ? "bg-emerald-600 text-white shadow-lg shadow-emerald-100" : "text-slate-600 hover:bg-slate-50"
               }`}
             >
-              💼 Manage Jobs
+              <Briefcase size={18} /> Manage Jobs
             </button>
             <Link
               to="/company/create-job"
               className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-50 no-underline"
             >
-              ➕ Post New Job
+              <PlusCircle size={18} /> Post New Job
             </Link>
           </nav>
         </div>
 
         <div className="mt-auto p-6 border-t border-slate-100">
           <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 text-red-500 font-bold text-sm hover:bg-red-50 rounded-xl transition-all">
-            🚪 Logout
+            <LogOut size={18} /> Logout
           </button>
         </div>
       </aside>
@@ -87,7 +88,7 @@ function CompanyDashboard() {
         <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
           <div>
             <h1 className="text-2xl font-extrabold text-slate-900">
-              Welcome back, {company.name.split(' ')[0]}! 👋
+              Welcome back, {company.name.split(' ')[0]}!
             </h1>
             <p className="text-slate-500 text-sm mt-1">Here's what's happening with your recruitment.</p>
           </div>
@@ -101,7 +102,7 @@ function CompanyDashboard() {
         {/* Account Status */}
         {!company.isVerified && (
           <div className="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-xl mb-8 flex items-center gap-4">
-            <span className="text-2xl">⚠️</span>
+            <span className="text-amber-500"><AlertTriangle size={24} /></span>
             <div>
               <p className="text-amber-800 font-bold">Account Verification Pending</p>
               <p className="text-amber-700 text-xs">Our team is reviewing your documents. You'll be notified once verified.</p>

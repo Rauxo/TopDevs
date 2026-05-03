@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../API/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
+import { ClipboardList, Bookmark, Users } from "lucide-react";
 import API from "../../API/api";
 
 function UserDashboard() {
@@ -95,7 +96,7 @@ function UserDashboard() {
                 activeTab === "applications" ? "border-slate-800 text-slate-800" : "border-transparent text-slate-400"
               }`}
             >
-              <span>📋</span> Applications
+              <ClipboardList size={14} /> Applications
             </button>
             <button
               onClick={() => setActiveTab("saved")}
@@ -103,7 +104,7 @@ function UserDashboard() {
                 activeTab === "saved" ? "border-slate-800 text-slate-800" : "border-transparent text-slate-400"
               }`}
             >
-              <span>🔖</span> Saved
+              <Bookmark size={14} /> Saved
             </button>
             <button
               onClick={() => setActiveTab("tagged")}
@@ -111,7 +112,7 @@ function UserDashboard() {
                 activeTab === "tagged" ? "border-slate-800 text-slate-800" : "border-transparent text-slate-400"
               }`}
             >
-              <span>👥</span> Tagged
+              <Users size={14} /> Tagged
             </button>
           </div>
         </div>
@@ -137,8 +138,10 @@ function UserDashboard() {
                   </div>
                 ))
               ) : (
-                <div className="col-span-full text-center py-20 text-slate-400">
-                  <div className="text-5xl mb-4">📋</div>
+                <div className="col-span-full text-center py-20 text-slate-300 flex flex-col items-center">
+                  <div className="mb-4">
+                    <ClipboardList size={64} />
+                  </div>
                   <p className="text-xl font-light">No job applications yet</p>
                   <button onClick={() => navigate("/jobs")} className="mt-4 text-blue-500 font-bold text-sm">Find your first job</button>
                 </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { Building2, MapPin, Calendar, FileText, X, ArrowRight } from "lucide-react";
 import API from "../../API/api";
 import { AuthContext } from "../../API/AuthContext";
 
@@ -113,10 +114,10 @@ const JobDetail = () => {
                 )}
                 <div>
                   <h1 className="text-3xl font-extrabold text-slate-900 mb-2">{job.jobTitle}</h1>
-                  <div className="flex flex-wrap items-center gap-4 text-slate-600 font-medium">
-                    <span>🏢 {job.company?.name || "Unknown Company"}</span>
-                    <span>📍 {job.location}</span>
-                    <span className="text-emerald-600">📅 Exp: {new Date(job.expiredDate).toLocaleDateString()}</span>
+                  <div className="flex flex-wrap items-center gap-6 text-slate-600 font-medium">
+                    <span className="flex items-center gap-2"><Building2 size={18} className="text-emerald-500" /> {job.company?.name || "Unknown Company"}</span>
+                    <span className="flex items-center gap-2"><MapPin size={18} className="text-emerald-500" /> {job.location}</span>
+                    <span className="text-emerald-600 flex items-center gap-2"><Calendar size={18} /> Exp: {new Date(job.expiredDate).toLocaleDateString()}</span>
                   </div>
                 </div>
               </div>
@@ -200,7 +201,9 @@ const JobDetail = () => {
             <div className="bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden animate-drop-in">
               <div className="px-8 py-6 bg-emerald-600 flex justify-between items-center text-white">
                 <h2 className="text-2xl font-bold">Apply for {job.jobTitle}</h2>
-                <button onClick={() => setShowModal(false)} className="text-3xl leading-none hover:rotate-90 transition-transform">&times;</button>
+                <button onClick={() => setShowModal(false)} className="hover:rotate-90 transition-transform p-1">
+                  <X size={28} />
+                </button>
               </div>
               
               <form onSubmit={handleSubmit} className="p-8 space-y-6 overflow-y-auto max-h-[70vh]">
@@ -233,7 +236,7 @@ const JobDetail = () => {
                   <div className="relative">
                     <input type="file" name="resume" onChange={handleChange} required accept=".pdf,.doc,.docx" className="hidden" id="resume-upload" />
                     <label htmlFor="resume-upload" className="flex items-center justify-center gap-3 w-full px-4 py-6 border-2 border-dashed border-slate-200 rounded-2xl cursor-pointer hover:border-emerald-500 hover:bg-emerald-50 transition-all">
-                      <span className="text-2xl">📄</span>
+                      <FileText size={24} className="text-emerald-600" />
                       <span className="font-bold text-slate-600">{formData.resume ? formData.resume.name : "Click to upload your resume"}</span>
                     </label>
                   </div>
@@ -242,9 +245,13 @@ const JobDetail = () => {
                 <button
                   type="submit"
                   disabled={applying}
-                  className="w-full py-4 bg-emerald-600 text-white font-bold rounded-2xl hover:bg-emerald-700 shadow-lg shadow-emerald-200 transition-all"
+                  className="w-full py-4 bg-emerald-600 text-white font-bold rounded-2xl hover:bg-emerald-700 shadow-lg shadow-emerald-200 transition-all flex items-center justify-center gap-2"
                 >
-                  {applying ? "Submitting Application..." : "Submit Application →"}
+                  {applying ? "Submitting Application..." : (
+                    <>
+                      Submit Application <ArrowRight size={20} />
+                    </>
+                  )}
                 </button>
               </form>
             </div>

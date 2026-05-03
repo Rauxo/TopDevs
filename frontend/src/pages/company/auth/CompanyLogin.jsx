@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import logo from "../../../assets/TopDevs.png";
 import { AuthContext } from "../../../API/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { Building2, Target, Zap, BarChart3, Lock, Mail, Eye, EyeOff, User, ArrowRight } from "lucide-react";
 
 function CompanyLogin() {
   const { companyLogin } = useContext(AuthContext);
@@ -38,7 +39,7 @@ function CompanyLogin() {
       {/* Left Panel */}
       <div style={styles.leftPanel}>
         <div style={styles.leftContent}>
-          <span style={styles.badge}>🏢 Company Portal</span>
+          <span style={styles.badge}><Building2 size={12} style={{ marginRight: "6px" }} /> Company Portal</span>
           <h1 style={styles.heroTitle}>
             Hire top developers on{" "}
             <span style={styles.heroGradient}>TopDevs</span>
@@ -49,10 +50,10 @@ function CompanyLogin() {
           </p>
           <div style={styles.benefitGrid}>
             {[
-              { icon: "🎯", title: "Targeted Hiring", desc: "Find devs by rank & skill" },
-              { icon: "⚡", title: "Fast Screening", desc: "Pre-vetted talent pool" },
-              { icon: "📊", title: "Analytics", desc: "Track application metrics" },
-              { icon: "🔒", title: "Verified Profiles", desc: "All devs are authenticated" },
+              { icon: <Target size={20} className="text-emerald-600" />, title: "Targeted Hiring", desc: "Find devs by rank & skill" },
+              { icon: <Zap size={20} className="text-emerald-600" />, title: "Fast Screening", desc: "Pre-vetted talent pool" },
+              { icon: <BarChart3 size={20} className="text-emerald-600" />, title: "Analytics", desc: "Track application metrics" },
+              { icon: <Lock size={20} className="text-emerald-600" />, title: "Verified Profiles", desc: "All devs are authenticated" },
             ].map((b) => (
               <div key={b.title} style={styles.benefitCard}>
                 <span style={styles.benefitIcon}>{b.icon}</span>
@@ -87,7 +88,7 @@ function CompanyLogin() {
                 Company Email
               </label>
               <div style={styles.inputWrapper}>
-                <span style={styles.inputIcon}>✉️</span>
+                <span style={styles.inputIcon}><Mail size={18} color="#64748b" /></span>
                 <input
                   id="email"
                   name="email"
@@ -113,7 +114,7 @@ function CompanyLogin() {
                 Password
               </label>
               <div style={styles.inputWrapper}>
-                <span style={styles.inputIcon}>🔒</span>
+                <span style={styles.inputIcon}><Lock size={18} color="#64748b" /></span>
                 <input
                   id="password"
                   name="password"
@@ -136,7 +137,7 @@ function CompanyLogin() {
                   onClick={() => setShowPassword(!showPassword)}
                   style={styles.eyeBtn}
                 >
-                  {showPassword ? "🙈" : "👁️"}
+                  {showPassword ? <EyeOff size={20} color="#64748b" /> : <Eye size={20} color="#64748b" />}
                 </button>
               </div>
             </div>
@@ -146,7 +147,7 @@ function CompanyLogin() {
               disabled={loading}
               style={loading ? { ...styles.submitBtn, opacity: 0.7 } : styles.submitBtn}
             >
-              {loading ? "Signing in…" : "Sign In as Company →"}
+              {loading ? "Signing in…" : <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>Sign In as Company <ArrowRight size={20} /></span>}
             </button>
           </form>
 
@@ -160,7 +161,9 @@ function CompanyLogin() {
             onClick={() => navigate("/login")}
             style={styles.altBtn}
           >
-            👤 Sign in as Developer
+            <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+              <User size={18} /> Sign in as Developer
+            </span>
           </button>
         </div>
       </div>
@@ -211,7 +214,8 @@ const styles = {
   },
   leftContent: { maxWidth: "420px" },
   badge: {
-    display: "inline-block",
+    display: "inline-flex",
+    alignItems: "center",
     fontSize: "11px",
     fontWeight: "700",
     letterSpacing: "0.1em",
@@ -256,7 +260,7 @@ const styles = {
     borderRadius: "14px",
     padding: "14px",
   },
-  benefitIcon: { fontSize: "22px", flexShrink: 0 },
+  benefitIcon: { flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center" },
   benefitTitle: { margin: 0, fontSize: "13px", fontWeight: "700", color: "#0f172a" },
   benefitDesc: { margin: "2px 0 0", fontSize: "11px", color: "#64748b" },
   rightPanel: {
@@ -318,7 +322,7 @@ const styles = {
     borderRadius: "12px",
     transition: "box-shadow 0.2s",
   },
-  inputIcon: { position: "absolute", left: "14px", fontSize: "15px", pointerEvents: "none" },
+  inputIcon: { position: "absolute", left: "14px", display: "flex", alignItems: "center", pointerEvents: "none" },
   input: {
     width: "100%",
     padding: "13px 14px 13px 42px",
@@ -336,7 +340,8 @@ const styles = {
     background: "none",
     border: "none",
     cursor: "pointer",
-    fontSize: "16px",
+    display: "flex",
+    alignItems: "center",
     padding: "0",
     lineHeight: "1",
   },

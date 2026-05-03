@@ -9,6 +9,7 @@ const authRoutes = require("./routes/auth.routes");
 const userRoutes = require("./routes/user.routes")
 const companyRoute = require("./routes/company.routes")
 const jobRoutes = require("./routes/job.routes")
+const adminRoutes = require("./routes/admin.routes")
 
 
 //config env
@@ -37,6 +38,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/user",userRoutes)
 app.use("/api/v1/company",companyRoute)
 app.use("/api/v1/job", jobRoutes)
+app.use("/api/v1/admin", adminRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}`);

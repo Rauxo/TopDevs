@@ -22,7 +22,7 @@ function Navbar() {
     role === "company"
       ? "/company/dashboard"
       : role === "admin"
-      ? "/admin"
+      ? "/admin/dashboard"
       : "/UserDashboard";
 
   // Languages from user (if learner)

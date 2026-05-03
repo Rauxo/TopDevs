@@ -12,6 +12,13 @@ import CompanyProtectedRoute from "./Protected Routes/CompanyProtectedRoute";
 import HomeScreen from "./pages/HomeScreen/HomeScreen";
 import NotFound from "./NotFound";
 
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminCompanies from "./pages/admin/AdminCompanies";
+import AdminJobs from "./pages/admin/AdminJobs";
+import AdminProtectedRoute from "./Protected Routes/AdminProtectedRoute";
+
 import Jobs from "./pages/jobs/Jobs";
 import JobDetail from "./pages/jobs/JobDetail";
 import CreateJob from "./pages/company/CreateJob";
@@ -98,6 +105,41 @@ function App() {
               <CompanyProtectedRoute>
                 <EditCompanyProfile />
               </CompanyProtectedRoute>
+            }
+          />
+
+          {/* Admin Routes */}
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route
+            path="/admin/dashboard"
+            element={
+              <AdminProtectedRoute>
+                <AdminDashboard />
+              </AdminProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <AdminProtectedRoute>
+                <AdminUsers />
+              </AdminProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/companies"
+            element={
+              <AdminProtectedRoute>
+                <AdminCompanies />
+              </AdminProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/jobs"
+            element={
+              <AdminProtectedRoute>
+                <AdminJobs />
+              </AdminProtectedRoute>
             }
           />
           <Route path="*" element={<NotFound />} />

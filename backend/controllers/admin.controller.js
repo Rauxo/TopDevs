@@ -1,5 +1,5 @@
 const adminModel = require("../models/admin.model");
-const userModel = require("../models/user.model");
+const userModel = require("../models/user.models");
 const companyModel = require("../models/company.model");
 const jobModel = require("../models/job.model");
 const jobApplicationModel = require("../models/jobApplication.model");
@@ -9,13 +9,23 @@ const nodemailer = require("nodemailer");
 
 // Seed admin if not exists (using .env)
 const seedAdmin = async () => {
-    const phone = process.env.ADMIN_PHONE;
-    const password = process.env.ADMIN_PASSWORD;
-    const existingAdmin = await adminModel.findOne({ phone });
-    if (!existingAdmin) {
-        const hashedPassword = await bcrypt.hash(password, 10);
-        await adminModel.create({ phone, password: hashedPassword });
-        console.log("Admin seeded successfully");
+    try {
+        const phone = process.env.ADMIN_PHONE;
+        const password = process.env.ADMIN_PASSWORD;
+
+        if (!phone || !password) {
+            console.warn("Admin seeding skipped: Missing ADMIN_PHONE or ADMIN_PASSWORD in .env");
+            return;
+        }
+
+        const existingAdmin = await adminModel.findOne({ phone });
+        if (!existingAdmin) {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            await adminModel.create({ phone, password: hashedPassword });
+            console.log("Admin seeded successfully");
+        }
+    } catch (err) {
+        console.error("Admin seeding error:", err);
     }
 };
 seedAdmin();

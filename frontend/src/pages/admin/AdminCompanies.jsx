@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AdminLayout from "./AdminLayout";
-import { Building2, CheckCircle2, XCircle, Eye, ShieldCheck, Mail, Phone, MapPin, FileText, ExternalLink, Ban } from "lucide-react";
+import { Building2,Clock , CheckCircle2, XCircle, Eye, ShieldCheck, Mail, Phone, MapPin, FileText, ExternalLink, Ban } from "lucide-react";
 import API from "../../API/api";
 
 const AdminCompanies = () => {

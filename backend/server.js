@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const connectDB = require('./db/connectDB')
 const morgan = require('morgan')
@@ -11,9 +12,6 @@ const companyRoute = require("./routes/company.routes")
 const jobRoutes = require("./routes/job.routes")
 const adminRoutes = require("./routes/admin.routes")
 
-
-//config env
-require("dotenv").config();
 
 //connect databse 
 connectDB();

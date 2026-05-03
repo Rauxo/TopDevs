@@ -34,6 +34,16 @@ function CompanyDashboard() {
     navigate("/company/login");
   };
 
+  const checkVerification = (e, path) => {
+    if (!company.isVerified) {
+      e.preventDefault();
+      alert("Please wait until we verify your company account.");
+      return false;
+    }
+    if (path) navigate(path);
+    return true;
+  };
+
   if (!company) return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
@@ -67,12 +77,12 @@ function CompanyDashboard() {
             >
               <Briefcase size={18} /> Manage Jobs
             </button>
-            <Link
-              to="/company/create-job"
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-50 no-underline"
+            <button
+              onClick={(e) => checkVerification(e, "/company/create-job")}
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-50 border-none bg-transparent transition-all cursor-pointer"
             >
               <PlusCircle size={18} /> Post New Job
-            </Link>
+            </button>
           </nav>
         </div>
 
@@ -93,9 +103,12 @@ function CompanyDashboard() {
             <p className="text-slate-500 text-sm mt-1">Here's what's happening with your recruitment.</p>
           </div>
           <div className="flex gap-3">
-            <Link to="/company/create-job" className="px-6 py-2.5 bg-emerald-600 text-white font-bold rounded-xl shadow-lg shadow-emerald-100 hover:-translate-y-0.5 transition-all no-underline">
+            <button 
+              onClick={(e) => checkVerification(e, "/company/create-job")} 
+              className="px-6 py-2.5 bg-emerald-600 text-white font-bold rounded-xl shadow-lg shadow-emerald-100 hover:-translate-y-0.5 transition-all border-none cursor-pointer"
+            >
               Post a Job
-            </Link>
+            </button>
           </div>
         </header>
 
@@ -229,7 +242,7 @@ function CompanyDashboard() {
                       </td>
                       <td className="py-4 text-right">
                         <button 
-                          onClick={() => navigate(`/company/applicants/${job._id}`)}
+                          onClick={(e) => checkVerification(e, `/company/applicants/${job._id}`)}
                           className="text-emerald-600 font-bold text-xs hover:underline cursor-pointer border-none bg-none"
                         >
                           View Apps

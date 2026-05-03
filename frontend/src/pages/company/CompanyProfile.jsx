@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { MapPin, Mail, Phone, CheckCircle2, ArrowRight } from "lucide-react";
+import { MapPin, Mail, Phone, CheckCircle2, ArrowRight, AlertTriangle, ShieldX } from "lucide-react";
 import API from "../../API/api";
 
 const CompanyProfile = () => {
@@ -63,15 +63,33 @@ const CompanyProfile = () => {
               </div>
             </div>
             <div className="pb-2">
-               <span className="px-4 py-2 bg-emerald-100 text-emerald-700 font-bold rounded-full text-sm flex items-center gap-2">
-                 <CheckCircle2 size={16} /> Verified Company
-               </span>
+               {company.isVerified ? (
+                 <span className="px-4 py-2 bg-emerald-100 text-emerald-700 font-bold rounded-full text-sm flex items-center gap-2">
+                   <CheckCircle2 size={16} /> Verified Company
+                 </span>
+               ) : (
+                 <span className="px-4 py-2 bg-amber-100 text-amber-700 font-bold rounded-full text-sm flex items-center gap-2">
+                   <AlertTriangle size={16} /> Company Not Verified
+                 </span>
+               )}
             </div>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 pb-20">
           <div className="lg:col-span-2 space-y-12">
+            {!company.isVerified && (
+              <div className="bg-amber-50 border-2 border-dashed border-amber-200 p-8 rounded-[32px] text-center mb-8">
+                 <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                   <ShieldX size={32} className="text-amber-600" />
+                 </div>
+                 <h3 className="text-xl font-bold text-amber-900 mb-2">Trust & Safety Notice</h3>
+                 <p className="text-amber-700 text-sm max-w-lg mx-auto">
+                   This company is currently undergoing our verification process. Job applications and other operations are temporarily disabled for your safety.
+                 </p>
+              </div>
+            )}
+
             <section>
               <h2 className="text-2xl font-bold text-slate-900 mb-6">Open Positions ({jobs.length})</h2>
               <div className="space-y-4">
@@ -79,18 +97,22 @@ const CompanyProfile = () => {
                   jobs.map(job => (
                     <div
                       key={job._id}
-                      onClick={() => navigate(`/jobs/${job._id}`)}
-                      className="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all cursor-pointer group"
+                      onClick={() => company.isVerified && navigate(`/jobs/${job._id}`)}
+                      className={`p-6 bg-white rounded-3xl border border-slate-100 shadow-sm transition-all flex items-center justify-between group ${
+                        company.isVerified ? "hover:shadow-md hover:border-emerald-200 cursor-pointer" : "opacity-60 cursor-not-allowed"
+                      }`}
                     >
-                      <div className="flex justify-between items-center">
-                        <div>
-                          <h3 className="font-bold text-slate-800 group-hover:text-emerald-600 transition-colors">{job.jobTitle}</h3>
-                          <p className="text-sm text-slate-500 mt-1">{job.location} • {job.jobType || "Full-time"}</p>
-                        </div>
+                      <div>
+                        <h3 className={`font-bold text-slate-800 transition-colors ${company.isVerified ? "group-hover:text-emerald-600" : ""}`}>{job.jobTitle}</h3>
+                        <p className="text-sm text-slate-500 mt-1">{job.location} • {job.jobType || "Full-time"}</p>
+                      </div>
+                      {company.isVerified ? (
                         <span className="text-emerald-600 font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                           View <ArrowRight size={16} />
                         </span>
-                      </div>
+                      ) : (
+                        <span className="text-slate-400 font-bold text-xs uppercase tracking-widest">Disabled</span>
+                      )}
                     </div>
                   ))
                 ) : (

@@ -18,6 +18,7 @@ import AdminUsers from "./pages/admin/AdminUsers";
 import AdminCompanies from "./pages/admin/AdminCompanies";
 import AdminJobs from "./pages/admin/AdminJobs";
 import AdminPlans from "./pages/admin/AdminPlans";
+import AdminLearning from "./pages/admin/AdminLearning";
 import AdminProtectedRoute from "./Protected Routes/AdminProtectedRoute";
 
 import Jobs from "./pages/jobs/Jobs";
@@ -30,6 +31,9 @@ import Companies from "./pages/company/Companies";
 import Search from "./pages/Search";
 import Layout from "./Layout/Layout";
 import Learn from "./pages/learn/Learn";
+import LevelsPage from "./pages/learn/LevelsPage";
+import LevelContentPage from "./pages/learn/LevelContentPage";
+import SolvePage from "./pages/learn/SolvePage";
 import Leaderboard from "./pages/leaderboard/Leaderboard";
 import TermsConditions from "./pages/legal/TermsConditions";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
@@ -75,6 +79,30 @@ function App() {
             element={
               <ProtectedRoute>
                 <EditProfile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/learn/:languageId/levels"
+            element={
+              <ProtectedRoute>
+                <LevelsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/learn/level/:levelId"
+            element={
+              <ProtectedRoute>
+                <LevelContentPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/learn/solve/:levelId"
+            element={
+              <ProtectedRoute>
+                <SolvePage />
               </ProtectedRoute>
             }
           />
@@ -154,6 +182,14 @@ function App() {
             element={
               <AdminProtectedRoute>
                 <AdminPlans />
+              </AdminProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/learning"
+            element={
+              <AdminProtectedRoute>
+                <AdminLearning />
               </AdminProtectedRoute>
             }
           />

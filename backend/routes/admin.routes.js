@@ -14,6 +14,8 @@ const {
     getAllPlans,
     deletePlan
 } = require("../controllers/admin.controller");
+const learningAdminController = require("../controllers/learning.admin.controller");
+const upload = require("../middlewares/upload");
 const { adminAuthMiddleware } = require("../middlewares/adminAuthMiddleware");
 
 router.post("/login", adminLogin);
@@ -30,5 +32,22 @@ router.delete("/job/:id", adminAuthMiddleware, deleteJob);
 router.post("/plans", adminAuthMiddleware, createPlan);
 router.get("/plans", adminAuthMiddleware, getAllPlans);
 router.delete("/plan/:id", adminAuthMiddleware, deletePlan);
+
+// Learning Admin Routes
+router.post("/language", adminAuthMiddleware, upload.single("icon"), learningAdminController.createLanguage);
+router.put("/language/:id", adminAuthMiddleware, upload.single("icon"), learningAdminController.updateLanguage);
+router.delete("/language/:id", adminAuthMiddleware, learningAdminController.deleteLanguage);
+
+router.post("/level", adminAuthMiddleware, upload.single("image"), learningAdminController.createLevel);
+router.get("/levels/:languageId", adminAuthMiddleware, learningAdminController.getLevels);
+router.put("/level/:id", adminAuthMiddleware, upload.single("image"), learningAdminController.updateLevel);
+router.delete("/level/:id", adminAuthMiddleware, learningAdminController.deleteLevel);
+
+router.post("/question", adminAuthMiddleware, learningAdminController.createQuestion);
+router.get("/questions/:levelId", adminAuthMiddleware, learningAdminController.getQuestions);
+router.put("/question/:id", adminAuthMiddleware, learningAdminController.updateQuestion);
+router.delete("/question/:id", adminAuthMiddleware, learningAdminController.deleteQuestion);
+
+router.put("/learning-settings", adminAuthMiddleware, learningAdminController.updateSettings);
 
 module.exports = router;

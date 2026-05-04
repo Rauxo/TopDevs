@@ -9,7 +9,8 @@ import {
   ShieldCheck,
   Menu,
   X,
-  CreditCard
+  CreditCard,
+  GraduationCap
 } from "lucide-react";
 
 const AdminLayout = ({ children }) => {
@@ -23,6 +24,7 @@ const AdminLayout = ({ children }) => {
     { label: "Company Management", path: "/admin/companies", icon: <Building2 size={20} /> },
     { label: "Job Moderation", path: "/admin/jobs", icon: <Briefcase size={20} /> },
     { label: "Subscription Plans", path: "/admin/plans", icon: <CreditCard size={20} /> },
+    { label: "Learning Center", path: "/admin/learning", icon: <GraduationCap size={20} /> },
   ];
 
   const handleLogout = () => {

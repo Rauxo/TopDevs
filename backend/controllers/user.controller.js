@@ -1,6 +1,6 @@
 exports.getProfile = async (req, res) => {
   try {
-    const user = req.user;
+    const user = await require("../models/user.models").findById(req.user._id).populate("selectedLanguages.language");
 
     return res.status(200).json({
       message: "User profile",

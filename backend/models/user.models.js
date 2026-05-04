@@ -37,6 +37,39 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  points: {
+    type: Number,
+    default: 0,
+  },
+  profileLevel: {
+    type: Number,
+    default: 1,
+  },
+  selectedLanguages: [{
+    language: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Language",
+    },
+    currentLevel: {
+      type: Number,
+      default: 1,
+    },
+    completedLevels: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Level",
+    }],
+    startDate: {
+      type: Date,
+      default: Date.now,
+    },
+    completionDate: {
+      type: Date,
+    },
+    progress: {
+      type: Number,
+      default: 0,
+    }
+  }],
 },{
     timestamps:true
 });

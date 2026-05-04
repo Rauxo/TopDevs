@@ -3,6 +3,8 @@ import { AuthContext } from "../../API/AuthContext";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { ClipboardList, FolderGit2, Zap, CheckCircle2, MessageSquare } from "lucide-react";
 import API from "../../API/api";
+import UserLevelTick from "../../components/UserLevelTick";
+import { GraduationCap } from "lucide-react";
 
 function UserDashboard() {
   const { user, logout } = useContext(AuthContext);
@@ -58,7 +60,10 @@ function UserDashboard() {
           {/* User Info */}
           <div className="flex-1 text-center md:text-left">
             <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">
-              <h1 className="text-2xl font-light text-slate-800">{user.username}</h1>
+              <div className="flex items-center gap-2">
+                <h1 className="text-2xl font-light text-slate-800">{user.username}</h1>
+                <UserLevelTick level={user.profileLevel || 1} size={24} />
+              </div>
               <div className="flex gap-2 justify-center">
                 <Link 
                   to="/edit-profile"
@@ -75,6 +80,12 @@ function UserDashboard() {
             <div className="flex justify-center md:justify-start gap-8 mb-6">
               <div className="text-center md:text-left">
                 <span className="font-bold block md:inline">{applications.length}</span> <span className="text-slate-500">applications</span>
+              </div>
+              <div className="text-center md:text-left">
+                <span className="font-bold block md:inline">{user.points || 0}</span> <span className="text-slate-500">points</span>
+              </div>
+              <div className="text-center md:text-left">
+                <span className="font-bold block md:inline">Level {user.profileLevel || 1}</span>
               </div>
             </div>
 
@@ -122,6 +133,14 @@ function UserDashboard() {
               }`}
             >
               <MessageSquare size={14} /> Messages
+            </button>
+            <button
+              onClick={() => setActiveTab("learning")}
+              className={`flex items-center gap-2 py-4 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors border-t ${
+                activeTab === "learning" ? "border-emerald-600 text-emerald-600" : "border-transparent text-slate-400"
+              }`}
+            >
+              <GraduationCap size={14} /> Learning
             </button>
           </div>
         </div>
@@ -205,6 +224,47 @@ function UserDashboard() {
               >
                 Open Messages
               </Link>
+            </div>
+          )}
+
+          {activeTab === "learning" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {user.selectedLanguages?.length > 0 ? (
+                user.selectedLanguages.map((sl, index) => (
+                  <div key={index} className="p-5 border border-slate-100 rounded-2xl bg-white shadow-sm hover:shadow-md transition-all">
+                    <div className="flex justify-between items-center mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-slate-50 p-2 flex items-center justify-center">
+                          <GraduationCap size={20} className="text-emerald-500" />
+                        </div>
+                        <h3 className="font-bold text-slate-900">{sl.language?.name || "Language Progress"}</h3>
+                      </div>
+                      <span className="text-emerald-600 font-black text-sm">{sl.progress}%</span>
+                    </div>
+                    <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+                      <div className="bg-emerald-500 h-full rounded-full" style={{ width: `${sl.progress}%` }}></div>
+                    </div>
+                    <div className="mt-4 flex flex-col gap-1 text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+                      <div className="flex justify-between items-center">
+                        <span>Started: {new Date(sl.startDate).toLocaleDateString()}</span>
+                        {sl.completionDate ? (
+                          <span className="text-emerald-500">
+                            Completed in {Math.ceil((new Date(sl.completionDate) - new Date(sl.startDate)) / (1000 * 60 * 60 * 24))} days
+                          </span>
+                        ) : (
+                          <Link to="/learn" className="text-emerald-600 no-underline hover:underline">Continue</Link>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <div className="col-span-full text-center py-20 bg-slate-50 rounded-[32px] border border-dashed border-slate-200">
+                  <GraduationCap size={48} className="text-slate-300 mb-4 mx-auto" />
+                  <p className="text-slate-400">No languages selected yet.</p>
+                  <Link to="/learn" className="mt-4 inline-block text-emerald-600 font-bold hover:underline">Start Learning</Link>
+                </div>
+              )}
             </div>
           )}
         </div>

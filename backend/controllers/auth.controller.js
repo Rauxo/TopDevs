@@ -180,7 +180,7 @@ exports.searchUsers = async (req, res) => {
 
 exports.getUserPublicProfile = async (req, res) => {
   try {
-    const user = await userModel.findById(req.params.id).select("-password");
+    const user = await userModel.findById(req.params.id).select("-password").populate("selectedLanguages.language");
     if (!user) return res.status(404).json({ message: "User not found" });
     res.status(200).json({ user });
   } catch (error) {

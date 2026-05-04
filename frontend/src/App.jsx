@@ -17,6 +17,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminUsers from "./pages/admin/AdminUsers";
 import AdminCompanies from "./pages/admin/AdminCompanies";
 import AdminJobs from "./pages/admin/AdminJobs";
+import AdminPlans from "./pages/admin/AdminPlans";
 import AdminProtectedRoute from "./Protected Routes/AdminProtectedRoute";
 
 import Jobs from "./pages/jobs/Jobs";
@@ -34,6 +35,8 @@ import TermsConditions from "./pages/legal/TermsConditions";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import ContactUs from "./pages/ContactUs";
 import ChatPage from "./pages/ChatPage";
+import Pricing from "./pages/Pricing";
+import PaymentStatus from "./pages/PaymentStatus";
 
 function App() {
   return (
@@ -55,6 +58,8 @@ function App() {
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/messages" element={<ChatPage />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/payment-status" element={<PaymentStatus />} />
 
           {/* User Protected Routes */}
           <Route
@@ -141,6 +146,14 @@ function App() {
             element={
               <AdminProtectedRoute>
                 <AdminJobs />
+              </AdminProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/plans"
+            element={
+              <AdminProtectedRoute>
+                <AdminPlans />
               </AdminProtectedRoute>
             }
           />

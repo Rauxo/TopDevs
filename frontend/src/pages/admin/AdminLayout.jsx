@@ -8,7 +8,8 @@ import {
   LogOut, 
   ShieldCheck,
   Menu,
-  X
+  X,
+  CreditCard
 } from "lucide-react";
 
 const AdminLayout = ({ children }) => {
@@ -21,6 +22,7 @@ const AdminLayout = ({ children }) => {
     { label: "User Management", path: "/admin/users", icon: <Users size={20} /> },
     { label: "Company Management", path: "/admin/companies", icon: <Building2 size={20} /> },
     { label: "Job Moderation", path: "/admin/jobs", icon: <Briefcase size={20} /> },
+    { label: "Subscription Plans", path: "/admin/plans", icon: <CreditCard size={20} /> },
   ];
 
   const handleLogout = () => {

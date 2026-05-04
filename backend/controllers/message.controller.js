@@ -10,6 +10,24 @@ exports.sendMessage = async (req, res) => {
     const senderType = req.user ? "User" : "Company";
 
     if (!senderId) return res.status(401).json({ message: "Unauthorized" });
+    const senderModel = req.user ? userModel : companyModel;
+    const sender = await senderModel.findById(senderId).populate("plan");
+
+    // Auto-expiry check
+    if (sender.isPremium && sender.premiumExpiry && new Date(sender.premiumExpiry) < new Date()) {
+      sender.isPremium = false;
+      sender.plan = null;
+      await sender.save();
+    }
+
+    const limit = sender.isPremium ? (sender.plan?.messageLimit || 1) : 1;
+
+    if (sender.messagesSent >= limit) {
+      return res.status(403).json({
+        message: "Message limit reached. Please upgrade to a premium plan to continue.",
+        limitReached: true,
+      });
+    }
 
     // Find or create conversation
     let conversation = await conversationModel.findOne({
@@ -44,6 +62,10 @@ exports.sendMessage = async (req, res) => {
       senderType,
       text
     });
+
+    // Increment message count
+    sender.messagesSent += 1;
+    await sender.save();
 
     res.status(201).json({ message: newMessage, conversation });
   } catch (error) {

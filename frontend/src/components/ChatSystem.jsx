@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { Send, User, Building2, Clock, CheckCircle2, MessageSquare, Search, ExternalLink, ChevronLeft, MoreVertical } from "lucide-react";
+import { Send, User, Building2, Clock, CheckCircle2, MessageSquare, Search, ExternalLink, ChevronLeft, MoreVertical, Sparkles } from "lucide-react";
 import { AuthContext } from "../API/AuthContext";
 import { useSocket } from "../API/SocketContext";
 import API from "../API/api";
@@ -14,6 +14,7 @@ const ChatSystem = ({ type }) => { // type: 'user' or 'company'
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(true);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const chatEndRef = useRef(null);
 
   const currentId = user?._id || company?._id;
@@ -90,7 +91,11 @@ const ChatSystem = ({ type }) => { // type: 'user' or 'company'
       setMessages((prev) => [...prev, res.data.message]);
       setNewMessage("");
     } catch (err) {
-      console.error(err);
+      if (err.response?.status === 403 && err.response?.data?.limitReached) {
+        setShowUpgradeModal(true);
+      } else {
+        console.error(err);
+      }
     }
   };
 
@@ -325,6 +330,35 @@ const ChatSystem = ({ type }) => { // type: 'user' or 'company'
           </div>
         )}
       </div>
+
+      {/* Upgrade Modal */}
+      {showUpgradeModal && (
+        <div className="fixed inset-0 z-[1100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300">
+          <div className="bg-white rounded-[40px] shadow-2xl max-w-md w-full p-10 text-center animate-in zoom-in-95 duration-300">
+            <div className="w-24 h-24 bg-emerald-100 rounded-[32px] flex items-center justify-center mx-auto mb-8 text-emerald-600">
+              <Sparkles size={48} />
+            </div>
+            <h3 className="text-3xl font-black text-slate-900 mb-4 tracking-tight">Limit Reached</h3>
+            <p className="text-slate-500 font-bold mb-10 leading-relaxed">
+              You've reached your free message limit. Upgrade to a premium plan to continue your conversations and unlock unlimited potential.
+            </p>
+            <div className="flex flex-col gap-4">
+              <button 
+                onClick={() => navigate("/pricing")}
+                className="w-full py-5 bg-emerald-600 text-white font-black uppercase tracking-widest rounded-2xl hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-500/20 border-none cursor-pointer"
+              >
+                View Plans
+              </button>
+              <button 
+                onClick={() => setShowUpgradeModal(false)}
+                className="w-full py-5 bg-slate-100 text-slate-600 font-black uppercase tracking-widest rounded-2xl hover:bg-slate-200 transition-all border-none cursor-pointer"
+              >
+                Maybe Later
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

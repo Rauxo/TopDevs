@@ -22,6 +22,21 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "Developer passionate about building beautiful and functional web applications. 🚀",
   },
+  isPremium: {
+    type: Boolean,
+    default: false,
+  },
+  plan: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Plan",
+  },
+  premiumExpiry: {
+    type: Date,
+  },
+  messagesSent: {
+    type: Number,
+    default: 0,
+  },
 },{
     timestamps:true
 });

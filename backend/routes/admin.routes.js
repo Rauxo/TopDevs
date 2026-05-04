@@ -9,7 +9,10 @@ const {
     verifyCompany,
     blockCompany,
     getAllJobs,
-    deleteJob
+    deleteJob,
+    createPlan,
+    getAllPlans,
+    deletePlan
 } = require("../controllers/admin.controller");
 const { adminAuthMiddleware } = require("../middlewares/adminAuthMiddleware");
 
@@ -24,5 +27,8 @@ router.put("/company/verify/:id", adminAuthMiddleware, verifyCompany);
 router.put("/company/block/:id", adminAuthMiddleware, blockCompany);
 router.get("/jobs", adminAuthMiddleware, getAllJobs);
 router.delete("/job/:id", adminAuthMiddleware, deleteJob);
+router.post("/plans", adminAuthMiddleware, createPlan);
+router.get("/plans", adminAuthMiddleware, getAllPlans);
+router.delete("/plan/:id", adminAuthMiddleware, deletePlan);
 
 module.exports = router;

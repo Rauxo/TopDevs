@@ -161,3 +161,34 @@ exports.deleteJob = async (req, res) => {
         res.status(500).json({ message: "Failed to delete job" });
     }
 };
+
+// Plan Management
+const planModel = require("../models/plan.model");
+
+exports.createPlan = async (req, res) => {
+    try {
+        const { name, type, price, messageLimit, durationInDays } = req.body;
+        const plan = await planModel.create({ name, type, price, messageLimit, durationInDays });
+        res.status(201).json({ message: "Plan created successfully", plan });
+    } catch (error) {
+        res.status(500).json({ message: "Failed to create plan" });
+    }
+};
+
+exports.getAllPlans = async (req, res) => {
+    try {
+        const plans = await planModel.find().sort({ createdAt: -1 });
+        res.status(200).json({ plans });
+    } catch (error) {
+        res.status(500).json({ message: "Failed to fetch plans" });
+    }
+};
+
+exports.deletePlan = async (req, res) => {
+    try {
+        await planModel.findByIdAndDelete(req.params.id);
+        res.status(200).json({ message: "Plan deleted successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Failed to delete plan" });
+    }
+};

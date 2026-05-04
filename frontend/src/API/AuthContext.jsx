@@ -87,8 +87,25 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const refreshAuth = async () => {
+    try {
+      const userRes = await API.get("/user/me");
+      setUser(userRes.data.user);
+      setCompany(null);
+    } catch (err) {
+      try {
+        const companyRes = await API.get("/company/myCompany");
+        setCompany(companyRes.data.company);
+        setUser(null);
+      } catch (companyErr) {
+        setUser(null);
+        setCompany(null);
+      }
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ user, setUser, company, setCompany, login, companyLogin, logout, companyLogout, register, companyRegister, loading }}>
+    <AuthContext.Provider value={{ user, setUser, company, setCompany, login, companyLogin, logout, companyLogout, register, companyRegister, loading, refreshAuth }}>
       {children}
     </AuthContext.Provider>
   );

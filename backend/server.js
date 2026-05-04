@@ -14,6 +14,7 @@ const companyRoute = require("./routes/company.routes")
 const jobRoutes = require("./routes/job.routes")
 const adminRoutes = require("./routes/admin.routes")
 const messageRoutes = require("./routes/message.routes");
+const paymentRoutes = require("./routes/payment.routes");
 
 //connect databse 
 connectDB();
@@ -78,6 +79,7 @@ app.use("/api/v1/company",companyRoute)
 app.use("/api/v1/job", jobRoutes)
 app.use("/api/v1/admin", adminRoutes)
 app.use("/api/v1/message", messageRoutes);
+app.use("/api/v1/payment", paymentRoutes);
 
 server.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}`);

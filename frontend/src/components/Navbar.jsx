@@ -133,6 +133,11 @@ function Navbar() {
               Leaderboard
             </Link>
           </li>
+          <li>
+            <Link to="/messages" className={isActive("/messages")}>
+              Messages
+            </Link>
+          </li>
 
           {/* Languages dropdown — learner only */}
           {isAuthenticated && role === "learner" && (
@@ -297,6 +302,12 @@ function Navbar() {
             className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
           >
             <Trophy size={18} /> Leaderboard
+          </Link>
+          <Link
+            to="/messages"
+            className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+          >
+            <MessageSquare size={18} /> Messages
           </Link>
 
           {isAuthenticated && role === "learner" && (

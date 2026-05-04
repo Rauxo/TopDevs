@@ -3,7 +3,6 @@ import { AuthContext } from "../../API/AuthContext";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { LayoutDashboard, Briefcase, PlusCircle, LogOut, AlertTriangle, MessageSquare } from "lucide-react";
 import API from "../../API/api";
-import ChatSystem from "../../components/ChatSystem";
 
 function CompanyDashboard() {
   const { company, companyLogout } = useContext(AuthContext);
@@ -268,7 +267,19 @@ function CompanyDashboard() {
         )}
 
         {activeTab === "messages" && (
-           <ChatSystem type="company" />
+           <div className="bg-white p-20 rounded-[32px] shadow-sm border border-slate-100 text-center">
+             <div className="w-20 h-20 bg-emerald-50 rounded-[28px] flex items-center justify-center mx-auto mb-8 text-emerald-500">
+               <MessageSquare size={32} />
+             </div>
+             <h3 className="text-2xl font-black text-slate-900 mb-4">Corporate Communications</h3>
+             <p className="text-slate-500 mb-10 max-w-sm mx-auto font-medium">Manage your candidate requests and active conversations in the professional messaging terminal.</p>
+             <Link 
+              to="/messages"
+              className="inline-flex items-center gap-2 px-10 py-4 bg-emerald-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-600/20 no-underline"
+             >
+               Go to Messages
+             </Link>
+           </div>
         )}
       </main>
     </div>

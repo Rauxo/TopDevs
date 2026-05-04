@@ -119,7 +119,7 @@ const ChatSystem = ({ type }) => { // type: 'user' or 'company'
   const activeChats = conversations.filter(c => c.status === "accepted" || (c.status === "pending" && c.initiatedBy.type === (type === "user" ? "User" : "Company")));
 
   return (
-    <div className="flex h-[700px] bg-slate-50 rounded-[40px] shadow-2xl border border-white overflow-hidden backdrop-blur-3xl">
+    <div className="flex h-full bg-white/40 rounded-[40px] shadow-[0_20px_70px_rgba(0,0,0,0.08)] border border-white/60 overflow-hidden backdrop-blur-3xl transition-all duration-500">
       {/* Sidebar */}
       <div className={`w-full md:w-96 border-r border-slate-200 flex flex-col bg-white/70 ${activeConv ? 'hidden md:flex' : 'flex'}`}>
         <div className="p-8 pb-4">
@@ -262,7 +262,7 @@ const ChatSystem = ({ type }) => { // type: 'user' or 'company'
                   <div className={`max-w-[75%] group`}>
                     <div className={`p-5 rounded-[32px] text-sm font-bold shadow-sm transition-all hover:shadow-md ${
                       msg.senderId === currentId 
-                        ? "bg-emerald-600 text-white rounded-tr-none shadow-emerald-200/50" 
+                        ? "bg-gradient-to-br from-emerald-600 to-emerald-700 text-white rounded-tr-none shadow-emerald-200/50" 
                         : "bg-white text-slate-800 rounded-tl-none border border-slate-100"
                     }`}>
                       {msg.text}
@@ -286,10 +286,10 @@ const ChatSystem = ({ type }) => { // type: 'user' or 'company'
                   <div className="flex-1 relative">
                     <input 
                       type="text" 
-                      placeholder="Draft a message..." 
+                      placeholder="Type a message..." 
                       value={newMessage}
                       onChange={(e) => setNewMessage(e.target.value)}
-                      className="w-full px-8 py-5 bg-slate-100/50 border-2 border-transparent rounded-[28px] outline-none focus:bg-white focus:border-emerald-500/20 transition-all font-bold text-slate-800 shadow-inner"
+                      className="w-full px-8 py-5 bg-slate-100/60 border-2 border-transparent rounded-[28px] outline-none focus:bg-white focus:border-emerald-500/30 focus:shadow-[0_0_0_4px_rgba(16,185,129,0.1)] transition-all font-bold text-slate-800"
                     />
                   </div>
                   <button 

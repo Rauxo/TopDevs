@@ -3,7 +3,6 @@ import { AuthContext } from "../../API/AuthContext";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { ClipboardList, FolderGit2, Zap, CheckCircle2, MessageSquare } from "lucide-react";
 import API from "../../API/api";
-import ChatSystem from "../../components/ChatSystem";
 
 function UserDashboard() {
   const { user, logout } = useContext(AuthContext);
@@ -194,7 +193,19 @@ function UserDashboard() {
           )}
 
           {activeTab === "messages" && (
-            <ChatSystem type="user" />
+            <div className="text-center py-20 bg-slate-50 rounded-[32px] border border-dashed border-slate-200">
+              <div className="text-emerald-500/30 mb-6 flex justify-center">
+                <MessageSquare size={64} />
+              </div>
+              <h3 className="text-xl font-black text-slate-900 mb-2">Private Messaging</h3>
+              <p className="text-slate-500 mb-8 max-w-xs mx-auto">Access your secure conversations in the dedicated messaging portal.</p>
+              <Link 
+                to="/messages"
+                className="inline-flex items-center gap-2 px-8 py-3 bg-emerald-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-600/20 no-underline"
+              >
+                Open Messages
+              </Link>
+            </div>
           )}
         </div>
       </div>

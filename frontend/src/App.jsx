@@ -33,6 +33,7 @@ import Leaderboard from "./pages/leaderboard/Leaderboard";
 import TermsConditions from "./pages/legal/TermsConditions";
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
 import ContactUs from "./pages/ContactUs";
+import ChatPage from "./pages/ChatPage";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
           <Route path="/terms" element={<TermsConditions />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/contact" element={<ContactUs />} />
+          <Route path="/messages" element={<ChatPage />} />
 
           {/* User Protected Routes */}
           <Route

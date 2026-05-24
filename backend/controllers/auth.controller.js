@@ -190,7 +190,7 @@ exports.getUserPublicProfile = async (req, res) => {
 
 exports.getLeaderboard = async (req, res) => {
   try {
-    const users = await userModel.find().select("username profileImg about createdAt").limit(10);
+    const users = await userModel.find().select("username profileImg about createdAt profileLevel").sort({ profileLevel: -1, createdAt: 1 }).limit(10);
     res.status(200).json({ users });
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch leaderboard" });

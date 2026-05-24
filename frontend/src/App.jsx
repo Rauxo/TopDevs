@@ -11,6 +11,7 @@ import CompanyDashboard from "./pages/company/CompanyDashboard";
 import CompanyProtectedRoute from "./Protected Routes/CompanyProtectedRoute";
 import HomeScreen from "./pages/HomeScreen/HomeScreen";
 import NotFound from "./NotFound";
+import ScrollToTop from "./components/ScrollToTop";
 
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -45,6 +46,7 @@ import PaymentStatus from "./pages/PaymentStatus";
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Layout>
         <Routes>
           <Route path="/" element={<HomeScreen />} />

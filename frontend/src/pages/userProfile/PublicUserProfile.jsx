@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { GraduationCap, MessageSquare } from "lucide-react";
+import { GraduationCap, MessageSquare, FolderGit2, Link as LinkIcon, X } from "lucide-react";
 import UserLevelTick from "../../components/UserLevelTick";
 import API from "../../API/api";
 import { AuthContext } from "../../API/AuthContext";
@@ -10,6 +10,8 @@ const PublicUserProfile = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState([]);
+  const [fullScreenGallery, setFullScreenGallery] = useState({ images: [], currentIndex: 0, isOpen: false });
   const { company } = React.useContext(AuthContext);
 
   const handleMessage = async () => {
@@ -32,6 +34,9 @@ const PublicUserProfile = () => {
       try {
         const res = await API.get(`/auth/public-profile/${id}`);
         setUser(res.data.user);
+        
+        const projRes = await API.get(`/project/user/${id}`);
+        setProjects(projRes.data.projects);
       } catch (err) {
         console.error("Error fetching user profile", err);
       } finally {
@@ -109,12 +114,67 @@ const PublicUserProfile = () => {
           </div>
         </div>
 
-        <div className="border-t border-slate-200">
+        <div className="border-t border-slate-200 mt-12">
           <div className="flex justify-center -mt-px">
             <div className="flex items-center gap-2 py-4 text-xs font-bold uppercase tracking-widest border-t border-emerald-600 text-emerald-600">
-              <Image size={14} /> Posts
+              <FolderGit2 size={14} /> Projects
             </div>
           </div>
+        </div>
+
+        {/* Projects Section */}
+        <div className="mt-8">
+          {projects.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {projects.map((proj) => (
+                <div key={proj._id} className="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-all">
+                  <div className="aspect-video relative overflow-hidden bg-slate-100 group cursor-pointer" onClick={() => setFullScreenImage(`http://localhost:5000/${proj.images[0]}`)}>
+                      <img src={`http://localhost:5000/${proj.images[0]}`} alt={proj.title} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
+                      {proj.images.length > 1 && (
+                        <div className="absolute bottom-2 right-2 px-2 py-1 bg-black/60 backdrop-blur-sm text-white text-xs font-bold rounded-lg flex items-center gap-1">
+                          +{proj.images.length - 1} more
+                        </div>
+                      )}
+                  </div>
+                  <div className="p-5">
+                    <h4 className="font-bold text-lg text-slate-800 mb-2">{proj.title}</h4>
+                    <p className="text-sm text-slate-500 mb-4 line-clamp-2">{proj.description}</p>
+                    <div className="flex items-center gap-3">
+                      <a href={proj.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-sm font-bold text-slate-700 hover:text-emerald-600">
+                        <FolderGit2  size={16} /> GitHub
+                      </a>
+                      {proj.liveLink && (
+                        <a href={proj.liveLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-sm font-bold text-emerald-600 hover:text-emerald-700">
+                          <LinkIcon size={16} /> Live Demo
+                        </a>
+                      )}
+                    </div>
+                    
+                    {proj.images.length > 1 && (
+                      <div className="flex gap-2 mt-4 pt-4 border-t border-slate-100 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-slate-200">
+                          {proj.images.map((img, idx) => (
+                            <img 
+                              key={idx} 
+                              src={`http://localhost:5000/${img}`} 
+                              alt="thumbnail" 
+                              className="w-12 h-12 rounded-lg object-cover cursor-pointer hover:opacity-80 transition-opacity flex-shrink-0"
+                              onClick={(e) => { e.stopPropagation(); setFullScreenImage(`http://localhost:5000/${img}`); }}
+                            />
+                          ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-20 bg-slate-50 rounded-[32px] border border-dashed border-slate-200">
+              <div className="text-slate-300 mb-4 flex justify-center">
+                <FolderGit2 size={48} />
+              </div>
+              <p className="text-slate-400 italic">No projects showcased yet.</p>
+            </div>
+          )}
         </div>
 
         {/* Learning Progress Section */}
@@ -166,6 +226,47 @@ const PublicUserProfile = () => {
           )}
         </div>
       </div>
+      
+      {/* Full Screen Image Viewer */}
+      {fullScreenGallery.isOpen && (
+        <div className="fixed inset-0 z-[60] bg-black/90 flex items-center justify-center p-4 backdrop-blur-sm" onClick={() => setFullScreenGallery({ ...fullScreenGallery, isOpen: false })}>
+          <button className="absolute top-6 right-6 text-white hover:text-slate-300 transition-colors p-2 bg-black/50 rounded-full z-10" onClick={() => setFullScreenGallery({ ...fullScreenGallery, isOpen: false })}>
+            <X size={24} />
+          </button>
+          
+          {fullScreenGallery.images.length > 1 && (
+            <button 
+              className="absolute left-4 md:left-10 text-white hover:text-slate-300 transition-colors p-2 md:p-4 bg-black/50 rounded-full z-10" 
+              onClick={(e) => {
+                e.stopPropagation();
+                setFullScreenGallery(prev => ({ 
+                  ...prev, 
+                  currentIndex: prev.currentIndex === 0 ? prev.images.length - 1 : prev.currentIndex - 1 
+                }));
+              }}
+            >
+              <ChevronLeft size={32} />
+            </button>
+          )}
+
+          <img src={fullScreenGallery.images[fullScreenGallery.currentIndex]} alt="Full screen" className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl relative z-0" onClick={(e) => e.stopPropagation()} />
+
+          {fullScreenGallery.images.length > 1 && (
+            <button 
+              className="absolute right-4 md:right-10 text-white hover:text-slate-300 transition-colors p-2 md:p-4 bg-black/50 rounded-full z-10" 
+              onClick={(e) => {
+                e.stopPropagation();
+                setFullScreenGallery(prev => ({ 
+                  ...prev, 
+                  currentIndex: prev.currentIndex === prev.images.length - 1 ? 0 : prev.currentIndex + 1 
+                }));
+              }}
+            >
+              <ChevronRight size={32} />
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

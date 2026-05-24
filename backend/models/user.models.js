@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
   },
   about: {
     type: String,
-    default: "Developer passionate about building beautiful and functional web applications. 🚀",
+    default: "Developer passionate about building beautiful and functional web applications. ",
   },
   isPremium: {
     type: Boolean,

@@ -186,13 +186,6 @@ function Navbar() {
                   {role === "admin" ? "Admin Panel" : "Dashboard"}
                 </Link>
               </li>
-              {role !== "company" && role !== "admin" && (
-                <li>
-                  <Link to="/learning" className={isActive("/learning")}>
-                    Sandbox
-                  </Link>
-                </li>
-              )}
               <li>
                 <button
                   className="px-4 py-2 rounded-xl text-sm font-semibold text-red-500 bg-red-50 hover:bg-red-100 border-none cursor-pointer font-[inherit] transition-colors"

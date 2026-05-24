@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { GraduationCap, MessageSquare, FolderGit2, Link as LinkIcon, X } from "lucide-react";
+import { GraduationCap, MessageSquare, FolderGit2, Link as LinkIcon, X, ChevronLeft, ChevronRight } from "lucide-react";
 import UserLevelTick from "../../components/UserLevelTick";
 import API from "../../API/api";
 import { AuthContext } from "../../API/AuthContext";

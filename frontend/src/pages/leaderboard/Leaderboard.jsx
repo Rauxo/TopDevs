@@ -1,17 +1,36 @@
 import React, { useState, useEffect } from "react";
 import API from "../../API/api";
 import { useNavigate } from "react-router-dom";
-import { Trophy, Crown, Medal, Calendar, Star } from "lucide-react";
+import { Trophy, Crown, Medal, Calendar, Star, Filter } from "lucide-react";
 
 const Leaderboard = () => {
   const [players, setPlayers] = useState([]);
+  const [languages, setLanguages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchLeaderboard = async () => {
+    const fetchLanguages = async () => {
       try {
-        const res = await API.get("/auth/leaderboard");
+        const res = await API.get("/learning/languages");
+        setLanguages(res.data || []);
+      } catch (err) {
+        console.error("Error fetching languages", err);
+      }
+    };
+    fetchLanguages();
+  }, []);
+
+  useEffect(() => {
+    const fetchLeaderboard = async () => {
+      setLoading(true);
+      try {
+        let query = "";
+        if (selectedLanguage) query += `?language=${selectedLanguage}`;
+        
+        const res = await API.get(`/auth/leaderboard${query}`);
         setPlayers(res.data.users);
       } catch (err) {
         console.error("Error fetching leaderboard", err);
@@ -20,13 +39,14 @@ const Leaderboard = () => {
       }
     };
     fetchLeaderboard();
-  }, []);
+  }, [selectedLanguage]);
 
-  if (loading) return (
-    <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-emerald-50 via-cyan-50 to-sky-100">
-      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-emerald-500"></div>
-    </div>
-  );
+  const formatTime = (seconds) => {
+    if (seconds === undefined || seconds === null || seconds > 9999999) return "N/A";
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}m ${secs}s`;
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-cyan-50 to-sky-100 text-slate-800 py-20 px-4 sm:px-6 relative overflow-hidden font-sans">
@@ -35,19 +55,42 @@ const Leaderboard = () => {
       <div className="absolute -bottom-24 right-0 w-[400px] h-[400px] bg-sky-200/40 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-4xl mx-auto relative z-10">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <div className="inline-flex items-center justify-center p-3 bg-emerald-100 rounded-2xl mb-6 shadow-[0_0_30px_rgba(16,185,129,0.2)] border border-emerald-200">
             <Trophy size={32} className="text-emerald-600" />
           </div>
           <h1 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-sky-500 mb-6 tracking-tight">
-            Hall of Fame
+           Leaderboard
           </h1>
           <p className="text-xl text-slate-600 max-w-2xl mx-auto font-medium">
-            Discover the most active and skilled developers in our community. Ranked by Level and tenure.
+            Discover the most active and skilled developers in our community.
           </p>
         </div>
 
-        {players.length > 0 ? (
+        {/* Filters */}
+        <div className="bg-white/70 backdrop-blur-md rounded-2xl p-4 mb-10 border border-white shadow-sm flex flex-col sm:flex-row items-center gap-4 justify-center">
+          <div className="flex items-center gap-2 text-slate-500 font-semibold">
+            <Filter size={18} /> Sort By:
+          </div>
+          <select 
+            value={selectedLanguage}
+            onChange={(e) => setSelectedLanguage(e.target.value)}
+            className="bg-white border border-slate-200 text-slate-700 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 min-w-[200px]"
+          >
+            <option value="">TopLevels</option>
+            <optgroup label="Top in Language">
+              {languages.map(lang => (
+                <option key={lang._id} value={lang._id}>{lang.name}</option>
+              ))}
+            </optgroup>
+          </select>
+        </div>
+
+        {loading ? (
+          <div className="flex justify-center items-center py-20">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-emerald-500"></div>
+          </div>
+        ) : players.length > 0 ? (
           <div className="space-y-6">
             {/* Top 3 Showcase */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 items-end">
@@ -67,7 +110,14 @@ const Leaderboard = () => {
                       <Star size={16} className="fill-emerald-500 text-emerald-500" />
                       <span className="font-semibold">Level {players[1].profileLevel || 1}</span>
                     </div>
-                    <p className="text-xs text-slate-500 mt-3 flex justify-center gap-1"><Calendar size={14}/> Joined {new Date(players[1].createdAt).toLocaleDateString()}</p>
+                    {selectedLanguage && (
+                      <div className="mt-2 text-sm text-emerald-700 font-bold bg-emerald-50 inline-block px-3 py-1 rounded-full border border-emerald-100">
+                        {players[1].progress || 0}% Complete
+                      </div>
+                    )}
+                    <p className="text-xs text-slate-500 mt-3 flex justify-center gap-1">
+                      {selectedLanguage ? `Time Taken: ${formatTime(players[1].totalTimeTaken)}` : <><Calendar size={14}/> Joined {new Date(players[1].createdAt).toLocaleDateString()}</>}
+                    </p>
                     <button onClick={() => navigate(`/user/profile/${players[1]._id}`)} className="mt-5 w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-sm font-medium transition-colors border border-slate-200">View Profile</button>
                   </div>
                 </div>
@@ -90,7 +140,14 @@ const Leaderboard = () => {
                       <Star size={18} className="fill-yellow-400 text-yellow-500" />
                       <span className="font-bold text-lg">Level {players[0].profileLevel || 1}</span>
                     </div>
-                    <p className="text-xs text-slate-500 mt-4 flex justify-center gap-1"><Calendar size={14}/> Joined {new Date(players[0].createdAt).toLocaleDateString()}</p>
+                    {selectedLanguage && (
+                      <div className="mt-2 text-sm text-emerald-700 font-bold bg-emerald-50 inline-block px-3 py-1 rounded-full border border-emerald-100">
+                        {players[0].progress || 0}% Complete
+                      </div>
+                    )}
+                    <p className="text-xs text-slate-500 mt-4 flex justify-center gap-1">
+                      {selectedLanguage ? `Time Taken: ${formatTime(players[0].totalTimeTaken)}` : <><Calendar size={14}/> Joined {new Date(players[0].createdAt).toLocaleDateString()}</>}
+                    </p>
                     <button onClick={() => navigate(`/user/profile/${players[0]._id}`)} className="mt-6 w-full py-2.5 bg-gradient-to-r from-emerald-500 to-sky-500 hover:from-emerald-600 hover:to-sky-600 text-white rounded-xl text-sm font-bold transition-all shadow-lg shadow-emerald-500/25">View Profile</button>
                   </div>
                 </div>
@@ -112,7 +169,14 @@ const Leaderboard = () => {
                       <Star size={16} className="fill-emerald-500 text-emerald-500" />
                       <span className="font-semibold">Level {players[2].profileLevel || 1}</span>
                     </div>
-                    <p className="text-xs text-slate-500 mt-3 flex justify-center gap-1"><Calendar size={14}/> Joined {new Date(players[2].createdAt).toLocaleDateString()}</p>
+                    {selectedLanguage && (
+                      <div className="mt-2 text-sm text-emerald-700 font-bold bg-emerald-50 inline-block px-3 py-1 rounded-full border border-emerald-100">
+                        {players[2].progress || 0}% Complete
+                      </div>
+                    )}
+                    <p className="text-xs text-slate-500 mt-3 flex justify-center gap-1">
+                      {selectedLanguage ? `Time Taken: ${formatTime(players[2].totalTimeTaken)}` : <><Calendar size={14}/> Joined {new Date(players[2].createdAt).toLocaleDateString()}</>}
+                    </p>
                     <button onClick={() => navigate(`/user/profile/${players[2]._id}`)} className="mt-5 w-full py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-sm font-medium transition-colors border border-slate-200">View Profile</button>
                   </div>
                 </div>
@@ -140,15 +204,24 @@ const Leaderboard = () => {
                         />
                         <div>
                           <h4 className="font-bold text-lg text-slate-800 group-hover:text-emerald-700 transition-colors">{p.username}</h4>
-                          <p className="text-xs text-slate-500 flex items-center gap-1"><Calendar size={12}/> Joined {new Date(p.createdAt).toLocaleDateString()}</p>
+                          <p className="text-xs text-slate-500 flex items-center gap-1">
+                            {selectedLanguage ? `Time Taken: ${formatTime(p.totalTimeTaken)}` : <><Calendar size={12}/> Joined {new Date(p.createdAt).toLocaleDateString()}</>}
+                          </p>
                         </div>
                       </div>
                       <div className="flex items-center gap-8 w-full sm:w-auto justify-between sm:justify-end">
                         <div className="flex flex-col items-end">
                           <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">Rank Info</span>
-                          <div className="flex items-center gap-1.5 text-emerald-700 bg-emerald-50 border border-emerald-100 px-3 py-1 rounded-full">
-                            <Star size={14} className="fill-emerald-500 text-emerald-500" />
-                            <span className="font-bold text-sm">Lvl {p.profileLevel || 1}</span>
+                          <div className="flex items-center gap-2">
+                            {selectedLanguage && (
+                              <div className="text-xs text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
+                                {p.progress || 0}%
+                              </div>
+                            )}
+                            <div className="flex items-center gap-1.5 text-emerald-700 bg-emerald-50 border border-emerald-100 px-3 py-1 rounded-full">
+                              <Star size={14} className="fill-emerald-500 text-emerald-500" />
+                              <span className="font-bold text-sm">Lvl {p.profileLevel || 1}</span>
+                            </div>
                           </div>
                         </div>
                         <div className="hidden sm:flex opacity-0 group-hover:opacity-100 transition-opacity">
@@ -166,8 +239,8 @@ const Leaderboard = () => {
         ) : (
           <div className="text-center py-32 bg-white/60 backdrop-blur-xl rounded-[3rem] border border-white/80 shadow-xl">
             <Trophy size={48} className="mx-auto text-emerald-300 mb-6" />
-            <h3 className="text-2xl font-bold text-slate-700 mb-2">No Leaders Yet</h3>
-            <p className="text-slate-500">Be the first to join the leaderboard and claim the top spot!</p>
+            <h3 className="text-2xl font-bold text-slate-700 mb-2">No Leaders Found</h3>
+            <p className="text-slate-500">Try adjusting your filters or be the first to join the leaderboard!</p>
           </div>
         )}
       </div>

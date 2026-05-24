@@ -190,9 +190,72 @@ exports.getUserPublicProfile = async (req, res) => {
 
 exports.getLeaderboard = async (req, res) => {
   try {
-    const users = await userModel.find().select("username profileImg about createdAt profileLevel").sort({ profileLevel: -1, createdAt: 1 }).limit(10);
-    res.status(200).json({ users });
+    const { language, level } = req.query;
+    const mongoose = require("mongoose");
+    
+    let matchStage = {};
+    if (level) {
+      matchStage.profileLevel = parseInt(level);
+    }
+
+    if (language) {
+      let languageId;
+      try {
+        languageId = new mongoose.Types.ObjectId(language);
+      } catch (e) {
+        return res.status(400).json({ message: "Invalid language ID" });
+      }
+
+      const users = await userModel.aggregate([
+        { $match: matchStage },
+        { $unwind: "$selectedLanguages" },
+        { $match: { "selectedLanguages.language": languageId } },
+        {
+          $lookup: {
+            from: "submissions",
+            let: { userId: "$_id" },
+            pipeline: [
+              { $match: { 
+                  $expr: { 
+                    $and: [
+                      { $eq: ["$user", "$$userId"] },
+                      { $eq: ["$language", languageId] },
+                      { $eq: ["$status", "Accepted"] }
+                    ]
+                  } 
+              }},
+              { $group: { _id: null, totalTimeTaken: { $sum: "$timeTaken" } } }
+            ],
+            as: "submissionStats"
+          }
+        },
+        {
+          $addFields: {
+            totalTimeTaken: { 
+              $cond: {
+                if: { $gt: [{ $size: "$submissionStats" }, 0] },
+                then: { $arrayElemAt: ["$submissionStats.totalTimeTaken", 0] },
+                else: 999999999 // Large number so they rank lower
+              }
+            },
+            progress: "$selectedLanguages.progress"
+          }
+        },
+        { $sort: { progress: -1, totalTimeTaken: 1, createdAt: 1 } },
+        { $limit: 10 },
+        { $project: { username: 1, profileImg: 1, about: 1, createdAt: 1, profileLevel: 1, progress: 1, totalTimeTaken: 1 } }
+      ]);
+      
+      return res.status(200).json({ users });
+    } else {
+      const users = await userModel.find(matchStage)
+        .select("username profileImg about createdAt profileLevel")
+        .sort({ profileLevel: -1, createdAt: 1 })
+        .limit(10);
+      return res.status(200).json({ users });
+    }
   } catch (error) {
+    console.error("Leaderboard error:", error);
     res.status(500).json({ message: "Failed to fetch leaderboard" });
   }
 };

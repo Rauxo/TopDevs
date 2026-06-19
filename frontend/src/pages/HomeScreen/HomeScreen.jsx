@@ -4,6 +4,7 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { Rocket, Target, ArrowRight } from "lucide-react";
 import OurGoal from "../../components/HomeScreen Components/OurGoal";
 import WhoWeAre from "../../components/HomeScreen Components/WhoWeAre";
+import VideoShowcase from "../../components/VideoShowcase"
 function HomeScreen() {
   const navigate = useNavigate();
 
@@ -61,7 +62,7 @@ function HomeScreen() {
           />
         </div>
       </section>
-
+      <VideoShowcase/>
       {/* ── Content Sections ── */}
       <OurGoal />
       <WhoWeAre />

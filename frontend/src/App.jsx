@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Login from "./pages/auth/Login";
 import Create from "./pages/auth/Create";
 import UserDashboard from "./pages/userProfile/UserDashboard";
@@ -42,8 +42,34 @@ import ContactUs from "./pages/ContactUs";
 import ChatPage from "./pages/ChatPage";
 import Pricing from "./pages/Pricing";
 import PaymentStatus from "./pages/PaymentStatus";
+import Lenis from "lenis";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect } from "react";
 
+gsap.registerPlugin(ScrollTrigger);
 function App() {
+   useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      smoothWheel: true,
+      wheelMultiplier: 1,
+    });
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    const update = (time) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(update);
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      lenis.destroy();
+      gsap.ticker.remove(update);
+    };
+  }, []);
   return (
     <BrowserRouter>
       <ScrollToTop />
@@ -201,6 +227,5 @@ function App() {
     </BrowserRouter>
   );
 }
-
 
 export default App;

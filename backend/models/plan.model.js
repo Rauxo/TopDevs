@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 
 const planSchema = new mongoose.Schema({
   name: {
-    type: String, // Basic, Standard, Premium
+    type: String, 
     required: true,
   },
   type: {
-    type: String, // User, Company
+    type: String, 
     required: true,
   },
   price: {

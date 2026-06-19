@@ -19,13 +19,12 @@ const levelSchema = new mongoose.Schema({
     required: true,
   },
   image: {
-    type: String, // URL to content image
+    type: String, 
   },
 }, {
   timestamps: true
 });
 
-// Ensure levelNumber is unique per language
 levelSchema.index({ language: 1, levelNumber: 1 }, { unique: true });
 
 module.exports = mongoose.model("Level", levelSchema);

@@ -7,7 +7,7 @@ const languageSchema = new mongoose.Schema({
     unique: true,
   },
   icon: {
-    type: String, // URL to icon
+    type: String,
     required: true,
   },
   description: {

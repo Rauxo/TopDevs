@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../API/AuthContext";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import { LayoutDashboard, Briefcase, PlusCircle, LogOut, AlertTriangle, MessageSquare } from "lucide-react";
+import { LayoutDashboard, Briefcase, PlusCircle, LogOut, AlertTriangle, MessageSquare, Trash2 } from "lucide-react";
 import API from "../../API/api";
 
 function CompanyDashboard() {
@@ -33,6 +33,18 @@ function CompanyDashboard() {
   const handleLogout = async () => {
     await companyLogout();
     navigate("/company/login");
+  };
+
+  const handleDeleteJob = async (e, jobId) => {
+    e.stopPropagation();
+    if (!window.confirm("Are you sure you want to delete this job?")) return;
+    try {
+      await API.delete(`/job/delete/${jobId}`);
+      setJobs(jobs.filter(job => job._id !== jobId));
+    } catch (err) {
+      console.error("Error deleting job", err);
+      alert("Failed to delete job");
+    }
   };
 
   const checkVerification = (e, path) => {
@@ -249,13 +261,22 @@ function CompanyDashboard() {
                       <td className="py-4">
                         <span className="px-2 py-1 bg-emerald-50 text-emerald-600 text-[10px] font-bold rounded">Active</span>
                       </td>
-                      <td className="py-4 text-right">
-                        <button 
-                          onClick={(e) => checkVerification(e, `/company/applicants/${job._id}`)}
-                          className="text-emerald-600 font-bold text-xs hover:underline cursor-pointer border-none bg-none"
-                        >
-                          View Apps
-                        </button>
+                      <td className="py-4">
+                        <div className="flex justify-end gap-4 items-center">
+                          <button 
+                            onClick={(e) => checkVerification(e, `/company/applicants/${job._id}`)}
+                            className="text-emerald-600 font-bold text-xs hover:underline cursor-pointer border-none bg-transparent p-0"
+                          >
+                            View Apps
+                          </button>
+                          <button
+                            onClick={(e) => handleDeleteJob(e, job._id)}
+                            className="text-red-500 hover:text-red-600 cursor-pointer border-none bg-transparent p-0 flex items-center"
+                            title="Delete Job"
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}

@@ -12,7 +12,7 @@ const jobApplicationSchema = new mongoose.Schema(
       required: true,
     },
     resume: {
-      type: String, // Path to the uploaded resume file
+      type: String, 
       required: true,
     },
     email: {

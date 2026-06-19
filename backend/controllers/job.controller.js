@@ -150,3 +150,20 @@ exports.updateApplicationStatus = async (req, res) => {
     res.status(500).json({ message: "Failed to update status" });
   }
 };
+
+exports.deleteCompanyJob = async (req, res) => {
+  try {
+    const job = await jobModel.findOneAndDelete({ _id: req.params.id, company: req.company._id });
+    if (!job) {
+      return res.status(404).json({ message: "Job not found or unauthorized to delete" });
+    }
+    
+    // Optionally delete all related applications
+    await jobApplicationModel.deleteMany({ job: req.params.id });
+
+    res.status(200).json({ message: "Job deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to delete job" });
+  }
+};

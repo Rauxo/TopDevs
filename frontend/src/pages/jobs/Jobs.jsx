@@ -31,10 +31,10 @@ const Jobs = () => {
     <>
       <div className="min-h-screen bg-slate-50 py-12 px-6 md:px-12">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
+          {/* <div className="text-center mb-12">
             <h1 className="text-4xl font-extrabold text-slate-900 mb-4">Find Your Dream Job</h1>
             <p className="text-lg text-slate-600">Browse through hundreds of opportunities from top tech companies.</p>
-          </div>
+          </div> */}
 
           {/* Search/Filter Bar */}
           <div className="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 mb-10 flex flex-col md:flex-row gap-4 items-center">

@@ -47,7 +47,7 @@ const Learn = () => {
   return (
     <div className="min-h-screen bg-slate-50 py-12 px-6">
       <div className="max-w-6xl mx-auto">
-        <div className="flex items-center gap-4 mb-12">
+        {/* <div className="flex items-center gap-4 mb-12">
           <div className="p-3 bg-emerald-500 text-white rounded-2xl shadow-lg shadow-emerald-200">
             <GraduationCap size={32} />
           </div>
@@ -55,7 +55,7 @@ const Learn = () => {
             <h1 className="text-3xl font-black text-slate-900">Learning Hub</h1>
             <p className="text-slate-500">Master new technologies and level up your career</p>
           </div>
-        </div>
+        </div> */}
 
         {/* Selected Languages Section */}
         {user?.selectedLanguages?.length > 0 && (

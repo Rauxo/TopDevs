@@ -44,7 +44,7 @@ const LevelContentPage = () => {
           )}
           
           <div className="p-10">
-            <div className="flex items-center gap-3 text-emerald-600 mb-6 bg-emerald-50 w-fit px-4 py-2 rounded-full font-bold text-sm">
+            <div className="flex items-center gap-3 text-blue-600 mb-6 bg-blue-50 w-fit px-4 py-2 rounded-full font-bold text-sm">
               <BookOpen size={18} /> Level {level.levelNumber} Reading Material
             </div>
             

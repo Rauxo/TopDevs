@@ -49,7 +49,7 @@ const PublicUserProfile = () => {
   if (loading)
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
 
@@ -62,7 +62,7 @@ const PublicUserProfile = () => {
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-20 mb-12">
           {/* Avatar */}
           <div className="relative group">
-            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-tr from-emerald-400 via-emerald-500 to-cyan-500">
+            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-tr from-blue-400 via-blue-500 to-blue-500">
               <div className="w-full h-full rounded-full p-1 bg-white">
                 <img
                   src={`http://localhost:5000/${user.profileImg}`}
@@ -86,7 +86,7 @@ const PublicUserProfile = () => {
                 {company && (
                   <button
                     onClick={handleMessage}
-                    className="px-6 py-1.5 bg-emerald-600 text-white font-bold text-sm rounded-lg hover:bg-emerald-700 transition-colors border-none cursor-pointer shadow-lg shadow-emerald-50"
+                    className="px-6 py-1.5 bg-blue-600 text-white font-bold text-sm rounded-lg hover:bg-blue-700 transition-colors border-none cursor-pointer shadow-lg shadow-blue-50"
                   >
                     <MessageSquare size={16} className="inline mr-2" /> Message
                     Developer
@@ -116,7 +116,7 @@ const PublicUserProfile = () => {
 
         <div className="border-t border-slate-200 mt-12">
           <div className="flex justify-center -mt-px">
-            <div className="flex items-center gap-2 py-4 text-xs font-bold uppercase tracking-widest border-t border-emerald-600 text-emerald-600">
+            <div className="flex items-center gap-2 py-4 text-xs font-bold uppercase tracking-widest border-t border-blue-600 text-blue-600">
               <FolderGit2 size={14} /> Projects
             </div>
           </div>
@@ -140,11 +140,11 @@ const PublicUserProfile = () => {
                     <h4 className="font-bold text-lg text-slate-800 mb-2">{proj.title}</h4>
                     <p className="text-sm text-slate-500 mb-4 line-clamp-2">{proj.description}</p>
                     <div className="flex items-center gap-3">
-                      <a href={proj.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-sm font-bold text-slate-700 hover:text-emerald-600">
+                      <a href={proj.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-sm font-bold text-slate-700 hover:text-blue-600">
                         <FolderGit2  size={16} /> GitHub
                       </a>
                       {proj.liveLink && (
-                        <a href={proj.liveLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-sm font-bold text-emerald-600 hover:text-emerald-700">
+                        <a href={proj.liveLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-sm font-bold text-blue-600 hover:text-blue-700">
                           <LinkIcon size={16} /> Live Demo
                         </a>
                       )}
@@ -180,7 +180,7 @@ const PublicUserProfile = () => {
         {/* Learning Progress Section */}
         <div className="mt-12">
           <h2 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2 uppercase tracking-widest text-xs">
-            <GraduationCap size={16} className="text-emerald-500" /> Learning
+            <GraduationCap size={16} className="text-blue-500" /> Learning
             Progress
           </h2>
           {user.selectedLanguages?.length > 0 ? (
@@ -194,18 +194,18 @@ const PublicUserProfile = () => {
                     <h3 className="font-bold text-slate-900">
                       {sl.language?.name || "Language"}
                     </h3>
-                    <span className="text-emerald-600 font-black text-sm">
+                    <span className="text-blue-600 font-black text-sm">
                       {sl.progress}%
                     </span>
                   </div>
                   <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mb-3">
                     <div
-                      className="bg-emerald-500 h-full rounded-full"
+                      className="bg-blue-500 h-full rounded-full"
                       style={{ width: `${sl.progress}%` }}
                     ></div>
                   </div>
                   {sl.completionDate && (
-                    <div className="text-[10px] font-bold text-emerald-500 uppercase tracking-widest">
+                    <div className="text-[10px] font-bold text-blue-500 uppercase tracking-widest">
                       Completed in{" "}
                       {Math.ceil(
                         (new Date(sl.completionDate) - new Date(sl.startDate)) /

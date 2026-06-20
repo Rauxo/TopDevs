@@ -55,7 +55,7 @@ function Navbar() {
 
   const isActive = (path) =>
     location.pathname === path
-      ? "inline-flex items-center gap-1 px-3.5 py-2 rounded-xl text-sm font-semibold bg-black/10 text-emerald-700 transition-all"
+      ? "inline-flex items-center gap-1 px-3.5 py-2 rounded-xl text-sm font-semibold bg-black/10 text-blue-700 transition-all"
       : "inline-flex items-center gap-1 px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-800 hover:bg-black/8 transition-all";
 
   const handleLogout = async () => {
@@ -75,8 +75,8 @@ function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-[999] h-[72px] bg-[rgba(15,244,206,0.92)] backdrop-blur-md border-b border-white/30 transition-shadow duration-300 ${
-        scrolled ? "shadow-[0_4px_24px_rgba(0,0,0,0.12)] bg-[#0ff4ce]" : ""
+      className={`fixed top-0 left-0 right-0 z-[999] h-[72px] bg-white/90 backdrop-blur-md border-b border-slate-200 transition-shadow duration-300 ${
+        scrolled ? "shadow-[0_4px_24px_rgba(0,0,0,0.06)] bg-white" : ""
       }`}
     >
       <div className="max-w-[1400px] mx-auto h-full flex items-center px-6 gap-5">
@@ -87,7 +87,7 @@ function Navbar() {
 
         {/* Search — hidden on mobile */}
         <form
-          className="hidden md:flex items-center flex-1 max-w-[380px] bg-white/60 rounded-xl border border-white/50 overflow-hidden focus-within:bg-white focus-within:border-emerald-500 focus-within:shadow-[0_0_0_3px_rgba(16,185,129,0.15)] transition-all"
+          className="hidden md:flex items-center flex-1 max-w-[380px] bg-white/60 rounded-xl border border-white/50 overflow-hidden focus-within:bg-white focus-within:border-blue-500 focus-within:shadow-[0_0_0_3px_rgba(59,130,246,0.15)] transition-all"
           onSubmit={handleSearch}
         >
           <input
@@ -165,7 +165,7 @@ function Navbar() {
                       >
                         <span>{lang.name}</span>
                         {isEnrolled(lang._id) && (
-                          <span className="text-emerald-500"><Check size={16} /></span>
+                          <span className="text-blue-500"><Check size={16} /></span>
                         )}
                       </div>
                     ))

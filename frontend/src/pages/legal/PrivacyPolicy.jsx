@@ -6,13 +6,13 @@ const PrivacyPolicy = () => {
     <div className="min-h-screen bg-[#fafafa]">
       {/* Background Shapes */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-emerald-100/50 rounded-full blur-3xl"></div>
+        <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-blue-100/50 rounded-full blur-3xl"></div>
         <div className="absolute bottom-[10%] left-[-5%] w-[400px] h-[400px] bg-blue-100/40 rounded-full blur-3xl"></div>
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto py-24 px-6">
         <header className="mb-20 text-center md:text-left">
-          <span className="text-emerald-600 font-black text-xs uppercase tracking-widest mb-4 block">Privacy First</span>
+          <span className="text-blue-600 font-black text-xs uppercase tracking-widest mb-4 block">Privacy First</span>
           <h1 className="text-5xl md:text-7xl font-black text-slate-900 mb-8">Our Privacy <br className="hidden md:block" /> Commitment.</h1>
           <p className="text-xl text-slate-500 max-w-2xl leading-relaxed font-medium">
             We value your trust. This policy explains how we collect, use, and protect your data when you join the TopDevs community.
@@ -22,10 +22,10 @@ const PrivacyPolicy = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           <aside className="hidden md:block sticky top-32 h-fit">
              <nav className="space-y-4">
-                <a href="#collection" className="block text-sm font-bold text-slate-400 hover:text-emerald-600 transition-colors">01. Data Collection</a>
-                <a href="#usage" className="block text-sm font-bold text-slate-400 hover:text-emerald-600 transition-colors">02. Data Usage</a>
-                <a href="#security" className="block text-sm font-bold text-slate-400 hover:text-emerald-600 transition-colors">03. Security Measures</a>
-                <a href="#rights" className="block text-sm font-bold text-slate-400 hover:text-emerald-600 transition-colors">04. Your Rights</a>
+                <a href="#collection" className="block text-sm font-bold text-slate-400 hover:text-blue-600 transition-colors">01. Data Collection</a>
+                <a href="#usage" className="block text-sm font-bold text-slate-400 hover:text-blue-600 transition-colors">02. Data Usage</a>
+                <a href="#security" className="block text-sm font-bold text-slate-400 hover:text-blue-600 transition-colors">03. Security Measures</a>
+                <a href="#rights" className="block text-sm font-bold text-slate-400 hover:text-blue-600 transition-colors">04. Your Rights</a>
              </nav>
           </aside>
 
@@ -38,12 +38,12 @@ const PrivacyPolicy = () => {
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm">
-                    <span className="text-emerald-500 mb-3 block"><User size={24} /></span>
+                    <span className="text-blue-500 mb-3 block"><User size={24} /></span>
                     <h3 className="font-bold text-slate-900 mb-1">Identity Data</h3>
                     <p className="text-xs text-slate-400">Username, full name, and profile images.</p>
                   </div>
                   <div className="p-6 bg-white rounded-3xl border border-slate-100 shadow-sm">
-                    <span className="text-emerald-500 mb-3 block"><Mail size={24} /></span>
+                    <span className="text-blue-500 mb-3 block"><Mail size={24} /></span>
                     <h3 className="font-bold text-slate-900 mb-1">Contact Data</h3>
                     <p className="text-xs text-slate-400">Email address and phone number.</p>
                   </div>
@@ -64,7 +64,7 @@ const PrivacyPolicy = () => {
                   "Communicating important updates and newsletters."
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-4 p-4 bg-white/50 backdrop-blur-sm rounded-2xl border border-white">
-                    <span className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-xs">{i+1}</span>
+                    <span className="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xs">{i+1}</span>
                     <span className="text-slate-700 text-sm font-bold">{item}</span>
                   </li>
                 ))}

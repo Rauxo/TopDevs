@@ -123,14 +123,14 @@ const SolvePage = () => {
         </div>
 
         <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2 text-emerald-400 font-mono bg-emerald-400/10 px-4 py-1.5 rounded-full border border-emerald-400/20">
+          <div className="flex items-center gap-2 text-blue-400 font-mono bg-blue-400/10 px-4 py-1.5 rounded-full border border-blue-400/20">
             <Timer size={18} />
             <span>{formatTime(timer)}</span>
           </div>
           <button 
             onClick={handleSubmit}
             disabled={submitting}
-            className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-700 text-white font-bold rounded-xl transition-all flex items-center gap-2"
+            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-700 text-white font-bold rounded-xl transition-all flex items-center gap-2"
           >
             {submitting ? "Submitting..." : <><Send size={18} /> Submit Solution</>}
           </button>
@@ -157,7 +157,7 @@ const SolvePage = () => {
               {currentQuestion.testCases?.map((tc, i) => (
                 <div key={i} className="p-4 bg-slate-950 rounded-xl border border-slate-800">
                   <div className="text-xs font-bold text-slate-500 mb-2">Input</div>
-                  <div className="font-mono text-emerald-400 mb-3">{tc.input}</div>
+                  <div className="font-mono text-blue-400 mb-3">{tc.input}</div>
                   <div className="text-xs font-bold text-slate-500 mb-2">Expected Output</div>
                   <div className="font-mono text-blue-400">{tc.expectedOutput}</div>
                 </div>
@@ -187,11 +187,11 @@ const SolvePage = () => {
           {/* Result Overlay */}
           {result && (
             <div className={`absolute bottom-6 right-6 p-6 rounded-2xl shadow-2xl border flex flex-col gap-3 animate-in slide-in-from-bottom-4 duration-300 ${
-              result.status === "success" ? "bg-emerald-900 border-emerald-500/50" : "bg-red-900 border-red-500/50"
+              result.status === "success" ? "bg-blue-900 border-blue-500/50" : "bg-red-900 border-red-500/50"
             }`}>
               <div className="flex items-center gap-3">
                 {result.status === "success" ? (
-                  <CheckCircle2 size={24} className="text-emerald-400" />
+                  <CheckCircle2 size={24} className="text-blue-400" />
                 ) : (
                   <AlertCircle size={24} className="text-red-400" />
                 )}
@@ -199,7 +199,7 @@ const SolvePage = () => {
               </div>
               <p className="text-slate-200">{result.message}</p>
               {result.points && (
-                <span className="font-bold text-emerald-400">+{result.points} Points Earned</span>
+                <span className="font-bold text-blue-400">+{result.points} Points Earned</span>
               )}
             </div>
           )}

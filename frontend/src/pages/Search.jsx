@@ -40,7 +40,7 @@ const Search = () => {
 
         {loading ? (
           <div className="flex flex-col items-center justify-center py-32 gap-4">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-emerald-600 border-t-transparent"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-600 border-t-transparent"></div>
             <p className="text-slate-500 font-bold animate-pulse text-sm uppercase tracking-widest">Searching platform...</p>
           </div>
         ) : (
@@ -58,7 +58,7 @@ const Search = () => {
                       className="bg-white p-8 rounded-[32px] border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col items-center text-center group"
                     >
                       <div className="relative mb-6">
-                        <div className="w-24 h-24 rounded-full p-1 bg-gradient-to-tr from-emerald-400 to-blue-500 transition-transform group-hover:scale-105">
+                        <div className="w-24 h-24 rounded-full p-1 bg-gradient-to-tr from-blue-400 to-blue-500 transition-transform group-hover:scale-105">
                            <img
                             src={u.profileImg ? `http://localhost:5000/${u.profileImg}` : "https://via.placeholder.com/150"}
                             alt={u.username}
@@ -70,7 +70,7 @@ const Search = () => {
                       <p className="text-xs text-slate-400 font-medium mb-6 line-clamp-1">{u.about || "No bio yet."}</p>
                       <button
                         onClick={() => navigate(`/user/profile/${u._id}`)}
-                        className="w-full py-3 bg-slate-900 text-white font-bold text-xs rounded-2xl hover:bg-emerald-600 shadow-lg shadow-slate-100 transition-all cursor-pointer border-none"
+                        className="w-full py-3 bg-slate-900 text-white font-bold text-xs rounded-2xl hover:bg-blue-600 shadow-lg shadow-slate-100 transition-all cursor-pointer border-none"
                       >
                         View Profile
                       </button>

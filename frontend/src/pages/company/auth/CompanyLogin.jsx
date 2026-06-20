@@ -50,10 +50,10 @@ function CompanyLogin() {
           </p>
           <div style={styles.benefitGrid}>
             {[
-              { icon: <Target size={20} className="text-emerald-600" />, title: "Targeted Hiring", desc: "Find devs by rank & skill" },
-              { icon: <Zap size={20} className="text-emerald-600" />, title: "Fast Screening", desc: "Pre-vetted talent pool" },
-              { icon: <BarChart3 size={20} className="text-emerald-600" />, title: "Analytics", desc: "Track application metrics" },
-              { icon: <Lock size={20} className="text-emerald-600" />, title: "Verified Profiles", desc: "All devs are authenticated" },
+              { icon: <Target size={20} className="text-blue-600" />, title: "Targeted Hiring", desc: "Find devs by rank & skill" },
+              { icon: <Zap size={20} className="text-blue-600" />, title: "Fast Screening", desc: "Pre-vetted talent pool" },
+              { icon: <BarChart3 size={20} className="text-blue-600" />, title: "Analytics", desc: "Track application metrics" },
+              { icon: <Lock size={20} className="text-blue-600" />, title: "Verified Profiles", desc: "All devs are authenticated" },
             ].map((b) => (
               <div key={b.title} style={styles.benefitCard}>
                 <span style={styles.benefitIcon}>{b.icon}</span>
@@ -100,7 +100,7 @@ function CompanyLogin() {
                   style={styles.input}
                   onFocus={(e) =>
                     (e.target.parentElement.style.boxShadow =
-                      "0 0 0 3px rgba(16,185,129,0.2)")
+                      "0 0 0 3px rgba(59,130,246,0.2)")
                   }
                   onBlur={(e) =>
                     (e.target.parentElement.style.boxShadow = "none")
@@ -126,7 +126,7 @@ function CompanyLogin() {
                   style={{ ...styles.input, paddingRight: "44px" }}
                   onFocus={(e) =>
                     (e.target.parentElement.style.boxShadow =
-                      "0 0 0 3px rgba(16,185,129,0.2)")
+                      "0 0 0 3px rgba(59,130,246,0.2)")
                   }
                   onBlur={(e) =>
                     (e.target.parentElement.style.boxShadow = "none")
@@ -188,7 +188,7 @@ const styles = {
     width: "480px",
     height: "480px",
     borderRadius: "50%",
-    background: "rgba(16,185,129,0.13)",
+    background: "rgba(59,130,246,0.13)",
     filter: "blur(90px)",
     pointerEvents: "none",
   },
@@ -256,7 +256,7 @@ const styles = {
     gap: "10px",
     background: "rgba(255,255,255,0.7)",
     backdropFilter: "blur(8px)",
-    border: "1px solid rgba(16,185,129,0.15)",
+    border: "1px solid rgba(59,130,246,0.15)",
     borderRadius: "14px",
     padding: "14px",
   },
@@ -276,9 +276,9 @@ const styles = {
     background: "rgba(255,255,255,0.88)",
     backdropFilter: "blur(20px)",
     borderRadius: "24px",
-    border: "1px solid rgba(16,185,129,0.15)",
+    border: "1px solid rgba(59,130,246,0.15)",
     boxShadow:
-      "0 20px 60px rgba(0,0,0,0.08), 0 4px 16px rgba(16,185,129,0.1)",
+      "0 20px 60px rgba(0,0,0,0.08), 0 4px 16px rgba(59,130,246,0.1)",
     padding: "44px 40px",
     width: "100%",
     maxWidth: "420px",
@@ -354,7 +354,7 @@ const styles = {
     fontSize: "15px",
     fontWeight: "700",
     cursor: "pointer",
-    boxShadow: "0 4px 20px rgba(16,185,129,0.35)",
+    boxShadow: "0 4px 20px rgba(59,130,246,0.35)",
     letterSpacing: "0.02em",
   },
   divider: { display: "flex", alignItems: "center", gap: "12px", margin: "24px 0" },

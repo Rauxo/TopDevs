@@ -6,7 +6,7 @@ function WhoWeAre() {
     <section className="w-full min-h-screen flex flex-col-reverse md:flex-row items-center gap-12 px-6 md:px-16 py-20 bg-[rgba(168,193,189,0.2)]">
       {/* Text */}
       <div className="flex-1">
-        <h1 className="text-[30px] md:text-[42px] font-extrabold text-emerald-700">
+        <h1 className="text-[30px] md:text-[42px] font-extrabold text-blue-700">
           Who We Are
         </h1>
         <p className="mt-6 text-lg md:text-[19px] text-slate-700 leading-relaxed">

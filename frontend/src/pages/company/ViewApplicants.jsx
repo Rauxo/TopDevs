@@ -55,7 +55,7 @@ const ViewApplicants = () => {
 
           {loading ? (
             <div className="flex justify-center py-20">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
             </div>
           ) : applicants.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -63,8 +63,8 @@ const ViewApplicants = () => {
                 <div key={app._id} className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 hover:shadow-md transition-all flex flex-col">
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-4">
-                      <div className="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center">
-                        <User size={28} className="text-emerald-600" />
+                      <div className="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center">
+                        <User size={28} className="text-blue-600" />
                       </div>
                       <div>
                         <h3 className="font-bold text-slate-900">{app.name}</h3>
@@ -77,7 +77,7 @@ const ViewApplicants = () => {
                         disabled={updatingId === app._id}
                         onChange={(e) => handleStatusChange(app._id, e.target.value)}
                         className={`text-[10px] font-black uppercase tracking-widest border-none outline-none rounded-lg px-2 py-1.5 cursor-pointer transition-all ${
-                          app.status === "Accepted" ? "bg-emerald-100 text-emerald-700" :
+                          app.status === "Accepted" ? "bg-blue-100 text-blue-700" :
                           app.status === "Rejected" ? "bg-red-100 text-red-700" :
                           app.status === "Pending" ? "bg-amber-100 text-amber-700" :
                           "bg-blue-100 text-blue-700"
@@ -90,7 +90,7 @@ const ViewApplicants = () => {
                        </select>
                        {updatingId === app._id && (
                          <div className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full flex items-center justify-center">
-                            <div className="w-2 h-2 border-2 border-emerald-600 border-t-transparent rounded-full animate-spin"></div>
+                            <div className="w-2 h-2 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
                          </div>
                        )}
                     </div>
@@ -116,7 +116,7 @@ const ViewApplicants = () => {
                       href={`http://localhost:5000/${app.resume}`}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex-1 text-center py-3 bg-emerald-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-emerald-700 shadow-lg shadow-emerald-50 transition-all no-underline flex items-center justify-center gap-2"
+                      className="flex-1 text-center py-3 bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest rounded-xl hover:bg-blue-700 shadow-lg shadow-blue-50 transition-all no-underline flex items-center justify-center gap-2"
                     >
                       <FileText size={14} /> Resume
                     </a>

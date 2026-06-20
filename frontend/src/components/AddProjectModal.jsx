@@ -87,7 +87,7 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all"
+              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
               placeholder="E.g., E-commerce Platform"
             />
           </div>
@@ -99,7 +99,7 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows="4"
-              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all resize-none"
+              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
               placeholder="Describe your project, technologies used, and your role..."
             />
           </div>
@@ -113,7 +113,7 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
                   type="url"
                   value={liveLink}
                   onChange={(e) => setLiveLink(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all"
+                  className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                   placeholder="https://..."
                 />
               </div>
@@ -127,7 +127,7 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
                   required
                   value={githubLink}
                   onChange={(e) => setGithubLink(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all"
+                  className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                   placeholder="https://github.com/..."
                 />
               </div>
@@ -156,7 +156,7 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
                 </div>
               ))}
               {images.length < 5 && (
-                <label className="aspect-video rounded-xl border-2 border-dashed border-slate-200 hover:border-emerald-500 flex flex-col items-center justify-center cursor-pointer transition-colors bg-slate-50 hover:bg-emerald-50/50">
+                <label className="aspect-video rounded-xl border-2 border-dashed border-slate-200 hover:border-blue-500 flex flex-col items-center justify-center cursor-pointer transition-colors bg-slate-50 hover:bg-blue-50/50">
                   <Upload size={24} className="text-slate-400 mb-2" />
                   <span className="text-xs font-bold text-slate-500">Upload Image</span>
                   <input
@@ -183,7 +183,7 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
             <button
               type="submit"
               disabled={loading}
-              className="px-6 py-2.5 rounded-xl font-bold text-white bg-emerald-600 hover:bg-emerald-700 transition-colors disabled:opacity-50 flex items-center gap-2"
+              className="px-6 py-2.5 rounded-xl font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors disabled:opacity-50 flex items-center gap-2"
             >
               {loading ? "Saving..." : <><Plus size={18} /> Add Project</>}
             </button>

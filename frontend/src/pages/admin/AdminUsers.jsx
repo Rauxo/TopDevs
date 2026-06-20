@@ -48,11 +48,11 @@ const AdminUsers = () => {
         </div>
         
         <div className="relative group w-full md:w-80">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-emerald-500 transition-colors" size={18} />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors" size={18} />
           <input 
             type="text" 
             placeholder="Search students..." 
-            className="w-full pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-2xl outline-none focus:border-emerald-500 transition-all font-medium text-sm"
+            className="w-full pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-2xl outline-none focus:border-blue-500 transition-all font-medium text-sm"
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
@@ -80,7 +80,7 @@ const AdminUsers = () => {
                         <img src={`http://localhost:5000/${user.profileImg}`} className="w-12 h-12 rounded-xl object-cover border-2 border-white shadow-sm" alt="profile" />
                         <div>
                           <p className="font-bold text-slate-800 text-sm">{user.username}</p>
-                          <p className="text-[10px] text-emerald-600 font-black uppercase">Active Member</p>
+                          <p className="text-[10px] text-blue-600 font-black uppercase">Active Member</p>
                         </div>
                       </div>
                     </td>

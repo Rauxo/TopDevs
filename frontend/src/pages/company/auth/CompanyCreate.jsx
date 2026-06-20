@@ -62,7 +62,7 @@ function CompanyCreate() {
   };
 
   const inputFocus = (e) => {
-    e.target.parentElement.style.boxShadow = "0 0 0 3px rgba(16,185,129,0.2)";
+    e.target.parentElement.style.boxShadow = "0 0 0 3px rgba(59,130,246,0.2)";
     e.target.parentElement.style.borderColor = "#10b981";
   };
   const inputBlur = (e) => {
@@ -213,7 +213,7 @@ function CompanyCreate() {
                   name: "companyIcon",
                   label: "Company Logo / Icon",
                   hint: "PNG or JPG recommended",
-                  icon: <Image size={24} className="text-emerald-600" />,
+                  icon: <Image size={24} className="text-blue-600" />,
                   multiple: false,
                   required: true,
                 },
@@ -221,7 +221,7 @@ function CompanyCreate() {
                   name: "legalDocument",
                   label: "Legal Document (Proof of Business)",
                   hint: "PDF, PNG or JPG — GST cert, trade licence, etc.",
-                  icon: <FileText size={24} className="text-emerald-600" />,
+                  icon: <FileText size={24} className="text-blue-600" />,
                   multiple: false,
                   required: true,
                 },
@@ -229,7 +229,7 @@ function CompanyCreate() {
                   name: "companyImages",
                   label: "Company Images (2–5 photos)",
                   hint: "Office, team, workspace — any 2 to 5 images",
-                  icon: <Camera size={24} className="text-emerald-600" />,
+                  icon: <Camera size={24} className="text-blue-600" />,
                   multiple: true,
                   required: true,
                 },
@@ -312,7 +312,7 @@ const styles = {
     width: "480px",
     height: "480px",
     borderRadius: "50%",
-    background: "rgba(16,185,129,0.13)",
+    background: "rgba(59,130,246,0.13)",
     filter: "blur(90px)",
     pointerEvents: "none",
   },
@@ -378,7 +378,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     flexShrink: 0,
-    boxShadow: "0 2px 10px rgba(16,185,129,0.4)",
+    boxShadow: "0 2px 10px rgba(59,130,246,0.4)",
   },
   stepCircleDone: {
     width: "30px",
@@ -413,8 +413,8 @@ const styles = {
     background: "rgba(255,255,255,0.88)",
     backdropFilter: "blur(20px)",
     borderRadius: "24px",
-    border: "1px solid rgba(16,185,129,0.15)",
-    boxShadow: "0 20px 60px rgba(0,0,0,0.08), 0 4px 16px rgba(16,185,129,0.1)",
+    border: "1px solid rgba(59,130,246,0.15)",
+    boxShadow: "0 20px 60px rgba(0,0,0,0.08), 0 4px 16px rgba(59,130,246,0.1)",
     padding: "36px",
     marginBottom: "20px",
   },
@@ -450,7 +450,7 @@ const styles = {
     justifyContent: "center",
     overflow: "hidden",
     flexShrink: 0,
-    border: "2px solid rgba(16,185,129,0.2)",
+    border: "2px solid rgba(59,130,246,0.2)",
   },
   iconImg: { width: "100%", height: "100%", objectFit: "cover" },
   iconPlaceholder: { display: "flex", alignItems: "center", justifyContent: "center" },
@@ -528,7 +528,7 @@ const styles = {
     fontSize: "15px",
     fontWeight: "700",
     cursor: "pointer",
-    boxShadow: "0 4px 20px rgba(16,185,129,0.35)",
+    boxShadow: "0 4px 20px rgba(59,130,246,0.35)",
     letterSpacing: "0.02em",
   },
   backBtn: {

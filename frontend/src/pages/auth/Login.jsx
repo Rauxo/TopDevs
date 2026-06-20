@@ -96,7 +96,7 @@ function Login() {
                   style={styles.input}
                   onFocus={(e) =>
                     (e.target.parentElement.style.boxShadow =
-                      "0 0 0 3px rgba(16,185,129,0.2)")
+                      "0 0 0 3px rgba(59,130,246,0.2)")
                   }
                   onBlur={(e) =>
                     (e.target.parentElement.style.boxShadow = "none")
@@ -123,7 +123,7 @@ function Login() {
                   style={{ ...styles.input, paddingRight: "44px" }}
                   onFocus={(e) =>
                     (e.target.parentElement.style.boxShadow =
-                      "0 0 0 3px rgba(16,185,129,0.2)")
+                      "0 0 0 3px rgba(59,130,246,0.2)")
                   }
                   onBlur={(e) =>
                     (e.target.parentElement.style.boxShadow = "none")
@@ -184,7 +184,7 @@ const styles = {
     width: "450px",
     height: "450px",
     borderRadius: "50%",
-    background: "rgba(16,185,129,0.15)",
+    background: "rgba(59,130,246,0.15)",
     filter: "blur(80px)",
     pointerEvents: "none",
   },
@@ -251,7 +251,7 @@ const styles = {
   statBox: {
     background: "rgba(255,255,255,0.7)",
     backdropFilter: "blur(10px)",
-    border: "1px solid rgba(16,185,129,0.2)",
+    border: "1px solid rgba(59,130,246,0.2)",
     borderRadius: "14px",
     padding: "16px 20px",
     display: "flex",
@@ -286,8 +286,8 @@ const styles = {
     background: "rgba(255,255,255,0.85)",
     backdropFilter: "blur(20px)",
     borderRadius: "24px",
-    border: "1px solid rgba(16,185,129,0.15)",
-    boxShadow: "0 20px 60px rgba(0,0,0,0.08), 0 4px 16px rgba(16,185,129,0.1)",
+    border: "1px solid rgba(59,130,246,0.15)",
+    boxShadow: "0 20px 60px rgba(0,0,0,0.08), 0 4px 16px rgba(59,130,246,0.1)",
     padding: "44px 40px",
     width: "100%",
     maxWidth: "420px",
@@ -385,7 +385,7 @@ const styles = {
     fontSize: "15px",
     fontWeight: "700",
     cursor: "pointer",
-    boxShadow: "0 4px 20px rgba(16,185,129,0.35)",
+    boxShadow: "0 4px 20px rgba(59,130,246,0.35)",
     transition: "transform 0.15s, box-shadow 0.15s",
     letterSpacing: "0.02em",
   },

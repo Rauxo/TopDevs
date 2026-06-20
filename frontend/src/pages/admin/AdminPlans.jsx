@@ -62,7 +62,7 @@ const AdminPlans = () => {
           </div>
           <button 
             onClick={() => setShowAddModal(true)}
-            className="flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-500/20 border-none cursor-pointer"
+            className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/20 border-none cursor-pointer"
           >
             <Plus size={18} /> Add New Plan
           </button>
@@ -70,7 +70,7 @@ const AdminPlans = () => {
 
         {loading ? (
           <div className="flex justify-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -85,8 +85,8 @@ const AdminPlans = () => {
                 
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 text-white ${
                   plan.name === 'Basic' ? 'bg-blue-500' : 
-                  plan.name === 'Standard' ? 'bg-purple-500' : 
-                  'bg-emerald-500'
+                  plan.name === 'Standard' ? 'bg-slate-500' : 
+                  'bg-blue-500'
                 }`}>
                   {plan.name === 'Basic' ? <Zap size={24} /> : 
                    plan.name === 'Standard' ? <Shield size={24} /> : 
@@ -96,7 +96,7 @@ const AdminPlans = () => {
                 <div className="flex items-center gap-2 mb-2">
                   <h3 className="text-xl font-black text-slate-900">{plan.name}</h3>
                   <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-widest ${
-                    plan.type === 'User' ? 'bg-blue-50 text-blue-600' : 'bg-purple-50 text-purple-600'
+                    plan.type === 'User' ? 'bg-blue-50 text-blue-600' : 'bg-slate-50 text-slate-600'
                   }`}>
                     {plan.type}
                   </span>
@@ -133,7 +133,7 @@ const AdminPlans = () => {
                   <select 
                     value={newPlan.name}
                     onChange={(e) => setNewPlan({ ...newPlan, name: e.target.value })}
-                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:bg-white focus:border-emerald-500 transition-all font-bold text-slate-700"
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:bg-white focus:border-blue-500 transition-all font-bold text-slate-700"
                   >
                     <option value="Basic">Basic</option>
                     <option value="Standard">Standard</option>
@@ -145,7 +145,7 @@ const AdminPlans = () => {
                   <select 
                     value={newPlan.type}
                     onChange={(e) => setNewPlan({ ...newPlan, type: e.target.value })}
-                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:bg-white focus:border-emerald-500 transition-all font-bold text-slate-700"
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:bg-white focus:border-blue-500 transition-all font-bold text-slate-700"
                   >
                     <option value="User">User</option>
                     <option value="Company">Company</option>
@@ -160,7 +160,7 @@ const AdminPlans = () => {
                       value={newPlan.price}
                       onChange={(e) => setNewPlan({ ...newPlan, price: e.target.value })}
                       placeholder="e.g. 499"
-                      className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:bg-white focus:border-emerald-500 transition-all font-bold text-slate-700"
+                      className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:bg-white focus:border-blue-500 transition-all font-bold text-slate-700"
                     />
                   </div>
                   <div>
@@ -171,7 +171,7 @@ const AdminPlans = () => {
                       value={newPlan.messageLimit}
                       onChange={(e) => setNewPlan({ ...newPlan, messageLimit: e.target.value })}
                       placeholder="e.g. 50"
-                      className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:bg-white focus:border-emerald-500 transition-all font-bold text-slate-700"
+                      className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:bg-white focus:border-blue-500 transition-all font-bold text-slate-700"
                     />
                   </div>
                 </div>
@@ -183,13 +183,13 @@ const AdminPlans = () => {
                     value={newPlan.durationInDays}
                     onChange={(e) => setNewPlan({ ...newPlan, durationInDays: e.target.value })}
                     placeholder="e.g. 30"
-                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:bg-white focus:border-emerald-500 transition-all font-bold text-slate-700"
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:bg-white focus:border-blue-500 transition-all font-bold text-slate-700"
                   />
                 </div>
                 <div className="flex gap-4 pt-4">
                   <button 
                     type="submit"
-                    className="flex-1 py-5 bg-emerald-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-500/20 border-none cursor-pointer"
+                    className="flex-1 py-5 bg-blue-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/20 border-none cursor-pointer"
                   >
                     Create Plan
                   </button>

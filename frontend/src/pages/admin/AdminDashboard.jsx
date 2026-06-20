@@ -27,7 +27,7 @@ const AdminDashboard = () => {
   const statCards = [
     { label: "Total Students", value: data.stats.userCount, icon: <Users size={24} />, color: "blue" },
     { label: "Registered Companies", value: data.stats.companyCount, icon: <Building2 size={24} />, color: "emerald" },
-    { label: "Live Job Postings", value: data.stats.jobCount, icon: <Briefcase size={24} />, color: "purple" },
+    { label: "Live Job Postings", value: data.stats.jobCount, icon: <Briefcase size={24} />, color: "slate" },
     { label: "Total Applications", value: data.stats.applicationCount, icon: <ClipboardList size={24} />, color: "orange" },
   ];
 
@@ -59,7 +59,7 @@ const AdminDashboard = () => {
              <h3 className="text-xl font-black text-slate-900 flex items-center gap-3">
                <Clock className="text-amber-500" /> Pending Verification
              </h3>
-             <Link to="/admin/companies" className="text-xs font-bold text-emerald-600 no-underline hover:underline">View All</Link>
+             <Link to="/admin/companies" className="text-xs font-bold text-blue-600 no-underline hover:underline">View All</Link>
            </div>
            
            <div className="space-y-4">
@@ -72,7 +72,7 @@ const AdminDashboard = () => {
                       <p className="text-[10px] text-slate-400 uppercase font-bold">{new Date(comp.createdAt).toLocaleDateString()}</p>
                     </div>
                   </div>
-                  <Link to="/admin/companies" className="p-2 bg-white rounded-lg border border-slate-200 text-slate-600 hover:text-emerald-600 transition-colors">
+                  <Link to="/admin/companies" className="p-2 bg-white rounded-lg border border-slate-200 text-slate-600 hover:text-blue-600 transition-colors">
                     <ArrowRight size={18} />
                   </Link>
                </div>
@@ -86,9 +86,9 @@ const AdminDashboard = () => {
         <div className="bg-white rounded-[40px] p-8 shadow-sm border border-slate-100">
            <div className="flex items-center justify-between mb-8">
              <h3 className="text-xl font-black text-slate-900 flex items-center gap-3">
-               <Briefcase className="text-emerald-500" /> Recent Job Postings
+               <Briefcase className="text-blue-500" /> Recent Job Postings
              </h3>
-             <Link to="/admin/jobs" className="text-xs font-bold text-emerald-600 no-underline hover:underline">View All</Link>
+             <Link to="/admin/jobs" className="text-xs font-bold text-blue-600 no-underline hover:underline">View All</Link>
            </div>
            
            <div className="space-y-4">
@@ -99,7 +99,7 @@ const AdminDashboard = () => {
                     <p className="text-[10px] text-slate-400 uppercase font-bold">{job.company?.name || "Unknown Company"}</p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="px-2 py-1 bg-emerald-100 text-emerald-700 text-[9px] font-black uppercase rounded-lg">Live</span>
+                    <span className="px-2 py-1 bg-blue-100 text-blue-700 text-[9px] font-black uppercase rounded-lg">Live</span>
                   </div>
                </div>
              ))}

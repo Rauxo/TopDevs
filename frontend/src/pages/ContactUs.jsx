@@ -20,8 +20,8 @@ const ContactUs = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           {/* Left Column: Content */}
           <div>
-            <span className="text-emerald-600 font-black text-xs uppercase tracking-[0.3em] mb-6 block">Get in Touch</span>
-            <h1 className="text-5xl md:text-7xl font-black text-slate-900 mb-8 leading-none">Let's build <br /> something <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-blue-500">incredible.</span></h1>
+            <span className="text-blue-600 font-black text-xs uppercase tracking-[0.3em] mb-6 block">Get in Touch</span>
+            <h1 className="text-5xl md:text-7xl font-black text-slate-900 mb-8 leading-none">Let's build <br /> something <br /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-500">incredible.</span></h1>
             
             <p className="text-lg text-slate-500 mb-12 max-w-md font-medium">
               Have a question about the platform? Or just want to say hi? We'd love to hear from you.
@@ -29,7 +29,7 @@ const ContactUs = () => {
 
             <div className="space-y-8">
                <div className="flex items-center gap-6 group cursor-pointer">
-                  <div className="w-16 h-16 rounded-3xl bg-white shadow-xl flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                  <div className="w-16 h-16 rounded-3xl bg-white shadow-xl flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-all">
                     <MapPin size={24} />
                   </div>
                   <div>
@@ -53,7 +53,7 @@ const ContactUs = () => {
           <div className="bg-white p-10 md:p-16 rounded-[48px] shadow-[0_32px_80px_rgba(0,0,0,0.08)] border border-slate-100">
             {submitted ? (
               <div className="text-center py-20 animate-bounce-in">
-                 <div className="text-emerald-500 mb-6 flex justify-center">
+                 <div className="text-blue-500 mb-6 flex justify-center">
                     <PartyPopper size={64} />
                   </div>
                  <h2 className="text-3xl font-black text-slate-900 mb-4">Message Sent!</h2>
@@ -68,7 +68,7 @@ const ContactUs = () => {
                       type="text" 
                       required
                       placeholder="John Doe"
-                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:border-emerald-500 focus:bg-white transition-all font-bold text-slate-800"
+                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:border-blue-500 focus:bg-white transition-all font-bold text-slate-800"
                     />
                   </div>
                   <div className="space-y-2">
@@ -77,7 +77,7 @@ const ContactUs = () => {
                       type="email" 
                       required
                       placeholder="john@example.com"
-                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:border-emerald-500 focus:bg-white transition-all font-bold text-slate-800"
+                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:border-blue-500 focus:bg-white transition-all font-bold text-slate-800"
                     />
                   </div>
                 </div>
@@ -87,7 +87,7 @@ const ContactUs = () => {
                     type="text" 
                     required
                     placeholder="Inquiry about jobs"
-                    className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:border-emerald-500 focus:bg-white transition-all font-bold text-slate-800"
+                    className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:border-blue-500 focus:bg-white transition-all font-bold text-slate-800"
                   />
                 </div>
                 <div className="space-y-2">
@@ -96,13 +96,13 @@ const ContactUs = () => {
                     rows="5"
                     required
                     placeholder="Tell us more..."
-                    className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:border-emerald-500 focus:bg-white transition-all font-bold text-slate-800 resize-none"
+                    className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:border-blue-500 focus:bg-white transition-all font-bold text-slate-800 resize-none"
                   ></textarea>
                 </div>
                 
                 <button 
                   type="submit"
-                  className="w-full py-5 bg-slate-900 text-white font-black text-sm uppercase tracking-widest rounded-[20px] hover:bg-emerald-600 hover:-translate-y-1 shadow-xl shadow-slate-200 active:scale-95 transition-all"
+                  className="w-full py-5 bg-slate-900 text-white font-black text-sm uppercase tracking-widest rounded-[20px] hover:bg-blue-600 hover:-translate-y-1 shadow-xl shadow-slate-200 active:scale-95 transition-all"
                 >
                   Send Message
                 </button>

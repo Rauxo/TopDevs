@@ -96,7 +96,7 @@ const EditCompanyProfile = () => {
                     className="w-full h-full object-cover"
                    />
                 </div>
-                <label htmlFor="icon-upload" className="absolute bottom-0 right-0 p-2.5 bg-emerald-600 text-white rounded-full cursor-pointer shadow-lg hover:bg-emerald-700 transition-all flex items-center justify-center">
+                <label htmlFor="icon-upload" className="absolute bottom-0 right-0 p-2.5 bg-blue-600 text-white rounded-full cursor-pointer shadow-lg hover:bg-blue-700 transition-all flex items-center justify-center">
                   <Camera size={18} />
                 </label>
                 <input type="file" id="icon-upload" name="companyIcon" onChange={handleChange} className="hidden" accept="image/*" />
@@ -106,29 +106,29 @@ const EditCompanyProfile = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-700">Company Name</label>
-                <input name="name" value={formData.name} onChange={handleChange} required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-emerald-500 transition-all" />
+                <input name="name" value={formData.name} onChange={handleChange} required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500 transition-all" />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-700">Email Address</label>
-                <input type="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-emerald-500 transition-all" />
+                <input type="email" name="email" value={formData.email} onChange={handleChange} required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500 transition-all" />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-700">Phone</label>
-                <input name="phone" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-emerald-500 transition-all" />
+                <input name="phone" value={formData.phone} onChange={handleChange} required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500 transition-all" />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-700">Founded Year</label>
-                <input name="founded" value={formData.founded} onChange={handleChange} placeholder="e.g. 2015" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-emerald-500 transition-all" />
+                <input name="founded" value={formData.founded} onChange={handleChange} placeholder="e.g. 2015" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500 transition-all" />
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-bold text-slate-700">Team Size</label>
-                <input name="teamSize" value={formData.teamSize} onChange={handleChange} placeholder="e.g. 10-50" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-emerald-500 transition-all" />
+                <input name="teamSize" value={formData.teamSize} onChange={handleChange} placeholder="e.g. 10-50" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500 transition-all" />
               </div>
             </div>
 
             <div className="space-y-2">
               <label className="text-sm font-bold text-slate-700">Address</label>
-              <input name="address" value={formData.address} onChange={handleChange} required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-emerald-500 transition-all" />
+              <input name="address" value={formData.address} onChange={handleChange} required className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500 transition-all" />
             </div>
 
             <div className="space-y-2">
@@ -138,7 +138,7 @@ const EditCompanyProfile = () => {
                 value={formData.about}
                 onChange={handleChange}
                 rows="5"
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-emerald-500 transition-all resize-none"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-blue-500 transition-all resize-none"
                 placeholder="Describe your company..."
               ></textarea>
             </div>
@@ -147,7 +147,7 @@ const EditCompanyProfile = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 bg-emerald-600 text-white font-bold rounded-2xl hover:bg-emerald-700 shadow-lg shadow-emerald-100 transition-all"
+                className="w-full py-4 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-700 shadow-lg shadow-blue-100 transition-all"
               >
                 {loading ? "Updating..." : "Update Company Profile"}
               </button>

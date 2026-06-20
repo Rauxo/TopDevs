@@ -48,11 +48,11 @@ const AdminJobs = () => {
         </div>
         
         <div className="relative group w-full md:w-80">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-emerald-500 transition-colors" size={18} />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors" size={18} />
           <input 
             type="text" 
             placeholder="Search jobs or companies..." 
-            className="w-full pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-2xl outline-none focus:border-emerald-500 transition-all font-medium text-sm"
+            className="w-full pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-2xl outline-none focus:border-blue-500 transition-all font-medium text-sm"
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
@@ -83,7 +83,7 @@ const AdminJobs = () => {
                     </td>
                     <td className="px-8 py-5">
                        <div className="flex items-center gap-3">
-                         <div className="w-8 h-8 rounded-lg bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold text-xs">
+                         <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs">
                            {job.company?.name.charAt(0)}
                          </div>
                          <span className="text-sm font-medium text-slate-700">{job.company?.name || "Unknown"}</span>
@@ -91,14 +91,14 @@ const AdminJobs = () => {
                     </td>
                     <td className="px-8 py-5">
                        <div className="flex items-center gap-2 text-slate-500 text-sm">
-                         <MapPin size={14} className="text-emerald-500" />
+                         <MapPin size={14} className="text-blue-500" />
                          {job.location}
                        </div>
                     </td>
                     <td className="px-8 py-5 text-right space-x-2">
                        <button 
                          onClick={() => window.open(`/jobs/${job._id}`, '_blank')}
-                         className="p-3 text-slate-400 hover:text-emerald-500 hover:bg-emerald-50 rounded-xl transition-all border-none bg-transparent cursor-pointer"
+                         className="p-3 text-slate-400 hover:text-blue-500 hover:bg-blue-50 rounded-xl transition-all border-none bg-transparent cursor-pointer"
                          title="View Job"
                        >
                          <ExternalLink size={20} />

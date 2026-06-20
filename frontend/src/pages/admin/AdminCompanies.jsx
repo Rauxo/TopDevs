@@ -73,7 +73,7 @@ const AdminCompanies = () => {
                    {loading ? (
                      <tr><td colSpan="3" className="px-8 py-20 text-center text-slate-400 italic">Synchronizing corporate data...</td></tr>
                    ) : companies.map((comp) => (
-                     <tr key={comp._id} className={`hover:bg-slate-50/50 transition-colors group ${selectedCompany?._id === comp._id ? "bg-emerald-50/30" : ""}`}>
+                     <tr key={comp._id} className={`hover:bg-slate-50/50 transition-colors group ${selectedCompany?._id === comp._id ? "bg-blue-50/30" : ""}`}>
                         <td className="px-8 py-5">
                            <div className="flex items-center gap-4">
                              <img src={`http://localhost:5000/${comp.companyIcon}`} className="w-12 h-12 rounded-xl object-cover border border-slate-200" alt="icon" />
@@ -85,7 +85,7 @@ const AdminCompanies = () => {
                         </td>
                         <td className="px-8 py-5">
                            {comp.isVerified ? (
-                             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-100 text-emerald-700 text-[10px] font-black uppercase tracking-widest rounded-full">
+                             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-100 text-blue-700 text-[10px] font-black uppercase tracking-widest rounded-full">
                                <ShieldCheck size={12} /> Verified
                              </span>
                            ) : (
@@ -97,14 +97,14 @@ const AdminCompanies = () => {
                         <td className="px-8 py-5 text-right space-x-2">
                            <button 
                              onClick={() => setSelectedCompany(comp)}
-                             className="p-2.5 bg-white border border-slate-200 rounded-xl text-slate-600 hover:text-emerald-600 hover:border-emerald-200 transition-all cursor-pointer"
+                             className="p-2.5 bg-white border border-slate-200 rounded-xl text-slate-600 hover:text-blue-600 hover:border-blue-200 transition-all cursor-pointer"
                              title="View Details"
                            >
                              <Eye size={18} />
                            </button>
                            <button 
                              onClick={() => handleBlock(comp._id)}
-                             className={`p-2.5 border rounded-xl transition-all cursor-pointer ${comp.isVerified ? "bg-white border-slate-200 text-red-400 hover:bg-red-50" : "bg-white border-slate-200 text-emerald-400 hover:bg-emerald-50"}`}
+                             className={`p-2.5 border rounded-xl transition-all cursor-pointer ${comp.isVerified ? "bg-white border-slate-200 text-red-400 hover:bg-red-50" : "bg-white border-slate-200 text-blue-400 hover:bg-blue-50"}`}
                              title={comp.isVerified ? "Block Company" : "Unblock/Verify"}
                            >
                              <Ban size={18} />
@@ -126,7 +126,7 @@ const AdminCompanies = () => {
                 <img src={`http://localhost:5000/${selectedCompany.companyIcon}`} className="w-20 h-20 rounded-3xl object-cover border-2 border-white/10" alt="logo" />
                 <div>
                   <h3 className="text-2xl font-black">{selectedCompany.name}</h3>
-                  <p className="text-emerald-500 font-bold text-xs uppercase tracking-widest">
+                  <p className="text-blue-500 font-bold text-xs uppercase tracking-widest">
                     {selectedCompany.isVerified ? "Authenticated Partner" : "Verification Required"}
                   </p>
                 </div>
@@ -134,15 +134,15 @@ const AdminCompanies = () => {
 
               <div className="space-y-6 mb-10">
                  <div className="flex items-center gap-3 text-slate-400">
-                    <Mail size={18} className="text-emerald-500" />
+                    <Mail size={18} className="text-blue-500" />
                     <span className="text-sm font-medium">{selectedCompany.email}</span>
                  </div>
                  <div className="flex items-center gap-3 text-slate-400">
-                    <Phone size={18} className="text-emerald-500" />
+                    <Phone size={18} className="text-blue-500" />
                     <span className="text-sm font-medium">{selectedCompany.phone}</span>
                  </div>
                  <div className="flex items-start gap-3 text-slate-400">
-                    <MapPin size={18} className="text-emerald-500 shrink-0" />
+                    <MapPin size={18} className="text-blue-500 shrink-0" />
                     <span className="text-sm font-medium leading-relaxed">{selectedCompany.address}</span>
                  </div>
               </div>
@@ -155,7 +155,7 @@ const AdminCompanies = () => {
                   href={`http://localhost:5000/${selectedCompany.legalDocument}`} 
                   target="_blank" 
                   rel="noreferrer"
-                  className="flex items-center justify-between p-4 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-500 rounded-2xl transition-all no-underline font-bold text-sm border border-emerald-500/20"
+                  className="flex items-center justify-between p-4 bg-blue-500/10 hover:bg-blue-500/20 text-blue-500 rounded-2xl transition-all no-underline font-bold text-sm border border-blue-500/20"
                 >
                   Verify Documents <ExternalLink size={18} />
                 </a>
@@ -165,7 +165,7 @@ const AdminCompanies = () => {
                 <button 
                   onClick={() => handleVerify(selectedCompany._id)}
                   disabled={actionLoading}
-                  className="w-full py-5 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-2xl shadow-xl shadow-emerald-900/40 transition-all active:scale-[0.98] flex items-center justify-center gap-2 border-none cursor-pointer disabled:opacity-50"
+                  className="w-full py-5 bg-blue-600 hover:bg-blue-500 text-white font-black rounded-2xl shadow-xl shadow-blue-900/40 transition-all active:scale-[0.98] flex items-center justify-center gap-2 border-none cursor-pointer disabled:opacity-50"
                 >
                   {actionLoading ? "Processing..." : (
                     <>Approve & Verify Company <ShieldCheck size={20} /></>

@@ -86,10 +86,10 @@ function Create() {
           </p>
           <ul style={styles.featureList}>
             {[
-              { text: "Personalized learning roadmap", icon: <Target size={18} className="text-emerald-500" /> },
-              { text: "Rank up & earn badges", icon: <Trophy size={18} className="text-emerald-500" /> },
-              { text: "Direct job applications", icon: <Briefcase size={18} className="text-emerald-500" /> },
-              { text: "Connect with top companies", icon: <Users size={18} className="text-emerald-500" /> },
+              { text: "Personalized learning roadmap", icon: <Target size={18} className="text-blue-500" /> },
+              { text: "Rank up & earn badges", icon: <Trophy size={18} className="text-blue-500" /> },
+              { text: "Direct job applications", icon: <Briefcase size={18} className="text-blue-500" /> },
+              { text: "Connect with top companies", icon: <Users size={18} className="text-blue-500" /> },
             ].map((f) => (
               <li key={f.text} style={styles.featureItem}>
                 <span style={{ display: "flex", alignItems: "center", gap: "10px" }}>
@@ -162,7 +162,7 @@ function Create() {
                   style={styles.input}
                   onFocus={(e) =>
                     (e.target.parentElement.style.boxShadow =
-                      "0 0 0 3px rgba(16,185,129,0.2)")
+                      "0 0 0 3px rgba(59,130,246,0.2)")
                   }
                   onBlur={(e) =>
                     (e.target.parentElement.style.boxShadow = "none")
@@ -189,7 +189,7 @@ function Create() {
                   style={styles.input}
                   onFocus={(e) =>
                     (e.target.parentElement.style.boxShadow =
-                      "0 0 0 3px rgba(16,185,129,0.2)")
+                      "0 0 0 3px rgba(59,130,246,0.2)")
                   }
                   onBlur={(e) =>
                     (e.target.parentElement.style.boxShadow = "none")
@@ -216,7 +216,7 @@ function Create() {
                   style={{ ...styles.input, paddingRight: "44px" }}
                   onFocus={(e) =>
                     (e.target.parentElement.style.boxShadow =
-                      "0 0 0 3px rgba(16,185,129,0.2)")
+                      "0 0 0 3px rgba(59,130,246,0.2)")
                   }
                   onBlur={(e) =>
                     (e.target.parentElement.style.boxShadow = "none")
@@ -302,7 +302,7 @@ const styles = {
     width: "480px",
     height: "480px",
     borderRadius: "50%",
-    background: "rgba(16,185,129,0.13)",
+    background: "rgba(59,130,246,0.13)",
     filter: "blur(90px)",
     pointerEvents: "none",
   },
@@ -365,7 +365,7 @@ const styles = {
     color: "#334155",
     background: "rgba(255,255,255,0.7)",
     backdropFilter: "blur(8px)",
-    border: "1px solid rgba(16,185,129,0.15)",
+    border: "1px solid rgba(59,130,246,0.15)",
     borderRadius: "12px",
     padding: "12px 16px",
     fontWeight: "500",
@@ -383,8 +383,8 @@ const styles = {
     background: "rgba(255,255,255,0.88)",
     backdropFilter: "blur(20px)",
     borderRadius: "24px",
-    border: "1px solid rgba(16,185,129,0.15)",
-    boxShadow: "0 20px 60px rgba(0,0,0,0.08), 0 4px 16px rgba(16,185,129,0.1)",
+    border: "1px solid rgba(59,130,246,0.15)",
+    boxShadow: "0 20px 60px rgba(0,0,0,0.08), 0 4px 16px rgba(59,130,246,0.1)",
     padding: "36px 36px",
     width: "100%",
     maxWidth: "440px",
@@ -416,7 +416,7 @@ const styles = {
     overflow: "hidden",
     flexShrink: 0,
     cursor: "pointer",
-    border: "2px solid rgba(16,185,129,0.3)",
+    border: "2px solid rgba(59,130,246,0.3)",
   },
   avatarImg: { width: "100%", height: "100%", objectFit: "cover" },
   avatarPlaceholder: { display: "flex", alignItems: "center", justifyContent: "center" },
@@ -492,7 +492,7 @@ const styles = {
     fontSize: "15px",
     fontWeight: "700",
     cursor: "pointer",
-    boxShadow: "0 4px 20px rgba(16,185,129,0.35)",
+    boxShadow: "0 4px 20px rgba(59,130,246,0.35)",
     letterSpacing: "0.02em",
   },
   divider: { display: "flex", alignItems: "center", gap: "12px", margin: "20px 0" },

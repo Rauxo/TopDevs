@@ -16,7 +16,7 @@ function OurGoal() {
 
       {/* Text */}
       <div className="flex-1">
-        <h1 className="text-[30px] md:text-[42px] font-extrabold text-emerald-700">
+        <h1 className="text-[30px] md:text-[42px] font-extrabold text-blue-700">
           Our Goal
         </h1>
         <div className="mt-6">

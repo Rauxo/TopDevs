@@ -84,7 +84,7 @@ const EditProfile = () => {
                     className="w-full h-full object-cover"
                    />
                 </div>
-                <label htmlFor="profile-upload" className="absolute bottom-0 right-0 p-2.5 bg-emerald-600 text-white rounded-full cursor-pointer shadow-lg hover:bg-emerald-700 transition-all flex items-center justify-center">
+                <label htmlFor="profile-upload" className="absolute bottom-0 right-0 p-2.5 bg-blue-600 text-white rounded-full cursor-pointer shadow-lg hover:bg-blue-700 transition-all flex items-center justify-center">
                   <Camera size={18} />
                 </label>
                 <input type="file" id="profile-upload" name="profileImg" onChange={handleChange} className="hidden" accept="image/*" />
@@ -99,7 +99,7 @@ const EditProfile = () => {
                 value={formData.username}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 outline-none transition-all"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-blue-500 outline-none transition-all"
               />
             </div>
 
@@ -111,7 +111,7 @@ const EditProfile = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 outline-none transition-all"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-blue-500 outline-none transition-all"
               />
             </div>
 
@@ -122,7 +122,7 @@ const EditProfile = () => {
                 value={formData.about}
                 onChange={handleChange}
                 rows="4"
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-emerald-500 outline-none transition-all resize-none"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-blue-500 outline-none transition-all resize-none"
                 placeholder="Tell us about yourself..."
               ></textarea>
             </div>
@@ -131,7 +131,7 @@ const EditProfile = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 bg-emerald-600 text-white font-bold rounded-2xl hover:bg-emerald-700 shadow-lg shadow-emerald-100 transition-all disabled:opacity-50"
+                className="w-full py-4 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-700 shadow-lg shadow-blue-100 transition-all disabled:opacity-50"
               >
                 {loading ? "Saving Changes..." : "Save Profile"}
               </button>

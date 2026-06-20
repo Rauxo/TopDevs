@@ -59,7 +59,7 @@ function CompanyDashboard() {
 
   if (!company) return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
     </div>
   );
 
@@ -77,7 +77,7 @@ function CompanyDashboard() {
             <button
               onClick={() => setActiveTab("overview")}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
-                activeTab === "overview" ? "bg-emerald-600 text-white shadow-lg shadow-emerald-100" : "text-slate-600 hover:bg-slate-50"
+                activeTab === "overview" ? "bg-blue-600 text-white shadow-lg shadow-blue-100" : "text-slate-600 hover:bg-slate-50"
               }`}
             >
               <LayoutDashboard size={18} /> Overview
@@ -85,7 +85,7 @@ function CompanyDashboard() {
             <button
               onClick={() => setActiveTab("jobs")}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
-                activeTab === "jobs" ? "bg-emerald-600 text-white shadow-lg shadow-emerald-100" : "text-slate-600 hover:bg-slate-50"
+                activeTab === "jobs" ? "bg-blue-600 text-white shadow-lg shadow-blue-100" : "text-slate-600 hover:bg-slate-50"
               }`}
             >
               <Briefcase size={18} /> Manage Jobs
@@ -93,7 +93,7 @@ function CompanyDashboard() {
             <button
               onClick={() => setActiveTab("messages")}
               className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
-                activeTab === "messages" ? "bg-emerald-600 text-white shadow-lg shadow-emerald-100" : "text-slate-600 hover:bg-slate-50"
+                activeTab === "messages" ? "bg-blue-600 text-white shadow-lg shadow-blue-100" : "text-slate-600 hover:bg-slate-50"
               }`}
             >
               <MessageSquare size={18} /> Messages
@@ -126,7 +126,7 @@ function CompanyDashboard() {
           <div className="flex gap-3">
             <button 
               onClick={(e) => checkVerification(e, "/company/create-job")} 
-              className="px-6 py-2.5 bg-emerald-600 text-white font-bold rounded-xl shadow-lg shadow-emerald-100 hover:-translate-y-0.5 transition-all border-none cursor-pointer"
+              className="px-6 py-2.5 bg-blue-600 text-white font-bold rounded-xl shadow-lg shadow-blue-100 hover:-translate-y-0.5 transition-all border-none cursor-pointer"
             >
               Post a Job
             </button>
@@ -151,7 +151,7 @@ function CompanyDashboard() {
               {[
                 { label: "Active Jobs", value: jobs.length, color: "blue" },
                 { label: "Total Applications", value: jobs.reduce((acc, job) => acc + (job.applicationCount || 0), 0), color: "emerald" },
-                { label: "Unread Messages", value: "0", color: "purple" },
+                { label: "Unread Messages", value: "0", color: "slate" },
                 { label: "New Candidates", value: "0", color: "orange" },
               ].map((stat, i) => (
                 <div key={i} className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
@@ -168,7 +168,7 @@ function CompanyDashboard() {
                   {jobs.slice(0, 3).map(job => (
                     <div key={job._id} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl hover:bg-slate-100 transition-colors">
                       <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold">
+                        <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 font-bold">
                           {job.jobTitle.charAt(0)}
                         </div>
                         <div>
@@ -176,11 +176,11 @@ function CompanyDashboard() {
                           <p className="text-slate-500 text-[10px]">{job.location} • {new Date(job.createdAt).toLocaleDateString()}</p>
                         </div>
                       </div>
-                      <span className="text-xs font-bold text-emerald-600">Active</span>
+                      <span className="text-xs font-bold text-blue-600">Active</span>
                     </div>
                   ))}
                   {jobs.length === 0 && <p className="text-center py-10 text-slate-400">No jobs posted yet.</p>}
-                  {jobs.length > 0 && <button onClick={() => setActiveTab("jobs")} className="w-full text-center text-sm font-bold text-emerald-600 pt-2">View all jobs</button>}
+                  {jobs.length > 0 && <button onClick={() => setActiveTab("jobs")} className="w-full text-center text-sm font-bold text-blue-600 pt-2">View all jobs</button>}
                 </div>
               </div>
 
@@ -254,18 +254,18 @@ function CompanyDashboard() {
                       </td>
                       <td className="py-4 text-sm text-slate-500">{new Date(job.createdAt).toLocaleDateString()}</td>
                       <td className="py-4">
-                        <span className={`px-2 py-1 text-[10px] font-bold rounded ${job.applicationCount > 0 ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-700"}`}>
+                        <span className={`px-2 py-1 text-[10px] font-bold rounded ${job.applicationCount > 0 ? "bg-blue-100 text-blue-700" : "bg-slate-100 text-slate-700"}`}>
                           {job.applicationCount || 0} Applications
                         </span>
                       </td>
                       <td className="py-4">
-                        <span className="px-2 py-1 bg-emerald-50 text-emerald-600 text-[10px] font-bold rounded">Active</span>
+                        <span className="px-2 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold rounded">Active</span>
                       </td>
                       <td className="py-4">
                         <div className="flex justify-end gap-4 items-center">
                           <button 
                             onClick={(e) => checkVerification(e, `/company/applicants/${job._id}`)}
-                            className="text-emerald-600 font-bold text-xs hover:underline cursor-pointer border-none bg-transparent p-0"
+                            className="text-blue-600 font-bold text-xs hover:underline cursor-pointer border-none bg-transparent p-0"
                           >
                             View Apps
                           </button>
@@ -289,14 +289,14 @@ function CompanyDashboard() {
 
         {activeTab === "messages" && (
            <div className="bg-white p-20 rounded-[32px] shadow-sm border border-slate-100 text-center">
-             <div className="w-20 h-20 bg-emerald-50 rounded-[28px] flex items-center justify-center mx-auto mb-8 text-emerald-500">
+             <div className="w-20 h-20 bg-blue-50 rounded-[28px] flex items-center justify-center mx-auto mb-8 text-blue-500">
                <MessageSquare size={32} />
              </div>
              <h3 className="text-2xl font-black text-slate-900 mb-4">Corporate Communications</h3>
              <p className="text-slate-500 mb-10 max-w-sm mx-auto font-medium">Manage your candidate requests and active conversations in the professional messaging terminal.</p>
              <Link 
               to="/messages"
-              className="inline-flex items-center gap-2 px-10 py-4 bg-emerald-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-600/20 no-underline"
+              className="inline-flex items-center gap-2 px-10 py-4 bg-blue-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-600/20 no-underline"
              >
                Go to Messages
              </Link>

@@ -48,7 +48,7 @@ const LevelsPage = () => {
               key={level._id} 
               className={`p-6 rounded-[24px] border-2 transition-all flex items-center justify-between ${
                 level.isUnlocked 
-                  ? "border-emerald-100 bg-white shadow-sm hover:border-emerald-500 cursor-pointer" 
+                  ? "border-blue-100 bg-white shadow-sm hover:border-blue-500 cursor-pointer" 
                   : "border-slate-50 bg-slate-50 opacity-60 cursor-not-allowed"
               }`}
               onClick={() => level.isUnlocked && navigate(`/learn/level/${level._id}`)}
@@ -56,7 +56,7 @@ const LevelsPage = () => {
               <div className="flex items-center gap-6">
                 <div className={`w-14 h-14 rounded-2xl flex items-center justify-center font-black text-xl ${
                   level.isCompleted 
-                    ? "bg-emerald-500 text-white" 
+                    ? "bg-blue-500 text-white" 
                     : level.isUnlocked 
                       ? "bg-slate-900 text-white" 
                       : "bg-slate-200 text-slate-400"
@@ -71,7 +71,7 @@ const LevelsPage = () => {
 
               <div className="flex items-center gap-4">
                 {level.isCompleted ? (
-                  <div className="text-emerald-500 flex items-center gap-2 font-bold">
+                  <div className="text-blue-500 flex items-center gap-2 font-bold">
                     <CheckCircle2 size={24} /> Completed
                   </div>
                 ) : level.isUnlocked ? (

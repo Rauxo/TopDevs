@@ -151,7 +151,7 @@ const AdminLearning = () => {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-4 py-3 font-bold text-sm border-b-2 transition-colors ${
-              activeTab === tab.id ? "border-emerald-500 text-emerald-600" : "border-transparent text-slate-500 hover:text-slate-800"
+              activeTab === tab.id ? "border-blue-500 text-blue-600" : "border-transparent text-slate-500 hover:text-slate-800"
             }`}
           >
             <tab.icon size={18} /> {tab.label}
@@ -179,7 +179,7 @@ const AdminLearning = () => {
                   <label className="block text-xs font-bold text-slate-500 mb-1">Icon URL</label>
                   <input type="text" value={langForm.icon} onChange={e => setLangForm({...langForm, icon: e.target.value})} className="w-full p-2 border border-slate-200 rounded-lg" placeholder="https://..." required />
                 </div>
-                <button type="submit" className="px-4 py-2 bg-emerald-600 text-white font-bold rounded-lg hover:bg-emerald-700">Add Language</button>
+                <button type="submit" className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700">Add Language</button>
               </form>
             </div>
             <div>
@@ -233,7 +233,7 @@ const AdminLearning = () => {
                   <label className="block text-xs font-bold text-slate-500 mb-1">Image URL (Optional)</label>
                   <input type="text" value={levelForm.image} onChange={e => setLevelForm({...levelForm, image: e.target.value})} className="w-full p-2 border border-slate-200 rounded-lg" placeholder="https://..." />
                 </div>
-                <button type="submit" className="px-4 py-2 bg-emerald-600 text-white font-bold rounded-lg hover:bg-emerald-700">Add Level</button>
+                <button type="submit" className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700">Add Level</button>
               </form>
             </div>
             <div>
@@ -241,7 +241,7 @@ const AdminLearning = () => {
               <div className="space-y-2">
                 {levels.length === 0 ? <p className="text-sm text-slate-400">No levels found.</p> : levels.map(level => (
                   <div key={level._id} className="p-3 border border-slate-100 bg-slate-50 rounded-lg">
-                    <span className="font-bold mr-2 text-emerald-600">Lvl {level.levelNumber}:</span>
+                    <span className="font-bold mr-2 text-blue-600">Lvl {level.levelNumber}:</span>
                     <span className="font-medium text-slate-700">{level.heading}</span>
                   </div>
                 ))}
@@ -299,7 +299,7 @@ const AdminLearning = () => {
                   <label className="block text-xs font-bold text-slate-500 mb-1">Points</label>
                   <input type="number" value={questionForm.points} onChange={e => setQuestionForm({...questionForm, points: e.target.value})} className="w-full p-2 border border-slate-200 rounded-lg" required />
                 </div>
-                <button type="submit" className="px-4 py-2 bg-emerald-600 text-white font-bold rounded-lg hover:bg-emerald-700">Add Question</button>
+                <button type="submit" className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700">Add Question</button>
               </form>
             </div>
             <div>
@@ -308,7 +308,7 @@ const AdminLearning = () => {
                 {questions.length === 0 ? <p className="text-sm text-slate-400">No questions found.</p> : questions.map(q => (
                   <div key={q._id} className="p-3 border border-slate-100 bg-slate-50 rounded-lg">
                     <span className="font-bold mr-2 text-slate-900">{q.title}</span>
-                    <span className="text-xs font-bold text-emerald-600">({q.points} pts)</span>
+                    <span className="text-xs font-bold text-blue-600">({q.points} pts)</span>
                   </div>
                 ))}
               </div>

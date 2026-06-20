@@ -39,7 +39,7 @@ const AdminLayout = ({ children }) => {
       <aside className="w-72 bg-slate-900 hidden lg:flex flex-col fixed inset-y-0 left-0 z-50">
         <div className="p-8 border-b border-white/5">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-emerald-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-emerald-500/20">
+            <div className="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
               <ShieldCheck size={24} />
             </div>
             <span className="text-white font-black text-xl tracking-tight">Admin Console</span>
@@ -53,7 +53,7 @@ const AdminLayout = ({ children }) => {
               to={item.path}
               className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl text-sm font-bold transition-all no-underline ${
                 location.pathname === item.path 
-                  ? "bg-emerald-600 text-white shadow-lg shadow-emerald-900/20" 
+                  ? "bg-blue-600 text-white shadow-lg shadow-blue-900/20" 
                   : "text-slate-400 hover:bg-white/5 hover:text-white"
               }`}
             >
@@ -77,7 +77,7 @@ const AdminLayout = ({ children }) => {
         {/* Mobile Header */}
         <header className="lg:hidden h-20 bg-slate-900 flex items-center justify-between px-6 sticky top-0 z-40">
            <div className="flex items-center gap-3 text-white">
-             <ShieldCheck className="text-emerald-500" size={24} />
+             <ShieldCheck className="text-blue-500" size={24} />
              <span className="font-bold uppercase tracking-widest text-xs">Admin Console</span>
            </div>
            <button onClick={() => setMobileOpen(true)} className="p-2 text-white bg-white/10 rounded-lg">
@@ -97,7 +97,7 @@ const AdminLayout = ({ children }) => {
           <aside className="absolute inset-y-0 left-0 w-80 bg-slate-900 p-6 flex flex-col animate-slide-right">
              <div className="flex items-center justify-between mb-10">
                <div className="flex items-center gap-3 text-white">
-                 <ShieldCheck className="text-emerald-500" size={32} />
+                 <ShieldCheck className="text-blue-500" size={32} />
                  <span className="font-black text-xl">Console</span>
                </div>
                <button onClick={() => setMobileOpen(false)} className="text-white p-2">
@@ -112,7 +112,7 @@ const AdminLayout = ({ children }) => {
                     onClick={() => setMobileOpen(false)}
                     className={`flex items-center gap-3 px-4 py-4 rounded-2xl text-sm font-bold no-underline ${
                       location.pathname === item.path 
-                        ? "bg-emerald-600 text-white" 
+                        ? "bg-blue-600 text-white" 
                         : "text-slate-400 hover:bg-white/5"
                     }`}
                   >

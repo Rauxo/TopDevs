@@ -43,7 +43,7 @@ const PaymentStatus = () => {
       <div className="bg-white rounded-[40px] shadow-2xl max-w-md w-full p-12 text-center border border-white">
         {status === "loading" && (
           <div className="flex flex-col items-center">
-            <Loader2 size={64} className="text-emerald-500 animate-spin mb-8" />
+            <Loader2 size={64} className="text-blue-500 animate-spin mb-8" />
             <h2 className="text-2xl font-black text-slate-900 mb-4">Verifying Payment</h2>
             <p className="text-slate-500 font-bold">{message}</p>
           </div>
@@ -51,14 +51,14 @@ const PaymentStatus = () => {
 
         {status === "success" && (
           <div className="flex flex-col items-center animate-in zoom-in-95 duration-500">
-            <div className="w-24 h-24 bg-emerald-100 rounded-[32px] flex items-center justify-center mb-8 text-emerald-600 shadow-lg shadow-emerald-500/10">
+            <div className="w-24 h-24 bg-blue-100 rounded-[32px] flex items-center justify-center mb-8 text-blue-600 shadow-lg shadow-blue-500/10">
               <CheckCircle size={48} />
             </div>
             <h2 className="text-3xl font-black text-slate-900 mb-4">Payment Success!</h2>
             <p className="text-slate-500 font-bold mb-10">{message}</p>
             <button 
               onClick={() => navigate("/messages")}
-              className="w-full py-5 bg-emerald-600 text-white font-black uppercase tracking-widest rounded-2xl hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-500/20 border-none cursor-pointer flex items-center justify-center gap-2"
+              className="w-full py-5 bg-blue-600 text-white font-black uppercase tracking-widest rounded-2xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/20 border-none cursor-pointer flex items-center justify-center gap-2"
             >
               Start Messaging <Sparkles size={18} />
             </button>

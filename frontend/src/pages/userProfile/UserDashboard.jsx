@@ -77,7 +77,7 @@ function UserDashboard() {
         <div className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-20 mb-12">
           {/* Avatar */}
           <div className="relative group">
-            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-tr from-emerald-400 via-emerald-500 to-cyan-500">
+            <div className="w-32 h-32 md:w-40 md:h-40 rounded-full p-1 bg-gradient-to-tr from-blue-400 via-blue-500 to-blue-500">
               <div className="w-full h-full rounded-full p-1 bg-white">
                 <img
                   src={`http://localhost:5000/${user.profileImg}`}
@@ -152,7 +152,7 @@ function UserDashboard() {
               onClick={() => setActiveTab("projects")}
               className={`flex items-center gap-2 py-4 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors border-t ${
                 activeTab === "projects"
-                  ? "border-emerald-600 text-emerald-600"
+                  ? "border-blue-600 text-blue-600"
                   : "border-transparent text-slate-400"
               }`}
             >
@@ -162,7 +162,7 @@ function UserDashboard() {
               onClick={() => setActiveTab("active")}
               className={`flex items-center gap-2 py-4 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors border-t ${
                 activeTab === "active"
-                  ? "border-emerald-600 text-emerald-600"
+                  ? "border-blue-600 text-blue-600"
                   : "border-transparent text-slate-400"
               }`}
             >
@@ -172,7 +172,7 @@ function UserDashboard() {
               onClick={() => setActiveTab("status")}
               className={`flex items-center gap-2 py-4 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors border-t ${
                 activeTab === "status"
-                  ? "border-emerald-600 text-emerald-600"
+                  ? "border-blue-600 text-blue-600"
                   : "border-transparent text-slate-400"
               }`}
             >
@@ -182,7 +182,7 @@ function UserDashboard() {
               onClick={() => setActiveTab("messages")}
               className={`flex items-center gap-2 py-4 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors border-t ${
                 activeTab === "messages"
-                  ? "border-emerald-600 text-emerald-600"
+                  ? "border-blue-600 text-blue-600"
                   : "border-transparent text-slate-400"
               }`}
             >
@@ -192,7 +192,7 @@ function UserDashboard() {
               onClick={() => setActiveTab("learning")}
               className={`flex items-center gap-2 py-4 text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors border-t ${
                 activeTab === "learning"
-                  ? "border-emerald-600 text-emerald-600"
+                  ? "border-blue-600 text-blue-600"
                   : "border-transparent text-slate-400"
               }`}
             >
@@ -211,7 +211,7 @@ function UserDashboard() {
                 </h3>
                 <button
                   onClick={() => setIsAddModalOpen(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors"
                 >
                   <Plus size={16} /> Add Project
                 </button>
@@ -258,7 +258,7 @@ function UserDashboard() {
                             href={proj.githubLink}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-1 text-sm font-bold text-slate-700 hover:text-emerald-600"
+                            className="flex items-center gap-1 text-sm font-bold text-slate-700 hover:text-blue-600"
                           >
                             <FolderGit2 size={16} /> GitHub
                           </a>
@@ -267,7 +267,7 @@ function UserDashboard() {
                               href={proj.liveLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-1 text-sm font-bold text-emerald-600 hover:text-emerald-700"
+                              className="flex items-center gap-1 text-sm font-bold text-blue-600 hover:text-blue-700"
                             >
                               <LinkIcon size={16} /> Live Demo
                             </a>
@@ -347,7 +347,7 @@ function UserDashboard() {
                       <span
                         className={`px-2 py-1 text-[10px] font-bold uppercase rounded ${
                           app.status === "Accepted"
-                            ? "bg-emerald-100 text-emerald-700"
+                            ? "bg-blue-100 text-blue-700"
                             : app.status === "Rejected"
                               ? "bg-red-100 text-red-700"
                               : "bg-blue-100 text-blue-700"
@@ -365,7 +365,7 @@ function UserDashboard() {
                           className="w-5 h-5 rounded object-cover border border-slate-100"
                         />
                       ) : (
-                        <div className="w-5 h-5 rounded bg-emerald-100 flex items-center justify-center text-emerald-600 font-bold text-[10px]">
+                        <div className="w-5 h-5 rounded bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-[10px]">
                           {app.job?.company?.name?.charAt(0) || "J"}
                         </div>
                       )}
@@ -395,7 +395,7 @@ function UserDashboard() {
                   {activeTab === "active" && (
                     <button
                       onClick={() => navigate("/jobs")}
-                      className="mt-4 text-emerald-600 font-bold text-sm hover:underline"
+                      className="mt-4 text-blue-600 font-bold text-sm hover:underline"
                     >
                       Find your first job
                     </button>
@@ -407,7 +407,7 @@ function UserDashboard() {
 
           {activeTab === "messages" && (
             <div className="text-center py-20 bg-slate-50 rounded-[32px] border border-dashed border-slate-200">
-              <div className="text-emerald-500/30 mb-6 flex justify-center">
+              <div className="text-blue-500/30 mb-6 flex justify-center">
                 <MessageSquare size={64} />
               </div>
               <h3 className="text-xl font-black text-slate-900 mb-2">
@@ -419,7 +419,7 @@ function UserDashboard() {
               </p>
               <Link
                 to="/messages"
-                className="inline-flex items-center gap-2 px-8 py-3 bg-emerald-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-emerald-700 transition-all shadow-xl shadow-emerald-600/20 no-underline"
+                className="inline-flex items-center gap-2 px-8 py-3 bg-blue-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-600/20 no-underline"
               >
                 Open Messages
               </Link>
@@ -439,20 +439,20 @@ function UserDashboard() {
                         <div className="w-10 h-10 rounded-xl bg-slate-50 p-2 flex items-center justify-center">
                           <GraduationCap
                             size={20}
-                            className="text-emerald-500"
+                            className="text-blue-500"
                           />
                         </div>
                         <h3 className="font-bold text-slate-900">
                           {sl.language?.name || "Language Progress"}
                         </h3>
                       </div>
-                      <span className="text-emerald-600 font-black text-sm">
+                      <span className="text-blue-600 font-black text-sm">
                         {sl.progress}%
                       </span>
                     </div>
                     <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
                       <div
-                        className="bg-emerald-500 h-full rounded-full"
+                        className="bg-blue-500 h-full rounded-full"
                         style={{ width: `${sl.progress}%` }}
                       ></div>
                     </div>
@@ -462,7 +462,7 @@ function UserDashboard() {
                           Started: {new Date(sl.startDate).toLocaleDateString()}
                         </span>
                         {sl.completionDate ? (
-                          <span className="text-emerald-500">
+                          <span className="text-blue-500">
                             Completed in{" "}
                             {Math.ceil(
                               (new Date(sl.completionDate) -
@@ -474,7 +474,7 @@ function UserDashboard() {
                         ) : (
                           <Link
                             to="/learn"
-                            className="text-emerald-600 no-underline hover:underline"
+                            className="text-blue-600 no-underline hover:underline"
                           >
                             Continue
                           </Link>
@@ -492,7 +492,7 @@ function UserDashboard() {
                   <p className="text-slate-400">No languages selected yet.</p>
                   <Link
                     to="/learn"
-                    className="mt-4 inline-block text-emerald-600 font-bold hover:underline"
+                    className="mt-4 inline-block text-blue-600 font-bold hover:underline"
                   >
                     Start Learning
                   </Link>

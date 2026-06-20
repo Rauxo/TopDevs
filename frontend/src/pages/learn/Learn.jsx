@@ -48,7 +48,7 @@ const Learn = () => {
     <div className="min-h-screen bg-slate-50 py-12 px-6">
       <div className="max-w-6xl mx-auto">
         {/* <div className="flex items-center gap-4 mb-12">
-          <div className="p-3 bg-emerald-500 text-white rounded-2xl shadow-lg shadow-emerald-200">
+          <div className="p-3 bg-blue-500 text-white rounded-2xl shadow-lg shadow-blue-200">
             <GraduationCap size={32} />
           </div>
           <div>
@@ -61,7 +61,7 @@ const Learn = () => {
         {user?.selectedLanguages?.length > 0 && (
           <div className="mb-16">
             <h2 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-              <BookOpen size={20} className="text-emerald-500" /> Your Learning Progress
+              <BookOpen size={20} className="text-blue-500" /> Your Learning Progress
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {languages.filter(l => isSelected(l._id)).map((lang) => {
@@ -75,14 +75,14 @@ const Learn = () => {
                         </div>
                         <h3 className="font-bold text-slate-900 text-lg">{lang.name}</h3>
                       </div>
-                      <span className="text-emerald-600 font-bold bg-emerald-50 px-3 py-1 rounded-full text-xs">
+                      <span className="text-blue-600 font-bold bg-blue-50 px-3 py-1 rounded-full text-xs">
                         {progress}%
                       </span>
                     </div>
                     
                     <div className="w-full bg-slate-100 h-2 rounded-full mb-6 overflow-hidden">
                       <div 
-                        className="bg-emerald-500 h-full rounded-full transition-all duration-1000" 
+                        className="bg-blue-500 h-full rounded-full transition-all duration-1000" 
                         style={{ width: `${progress}%` }}
                       ></div>
                     </div>
@@ -113,7 +113,7 @@ const Learn = () => {
                 <p className="text-xs text-slate-500 mb-6 line-clamp-2">{lang.description}</p>
                 <button 
                   onClick={() => handleSelectLanguage(lang._id)}
-                  className="w-full py-2 bg-emerald-50 text-emerald-600 rounded-lg font-bold hover:bg-emerald-100 transition-colors"
+                  className="w-full py-2 bg-blue-50 text-blue-600 rounded-lg font-bold hover:bg-blue-100 transition-colors"
                 >
                   Start Learning
                 </button>

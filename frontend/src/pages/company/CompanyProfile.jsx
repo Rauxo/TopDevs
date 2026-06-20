@@ -47,7 +47,7 @@ const CompanyProfile = () => {
 
   if (loading) return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
     </div>
   );
 
@@ -58,7 +58,7 @@ const CompanyProfile = () => {
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Header Cover */}
-      <div className="h-48 md:h-64 bg-gradient-to-r from-emerald-600 to-sky-600"></div>
+      <div className="h-48 md:h-64 bg-gradient-to-r from-blue-600 to-blue-600"></div>
 
       <div className="max-w-6xl mx-auto px-6">
         <div className="relative -mt-24 mb-12">
@@ -73,14 +73,14 @@ const CompanyProfile = () => {
             <div className="flex-1 text-center md:text-left pb-2">
               <h1 className="text-4xl font-black text-slate-900 mb-2">{company.name}</h1>
               <div className="flex flex-wrap justify-center md:justify-start gap-6 text-slate-500 font-medium mt-2">
-                <span className="flex items-center gap-1.5"><MapPin size={16} className="text-emerald-500" /> {company.address}</span>
-                <span className="flex items-center gap-1.5"><Mail size={16} className="text-emerald-500" /> {company.email}</span>
-                <span className="flex items-center gap-1.5"><Phone size={16} className="text-emerald-500" /> {company.phone}</span>
+                <span className="flex items-center gap-1.5"><MapPin size={16} className="text-blue-500" /> {company.address}</span>
+                <span className="flex items-center gap-1.5"><Mail size={16} className="text-blue-500" /> {company.email}</span>
+                <span className="flex items-center gap-1.5"><Phone size={16} className="text-blue-500" /> {company.phone}</span>
               </div>
             </div>
             <div className="pb-2">
                {company.isVerified ? (
-                 <span className="px-4 py-2 bg-emerald-100 text-emerald-700 font-bold rounded-full text-sm flex items-center gap-2">
+                 <span className="px-4 py-2 bg-blue-100 text-blue-700 font-bold rounded-full text-sm flex items-center gap-2">
                    <CheckCircle2 size={16} /> Verified Company
                  </span>
                ) : (
@@ -125,15 +125,15 @@ const CompanyProfile = () => {
                       key={job._id}
                       onClick={() => company.isVerified && navigate(`/jobs/${job._id}`)}
                       className={`p-6 bg-white rounded-3xl border border-slate-100 shadow-sm transition-all flex items-center justify-between group ${
-                        company.isVerified ? "hover:shadow-md hover:border-emerald-200 cursor-pointer" : "opacity-60 cursor-not-allowed"
+                        company.isVerified ? "hover:shadow-md hover:border-blue-200 cursor-pointer" : "opacity-60 cursor-not-allowed"
                       }`}
                     >
                       <div>
-                        <h3 className={`font-bold text-slate-800 transition-colors ${company.isVerified ? "group-hover:text-emerald-600" : ""}`}>{job.jobTitle}</h3>
+                        <h3 className={`font-bold text-slate-800 transition-colors ${company.isVerified ? "group-hover:text-blue-600" : ""}`}>{job.jobTitle}</h3>
                         <p className="text-sm text-slate-500 mt-1">{job.location} • {job.jobType || "Full-time"}</p>
                       </div>
                       {company.isVerified ? (
-                        <span className="text-emerald-600 font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        <span className="text-blue-600 font-bold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                           View <ArrowRight size={16} />
                         </span>
                       ) : (

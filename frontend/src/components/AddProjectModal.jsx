@@ -87,7 +87,7 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
               placeholder="E.g., E-commerce Platform"
             />
           </div>
@@ -99,7 +99,7 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows="4"
-              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
+              className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
               placeholder="Describe your project, technologies used, and your role..."
             />
           </div>
@@ -176,14 +176,14 @@ const AddProjectModal = ({ isOpen, onClose, onProjectAdded }) => {
             <button
               type="button"
               onClick={onClose}
-              className="px-6 py-2.5 rounded-xl font-bold text-slate-600 hover:bg-slate-100 transition-colors"
+              className="px-6 py-2.5 rounded font-bold text-slate-600 hover:bg-slate-100 transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="px-6 py-2.5 rounded-xl font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors disabled:opacity-50 flex items-center gap-2"
+              className="px-6 py-2.5 rounded font-bold text-white bg-blue-600 hover:bg-blue-700 transition-colors disabled:opacity-50 flex items-center gap-2"
             >
               {loading ? "Saving..." : <><Plus size={18} /> Add Project</>}
             </button>

@@ -100,13 +100,13 @@ function UserDashboard() {
               <div className="flex gap-2 justify-center">
                 <Link
                   to="/edit-profile"
-                  className="px-4 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-sm rounded-lg transition-colors no-underline"
+                  className="px-4 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-sm rounded transition-colors no-underline"
                 >
                   Edit Profile
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="px-4 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 font-bold text-sm rounded-lg transition-colors"
+                  className="px-4 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 font-bold text-sm rounded transition-colors"
                 >
                   Logout
                 </button>
@@ -211,7 +211,7 @@ function UserDashboard() {
                 </h3>
                 <button
                   onClick={() => setIsAddModalOpen(true)}
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white font-bold rounded hover:bg-blue-700 transition-colors"
                 >
                   <Plus size={16} /> Add Project
                 </button>
@@ -241,7 +241,7 @@ function UserDashboard() {
                           className="w-full h-full object-cover transition-transform group-hover:scale-105"
                         />
                         {proj.images.length > 1 && (
-                          <div className="absolute bottom-2 right-2 px-2 py-1 bg-black/60 backdrop-blur-sm text-white text-xs font-bold rounded-lg flex items-center gap-1">
+                          <div className="absolute bottom-2 right-2 px-2 py-1 bg-black/60 backdrop-blur-sm text-white text-xs font-bold rounded flex items-center gap-1">
                             +{proj.images.length - 1} more
                           </div>
                         )}
@@ -419,7 +419,7 @@ function UserDashboard() {
               </p>
               <Link
                 to="/messages"
-                className="inline-flex items-center gap-2 px-8 py-3 bg-blue-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-600/20 no-underline"
+                className="inline-flex items-center gap-2 px-8 py-3 bg-blue-600 text-white font-black uppercase tracking-widest text-xs rounded hover:bg-blue-700 transition-all shadow-blue-600/20 no-underline"
               >
                 Open Messages
               </Link>

@@ -75,7 +75,7 @@ const Learn = () => {
                         </div>
                         <h3 className="font-bold text-slate-900 text-lg">{lang.name}</h3>
                       </div>
-                      <span className="text-blue-600 font-bold bg-blue-50 px-3 py-1 rounded-full text-xs">
+                      <span className="text-blue-600 font-bold bg-blue-50 px-3 py-1 rounded text-xs">
                         {progress}%
                       </span>
                     </div>

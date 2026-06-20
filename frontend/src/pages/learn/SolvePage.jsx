@@ -123,14 +123,14 @@ const SolvePage = () => {
         </div>
 
         <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2 text-blue-400 font-mono bg-blue-400/10 px-4 py-1.5 rounded-full border border-blue-400/20">
+          <div className="flex items-center gap-2 text-blue-400 font-mono bg-blue-400/10 px-4 py-1.5 rounded border border-blue-400/20">
             <Timer size={18} />
             <span>{formatTime(timer)}</span>
           </div>
           <button 
             onClick={handleSubmit}
             disabled={submitting}
-            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-700 text-white font-bold rounded-xl transition-all flex items-center gap-2"
+            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-700 text-white font-bold rounded transition-all flex items-center gap-2"
           >
             {submitting ? "Submitting..." : <><Send size={18} /> Submit Solution</>}
           </button>
@@ -142,7 +142,7 @@ const SolvePage = () => {
         {/* Left Panel: Question */}
         <div className="w-1/3 border-r border-slate-800 flex flex-col bg-slate-900 overflow-y-auto p-8">
           <div className="mb-6">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 bg-slate-800 px-3 py-1 rounded-full">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 bg-slate-800 px-3 py-1 rounded">
               Problem {currentQuestionIndex + 1}
             </span>
           </div>
@@ -209,7 +209,7 @@ const SolvePage = () => {
             <button 
               onClick={handleRunCode}
               disabled={running || submitting}
-              className="px-6 py-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed text-slate-300 font-bold rounded-xl transition-all flex items-center gap-2"
+              className="px-6 py-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed text-slate-300 font-bold rounded transition-all flex items-center gap-2"
             >
               <Play size={18} fill="currentColor" /> {running ? "Running..." : "Run Code"}
             </button>

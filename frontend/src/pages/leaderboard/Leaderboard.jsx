@@ -75,7 +75,7 @@ const Leaderboard = () => {
           <select 
             value={selectedLanguage}
             onChange={(e) => setSelectedLanguage(e.target.value)}
-            className="bg-white border border-slate-200 text-slate-700 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[200px]"
+            className="bg-white border border-slate-200 text-slate-700 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[200px]"
           >
             <option value="">TopLevels</option>
             <optgroup label="Top in Language">
@@ -111,7 +111,7 @@ const Leaderboard = () => {
                       <span className="font-semibold">Level {players[1].profileLevel || 1}</span>
                     </div>
                     {selectedLanguage && (
-                      <div className="mt-2 text-sm text-blue-700 font-bold bg-blue-50 inline-block px-3 py-1 rounded-full border border-blue-100">
+                      <div className="mt-2 text-sm text-blue-700 font-bold bg-blue-50 inline-block px-3 py-1 rounded border border-blue-100">
                         {players[1].progress || 0}% Complete
                       </div>
                     )}
@@ -141,7 +141,7 @@ const Leaderboard = () => {
                       <span className="font-bold text-lg">Level {players[0].profileLevel || 1}</span>
                     </div>
                     {selectedLanguage && (
-                      <div className="mt-2 text-sm text-blue-700 font-bold bg-blue-50 inline-block px-3 py-1 rounded-full border border-blue-100">
+                      <div className="mt-2 text-sm text-blue-700 font-bold bg-blue-50 inline-block px-3 py-1 rounded border border-blue-100">
                         {players[0].progress || 0}% Complete
                       </div>
                     )}
@@ -170,7 +170,7 @@ const Leaderboard = () => {
                       <span className="font-semibold">Level {players[2].profileLevel || 1}</span>
                     </div>
                     {selectedLanguage && (
-                      <div className="mt-2 text-sm text-blue-700 font-bold bg-blue-50 inline-block px-3 py-1 rounded-full border border-blue-100">
+                      <div className="mt-2 text-sm text-blue-700 font-bold bg-blue-50 inline-block px-3 py-1 rounded border border-blue-100">
                         {players[2].progress || 0}% Complete
                       </div>
                     )}
@@ -214,11 +214,11 @@ const Leaderboard = () => {
                           <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">Rank Info</span>
                           <div className="flex items-center gap-2">
                             {selectedLanguage && (
-                              <div className="text-xs text-blue-700 font-bold bg-blue-50 px-2 py-0.5 rounded-full border border-blue-100">
+                              <div className="text-xs text-blue-700 font-bold bg-blue-50 px-2 py-0.5 rounded border border-blue-100">
                                 {p.progress || 0}%
                               </div>
                             )}
-                            <div className="flex items-center gap-1.5 text-blue-700 bg-blue-50 border border-blue-100 px-3 py-1 rounded-full">
+                            <div className="flex items-center gap-1.5 text-blue-700 bg-blue-50 border border-blue-100 px-3 py-1 rounded">
                               <Star size={14} className="fill-blue-500 text-blue-500" />
                               <span className="font-bold text-sm">Lvl {p.profileLevel || 1}</span>
                             </div>

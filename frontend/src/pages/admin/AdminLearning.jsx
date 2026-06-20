@@ -179,7 +179,7 @@ const AdminLearning = () => {
                   <label className="block text-xs font-bold text-slate-500 mb-1">Icon URL</label>
                   <input type="text" value={langForm.icon} onChange={e => setLangForm({...langForm, icon: e.target.value})} className="w-full p-2 border border-slate-200 rounded-lg" placeholder="https://..." required />
                 </div>
-                <button type="submit" className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700">Add Language</button>
+                <button type="submit" className="px-4 py-2 bg-blue-600 text-white font-bold rounded hover:bg-blue-700">Add Language</button>
               </form>
             </div>
             <div>
@@ -233,7 +233,7 @@ const AdminLearning = () => {
                   <label className="block text-xs font-bold text-slate-500 mb-1">Image URL (Optional)</label>
                   <input type="text" value={levelForm.image} onChange={e => setLevelForm({...levelForm, image: e.target.value})} className="w-full p-2 border border-slate-200 rounded-lg" placeholder="https://..." />
                 </div>
-                <button type="submit" className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700">Add Level</button>
+                <button type="submit" className="px-4 py-2 bg-blue-600 text-white font-bold rounded hover:bg-blue-700">Add Level</button>
               </form>
             </div>
             <div>
@@ -299,7 +299,7 @@ const AdminLearning = () => {
                   <label className="block text-xs font-bold text-slate-500 mb-1">Points</label>
                   <input type="number" value={questionForm.points} onChange={e => setQuestionForm({...questionForm, points: e.target.value})} className="w-full p-2 border border-slate-200 rounded-lg" required />
                 </div>
-                <button type="submit" className="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700">Add Question</button>
+                <button type="submit" className="px-4 py-2 bg-blue-600 text-white font-bold rounded hover:bg-blue-700">Add Question</button>
               </form>
             </div>
             <div>
@@ -359,7 +359,7 @@ const AdminLearning = () => {
               ))}
               
               <div className="pt-4">
-                <button type="submit" className="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800">
+                <button type="submit" className="flex items-center gap-2 px-6 py-3 bg-slate-900 text-white font-bold rounded hover:bg-slate-800">
                   <Save size={18} /> Save Configurations
                 </button>
               </div>

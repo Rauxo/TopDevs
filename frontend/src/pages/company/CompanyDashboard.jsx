@@ -100,7 +100,7 @@ function CompanyDashboard() {
             </button>
             <button
               onClick={(e) => checkVerification(e, "/company/create-job")}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-50 border-none bg-transparent transition-all cursor-pointer"
+              className="w-full flex items-center gap-3 px-4 py-3 rounded text-sm font-bold text-slate-600 hover:bg-slate-50 border-none bg-transparent transition-all cursor-pointer"
             >
               <PlusCircle size={18} /> Post New Job
             </button>
@@ -108,7 +108,7 @@ function CompanyDashboard() {
         </div>
 
         <div className="mt-auto p-6 border-t border-slate-100">
-          <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 text-red-500 font-bold text-sm hover:bg-red-50 rounded-xl transition-all">
+          <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 text-red-500 font-bold text-sm hover:bg-red-50 rounded transition-all">
             <LogOut size={18} /> Logout
           </button>
         </div>
@@ -126,7 +126,7 @@ function CompanyDashboard() {
           <div className="flex gap-3">
             <button 
               onClick={(e) => checkVerification(e, "/company/create-job")} 
-              className="px-6 py-2.5 bg-blue-600 text-white font-bold rounded-xl shadow-lg shadow-blue-100 hover:-translate-y-0.5 transition-all border-none cursor-pointer"
+              className="px-6 py-2.5 bg-blue-600 text-white font-bold rounded shadow-blue-100 hover:-translate-y-0.5 transition-all border-none cursor-pointer"
             >
               Post a Job
             </button>
@@ -231,7 +231,7 @@ function CompanyDashboard() {
           <div className="bg-white p-8 rounded-[32px] shadow-sm border border-slate-100">
             <div className="flex items-center justify-between mb-8">
               <h3 className="text-xl font-bold text-slate-900">Manage Your Job Postings</h3>
-              <span className="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded-full">{jobs.length} Total</span>
+              <span className="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded">{jobs.length} Total</span>
             </div>
             
             <div className="overflow-x-auto">
@@ -296,7 +296,7 @@ function CompanyDashboard() {
              <p className="text-slate-500 mb-10 max-w-sm mx-auto font-medium">Manage your candidate requests and active conversations in the professional messaging terminal.</p>
              <Link 
               to="/messages"
-              className="inline-flex items-center gap-2 px-10 py-4 bg-blue-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-600/20 no-underline"
+              className="inline-flex items-center gap-2 px-10 py-4 bg-blue-600 text-white font-black uppercase tracking-widest text-xs rounded hover:bg-blue-700 transition-all shadow-blue-600/20 no-underline"
              >
                Go to Messages
              </Link>

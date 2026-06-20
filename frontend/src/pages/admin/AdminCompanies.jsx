@@ -85,11 +85,11 @@ const AdminCompanies = () => {
                         </td>
                         <td className="px-8 py-5">
                            {comp.isVerified ? (
-                             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-100 text-blue-700 text-[10px] font-black uppercase tracking-widest rounded-full">
+                             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-100 text-blue-700 text-[10px] font-black uppercase tracking-widest rounded">
                                <ShieldCheck size={12} /> Verified
                              </span>
                            ) : (
-                             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100 text-amber-700 text-[10px] font-black uppercase tracking-widest rounded-full">
+                             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100 text-amber-700 text-[10px] font-black uppercase tracking-widest rounded">
                                <Clock size={12} /> Pending
                              </span>
                            )}

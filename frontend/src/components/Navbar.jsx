@@ -143,7 +143,7 @@ function Navbar() {
           {isAuthenticated && role === "learner" && (
             <li className="relative" ref={langRef}>
               <button
-                className="inline-flex items-center gap-1 px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-800 hover:bg-black/8 transition-all cursor-pointer border-none bg-transparent font-[inherit]"
+                className="inline-flex items-center gap-1 px-3.5 py-2 rounded text-sm font-semibold text-slate-800 hover:bg-black/8 transition-all cursor-pointer border-none bg-transparent font-[inherit]"
                 onClick={() => setShowLangDropdown((v) => !v)}
               >
                 Languages{" "}
@@ -188,7 +188,7 @@ function Navbar() {
               </li>
               <li>
                 <button
-                  className="px-4 py-2 rounded-xl text-sm font-semibold text-red-500 bg-red-50 hover:bg-red-100 border-none cursor-pointer font-[inherit] transition-colors"
+                  className="px-4 py-2 rounded text-sm font-semibold text-red-500 bg-red-50 hover:bg-red-100 border-none cursor-pointer font-[inherit] transition-colors"
                   onClick={handleLogout}
                 >
                   Logout
@@ -200,7 +200,7 @@ function Navbar() {
               <li>
                 <Link
                   to="/login"
-                  className="inline-block px-[18px] py-2 rounded-xl text-sm font-semibold text-slate-800 border-2 border-black/15 hover:bg-black/7 transition-all no-underline"
+                  className="inline-block px-[18px] py-2 rounded text-sm font-semibold text-slate-800 border-2 border-black/15 hover:bg-black/7 transition-all no-underline"
                 >
                   Login
                 </Link>
@@ -208,7 +208,7 @@ function Navbar() {
               <li>
                 <Link
                   to="/create"
-                  className="inline-block px-[18px] py-2 rounded-xl text-sm font-bold text-white bg-[#2376ca] hover:bg-[#1d68b8] hover:-translate-y-px transition-all no-underline"
+                  className="inline-block px-[18px] py-2 rounded text-sm font-bold text-white bg-[#2376ca] hover:bg-[#1d68b8] hover:-translate-y-px transition-all no-underline"
                 >
                   Register
                 </Link>
@@ -268,37 +268,37 @@ function Navbar() {
 
           <Link
             to="/"
-            className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+            className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded hover:bg-slate-100 transition-colors mb-0.5 no-underline"
           >
             <Home size={18} /> Home
           </Link>
           <Link
             to="/jobs"
-            className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+            className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded hover:bg-slate-100 transition-colors mb-0.5 no-underline"
           >
             <Briefcase size={18} /> Jobs
           </Link>
           <Link
             to="/companies"
-            className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+            className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded hover:bg-slate-100 transition-colors mb-0.5 no-underline"
           >
             <Building2 size={18} /> Companies
           </Link>
           <Link
             to="/learn"
-            className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+            className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded hover:bg-slate-100 transition-colors mb-0.5 no-underline"
           >
             <GraduationCap size={18} /> Learn
           </Link>
           <Link
             to="/leaderboard"
-            className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+            className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded hover:bg-slate-100 transition-colors mb-0.5 no-underline"
           >
             <Trophy size={18} /> Leaderboard
           </Link>
           <Link
             to="/messages"
-            className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+            className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded hover:bg-slate-100 transition-colors mb-0.5 no-underline"
           >
             <MessageSquare size={18} /> Messages
           </Link>
@@ -306,7 +306,7 @@ function Navbar() {
           {isAuthenticated && role === "learner" && (
             <Link
               to="/learning"
-              className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+              className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded hover:bg-slate-100 transition-colors mb-0.5 no-underline"
             >
               <Terminal size={18} /> Sandbox
             </Link>
@@ -316,12 +316,12 @@ function Navbar() {
             <>
               <Link
                 to={dashboardLink}
-                className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+                className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded hover:bg-slate-100 transition-colors mb-0.5 no-underline"
               >
                 <Terminal size={18} /> {role === "admin" ? "Admin Panel" : "Dashboard"}
               </Link>
               <button
-                className="flex items-center gap-3 w-full text-left px-4 py-3 text-red-500 font-semibold text-[0.95rem] rounded-xl hover:bg-red-50 transition-colors cursor-pointer border-none bg-none font-[inherit] mb-0.5"
+                className="flex items-center gap-3 w-full text-left px-4 py-3 text-red-500 font-semibold text-[0.95rem] rounded hover:bg-red-50 transition-colors cursor-pointer border-none bg-none font-[inherit] mb-0.5"
                 onClick={handleLogout}
               >
                 <LogOut size={18} /> Logout
@@ -331,13 +331,13 @@ function Navbar() {
             <>
               <Link
                 to="/login"
-                className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+                className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded hover:bg-slate-100 transition-colors mb-0.5 no-underline"
               >
                 <Key size={18} /> Login
               </Link>
               <Link
                 to="/create"
-                className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded-xl hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+                className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded hover:bg-slate-100 transition-colors mb-0.5 no-underline"
               >
                 <Sparkles size={18} /> Register
               </Link>

@@ -62,7 +62,7 @@ const AdminPlans = () => {
           </div>
           <button 
             onClick={() => setShowAddModal(true)}
-            className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/20 border-none cursor-pointer"
+            className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-black uppercase tracking-widest text-xs rounded hover:bg-blue-700 transition-all shadow-blue-500/20 border-none cursor-pointer"
           >
             <Plus size={18} /> Add New Plan
           </button>
@@ -133,7 +133,7 @@ const AdminPlans = () => {
                   <select 
                     value={newPlan.name}
                     onChange={(e) => setNewPlan({ ...newPlan, name: e.target.value })}
-                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:bg-white focus:border-blue-500 transition-all font-bold text-slate-700"
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded outline-none focus:bg-white focus:border-blue-500 transition-all font-bold text-slate-700"
                   >
                     <option value="Basic">Basic</option>
                     <option value="Standard">Standard</option>
@@ -145,7 +145,7 @@ const AdminPlans = () => {
                   <select 
                     value={newPlan.type}
                     onChange={(e) => setNewPlan({ ...newPlan, type: e.target.value })}
-                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:bg-white focus:border-blue-500 transition-all font-bold text-slate-700"
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded outline-none focus:bg-white focus:border-blue-500 transition-all font-bold text-slate-700"
                   >
                     <option value="User">User</option>
                     <option value="Company">Company</option>
@@ -160,7 +160,7 @@ const AdminPlans = () => {
                       value={newPlan.price}
                       onChange={(e) => setNewPlan({ ...newPlan, price: e.target.value })}
                       placeholder="e.g. 499"
-                      className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:bg-white focus:border-blue-500 transition-all font-bold text-slate-700"
+                      className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded outline-none focus:bg-white focus:border-blue-500 transition-all font-bold text-slate-700"
                     />
                   </div>
                   <div>
@@ -171,7 +171,7 @@ const AdminPlans = () => {
                       value={newPlan.messageLimit}
                       onChange={(e) => setNewPlan({ ...newPlan, messageLimit: e.target.value })}
                       placeholder="e.g. 50"
-                      className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:bg-white focus:border-blue-500 transition-all font-bold text-slate-700"
+                      className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded outline-none focus:bg-white focus:border-blue-500 transition-all font-bold text-slate-700"
                     />
                   </div>
                 </div>
@@ -183,7 +183,7 @@ const AdminPlans = () => {
                     value={newPlan.durationInDays}
                     onChange={(e) => setNewPlan({ ...newPlan, durationInDays: e.target.value })}
                     placeholder="e.g. 30"
-                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:bg-white focus:border-blue-500 transition-all font-bold text-slate-700"
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded outline-none focus:bg-white focus:border-blue-500 transition-all font-bold text-slate-700"
                   />
                 </div>
                 <div className="flex gap-4 pt-4">

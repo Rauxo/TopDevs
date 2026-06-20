@@ -70,7 +70,7 @@ const Companies = () => {
                     </div>
                   )}
                   {company.isVerified && (
-                    <span className="px-3 py-1 bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-widest rounded-full">Verified</span>
+                    <span className="px-3 py-1 bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-widest rounded">Verified</span>
                   )}
                 </div>
 

@@ -65,7 +65,7 @@ const AdminLayout = ({ children }) => {
         <div className="p-6 border-t border-white/5">
           <button 
             onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-4 py-3.5 text-red-400 font-bold text-sm hover:bg-red-500/10 rounded-2xl transition-all border-none bg-transparent cursor-pointer"
+            className="w-full flex items-center gap-3 px-4 py-3.5 text-red-400 font-bold text-sm hover:bg-red-500/10 rounded transition-all border-none bg-transparent cursor-pointer"
           >
             <LogOut size={20} /> Terminate Session
           </button>
@@ -120,7 +120,7 @@ const AdminLayout = ({ children }) => {
                   </Link>
                 ))}
              </nav>
-             <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-4 text-red-400 font-bold text-sm bg-red-500/10 rounded-2xl border-none cursor-pointer">
+             <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-4 text-red-400 font-bold text-sm bg-red-500/10 rounded border-none cursor-pointer">
                <LogOut size={20} /> Logout
              </button>
           </aside>

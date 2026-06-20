@@ -2,70 +2,74 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { Rocket, Target, ArrowRight } from "lucide-react";
+import Features from "../../components/HomeScreen Components/Features";
 import OurGoal from "../../components/HomeScreen Components/OurGoal";
 import WhoWeAre from "../../components/HomeScreen Components/WhoWeAre";
-import VideoShowcase from "../../components/VideoShowcase"
+import CommunitySupport from "../../components/HomeScreen Components/CommunitySupport";
+import CallToAction from "../../components/HomeScreen Components/CallToAction";
+import VideoShowcase from "../../components/VideoShowcase";
+
 function HomeScreen() {
   const navigate = useNavigate();
 
   return (
     <>
       {/* ── Hero Section ── */}
-      <section className="relative min-h-screen w-full flex items-center overflow-hidden bg-gradient-to-br from-blue-50 via-blue-50 to-blue-100">
-        {/* Decorative background blobs */}
-        <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-blue-200/40 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-24 right-0 w-[400px] h-[400px] bg-blue-200/40 rounded-full blur-3xl pointer-events-none" />
+      <section className="relative min-h-[90vh] w-full flex items-center bg-white border-b border-slate-200">
+        <div className="max-w-[1400px] mx-auto w-full flex flex-col md:flex-row items-center justify-between px-6 md:px-12">
+          {/* Hero Text */}
+          <div className="w-full md:w-[50%] z-10 pt-20 md:pt-0">
+            <h1 className="text-4xl md:text-6xl font-black leading-tight text-slate-900 mb-6 tracking-tight">
+              Welcome to <span className="text-blue-600">TopDevs</span>{" "}
+              Community
+            </h1>
 
-        {/* Hero Text */}
-        <div className="relative z-10 w-full md:w-[55%] px-6 md:pl-24">
-          <span className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-blue-600 bg-blue-100 px-3 py-1 rounded-full mb-4">
-            <Rocket size={14} /> Developer Platform
-          </span>
-          <h1 className="text-4xl md:text-[52px] font-extrabold leading-[1.1] text-slate-800">
-            Welcome to{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-500">
-              TopDevs
-            </span>{" "}
-            Community
-          </h1>
-          <p className="text-xl md:text-2xl font-medium mt-4 text-slate-600 flex items-center gap-2">
-            Learn, Practice &amp; Get Hired <Target size={24} className="text-blue-500" />
-          </p>
-          <p className="mt-4 text-slate-500 text-base max-w-md leading-relaxed">
-            A platform that bridges the gap between learning to code and landing
-            your dream job. Build skills, earn ranks, and connect with top
-            companies.
-          </p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <button
-              onClick={() => navigate("/create")}
-              className="h-13 px-8 rounded-xl font-bold text-base text-white bg-gradient-to-r from-blue-500 to-blue-500 shadow-[0_4px_20px_rgba(59,130,246,0.35)] hover:shadow-[0_8px_28px_rgba(59,130,246,0.5)] hover:-translate-y-0.5 transition-all duration-200 cursor-pointer border-none flex items-center gap-2"
-            >
-              Get Started <ArrowRight size={20} />
-            </button>
-            <button
-              onClick={() => navigate("/login")}
-              className="h-13 px-8 rounded-xl font-bold text-base text-slate-700 bg-white border-2 border-slate-200 hover:border-blue-400 hover:text-blue-600 transition-all duration-200 cursor-pointer"
-            >
-              Login
-            </button>
+            <p className="text-xl font-bold text-slate-700 flex items-center gap-2 mb-4">
+              Learn, Practice &amp; Get Hired{" "}
+              <Target size={20} className="text-blue-600" />
+            </p>
+
+            <p className="text-slate-600 text-lg leading-relaxed max-w-lg mb-10">
+              A platform that bridges the gap between learning to code and
+              landing your dream job. Build skills, earn ranks, and connect with
+              top companies.
+            </p>
+
+            <div className="flex flex-wrap gap-4">
+              <button
+                onClick={() => navigate("/create")}
+                className="px-8 py-4 font-bold text-base text-white bg-blue-600 rounded hover:bg-blue-700 transition-colors cursor-pointer border-none flex items-center gap-2"
+              >
+                Get Started <ArrowRight size={20} />
+              </button>
+              <button
+                onClick={() => navigate("/login")}
+                className="px-8 py-4 font-bold text-base text-slate-900 bg-white border-2 border-slate-900 rounded hover:bg-slate-50 transition-colors cursor-pointer"
+              >
+                Login
+              </button>
+            </div>
+          </div>
+
+          {/* Hero Animation */}
+          <div className="hidden md:flex w-[50%] justify-end pointer-events-none">
+            <DotLottieReact
+              src="/PC Coding and Dislay app Mobile.json"
+              autoplay
+              loop
+              className="w-[680px] h-[540px]"
+            />
           </div>
         </div>
-
-        {/* Hero Animation — hidden on small screens */}
-        <div className="hidden md:flex absolute right-0 top-0 h-full w-[50%] items-center justify-center pointer-events-none">
-          <DotLottieReact
-            src="/PC Coding and Dislay app Mobile.json"
-            autoplay
-            loop
-            className="w-[680px] h-[540px]"
-          />
-        </div>
       </section>
-      <VideoShowcase/>
+
       {/* ── Content Sections ── */}
+      <Features />
+      <VideoShowcase />
       <OurGoal />
       <WhoWeAre />
+      <CommunitySupport />
+      <CallToAction />
     </>
   );
 }

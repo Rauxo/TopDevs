@@ -68,7 +68,7 @@ const ContactUs = () => {
                       type="text" 
                       required
                       placeholder="John Doe"
-                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:border-blue-500 focus:bg-white transition-all font-bold text-slate-800"
+                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded outline-none focus:border-blue-500 focus:bg-white transition-all font-bold text-slate-800"
                     />
                   </div>
                   <div className="space-y-2">
@@ -77,7 +77,7 @@ const ContactUs = () => {
                       type="email" 
                       required
                       placeholder="john@example.com"
-                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:border-blue-500 focus:bg-white transition-all font-bold text-slate-800"
+                      className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded outline-none focus:border-blue-500 focus:bg-white transition-all font-bold text-slate-800"
                     />
                   </div>
                 </div>
@@ -87,7 +87,7 @@ const ContactUs = () => {
                     type="text" 
                     required
                     placeholder="Inquiry about jobs"
-                    className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:border-blue-500 focus:bg-white transition-all font-bold text-slate-800"
+                    className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded outline-none focus:border-blue-500 focus:bg-white transition-all font-bold text-slate-800"
                   />
                 </div>
                 <div className="space-y-2">
@@ -96,7 +96,7 @@ const ContactUs = () => {
                     rows="5"
                     required
                     placeholder="Tell us more..."
-                    className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl outline-none focus:border-blue-500 focus:bg-white transition-all font-bold text-slate-800 resize-none"
+                    className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded outline-none focus:border-blue-500 focus:bg-white transition-all font-bold text-slate-800 resize-none"
                   ></textarea>
                 </div>
                 

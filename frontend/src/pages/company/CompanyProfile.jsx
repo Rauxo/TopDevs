@@ -80,11 +80,11 @@ const CompanyProfile = () => {
             </div>
             <div className="pb-2">
                {company.isVerified ? (
-                 <span className="px-4 py-2 bg-blue-100 text-blue-700 font-bold rounded-full text-sm flex items-center gap-2">
+                 <span className="px-4 py-2 bg-blue-100 text-blue-700 font-bold rounded text-sm flex items-center gap-2">
                    <CheckCircle2 size={16} /> Verified Company
                  </span>
                ) : (
-                 <span className="px-4 py-2 bg-amber-100 text-amber-700 font-bold rounded-full text-sm flex items-center gap-2">
+                 <span className="px-4 py-2 bg-amber-100 text-amber-700 font-bold rounded text-sm flex items-center gap-2">
                    <AlertTriangle size={16} /> Company Not Verified
                  </span>
                )}
@@ -93,7 +93,7 @@ const CompanyProfile = () => {
               <div className="pb-2">
                 <button 
                   onClick={handleMessage}
-                  className="px-6 py-2.5 bg-slate-900 text-white font-bold rounded-2xl hover:bg-slate-800 transition-all flex items-center gap-2 border-none cursor-pointer"
+                  className="px-6 py-2.5 bg-slate-900 text-white font-bold rounded hover:bg-slate-800 transition-all flex items-center gap-2 border-none cursor-pointer"
                 >
                   <MessageSquare size={18} /> Message
                 </button>

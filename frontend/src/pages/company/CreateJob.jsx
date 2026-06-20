@@ -41,7 +41,7 @@ const CreateJob = () => {
         <div className="max-w-3xl mx-auto">
           <div className="bg-white p-8 md:p-12 rounded-[32px] shadow-sm border border-slate-100">
             <div className="mb-10 text-center">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wider rounded mb-4">
                 <Briefcase size={14} /> Hiring Portal
               </span>
               <h1 className="text-3xl font-extrabold text-slate-900">Post a New Job</h1>
@@ -58,7 +58,7 @@ const CreateJob = () => {
                     onChange={handleChange}
                     required
                     placeholder="e.g. Senior Frontend Developer"
-                    className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:border-blue-500 focus:bg-white outline-none transition-all"
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded focus:border-blue-500 focus:bg-white outline-none transition-all"
                   />
                 </div>
                 <div className="space-y-2">
@@ -69,7 +69,7 @@ const CreateJob = () => {
                     onChange={handleChange}
                     required
                     placeholder="e.g. New York, Remote"
-                    className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:border-blue-500 focus:bg-white outline-none transition-all"
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded focus:border-blue-500 focus:bg-white outline-none transition-all"
                   />
                 </div>
                 <div className="space-y-2">
@@ -78,7 +78,7 @@ const CreateJob = () => {
                     name="jobType"
                     value={formData.jobType}
                     onChange={handleChange}
-                    className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:border-blue-500 focus:bg-white outline-none transition-all appearance-none"
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded focus:border-blue-500 focus:bg-white outline-none transition-all appearance-none"
                   >
                     <option value="Full-time">Full-time</option>
                     <option value="Part-time">Part-time</option>
@@ -94,7 +94,7 @@ const CreateJob = () => {
                     value={formData.salary}
                     onChange={handleChange}
                     placeholder="e.g. ₹5,00,000 - ₹8,00,000"
-                    className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:border-blue-500 focus:bg-white outline-none transition-all"
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded focus:border-blue-500 focus:bg-white outline-none transition-all"
                   />
                 </div>
                 <div className="space-y-2 md:col-span-2">
@@ -105,7 +105,7 @@ const CreateJob = () => {
                     value={formData.expiredDate}
                     onChange={handleChange}
                     required
-                    className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:border-blue-500 focus:bg-white outline-none transition-all"
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded focus:border-blue-500 focus:bg-white outline-none transition-all"
                   />
                 </div>
               </div>
@@ -119,7 +119,7 @@ const CreateJob = () => {
                   required
                   rows="5"
                   placeholder="Describe the role, day-to-day responsibilities, etc."
-                  className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:border-blue-500 focus:bg-white outline-none transition-all resize-none"
+                  className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded focus:border-blue-500 focus:bg-white outline-none transition-all resize-none"
                 ></textarea>
               </div>
 
@@ -132,7 +132,7 @@ const CreateJob = () => {
                   required
                   rows="5"
                   placeholder="List skills, experience, and qualifications needed..."
-                  className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:border-blue-500 focus:bg-white outline-none transition-all resize-none"
+                  className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded focus:border-blue-500 focus:bg-white outline-none transition-all resize-none"
                 ></textarea>
               </div>
 

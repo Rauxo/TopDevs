@@ -86,7 +86,7 @@ const PublicUserProfile = () => {
                 {company && (
                   <button
                     onClick={handleMessage}
-                    className="px-6 py-1.5 bg-blue-600 text-white font-bold text-sm rounded-lg hover:bg-blue-700 transition-colors border-none cursor-pointer shadow-lg shadow-blue-50"
+                    className="px-6 py-1.5 bg-blue-600 text-white font-bold text-sm rounded hover:bg-blue-700 transition-colors border-none cursor-pointer shadow-blue-50"
                   >
                     <MessageSquare size={16} className="inline mr-2" /> Message
                     Developer
@@ -131,7 +131,7 @@ const PublicUserProfile = () => {
                   <div className="aspect-video relative overflow-hidden bg-slate-100 group cursor-pointer" onClick={() => setFullScreenImage(`http://localhost:5000/${proj.images[0]}`)}>
                       <img src={`http://localhost:5000/${proj.images[0]}`} alt={proj.title} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
                       {proj.images.length > 1 && (
-                        <div className="absolute bottom-2 right-2 px-2 py-1 bg-black/60 backdrop-blur-sm text-white text-xs font-bold rounded-lg flex items-center gap-1">
+                        <div className="absolute bottom-2 right-2 px-2 py-1 bg-black/60 backdrop-blur-sm text-white text-xs font-bold rounded flex items-center gap-1">
                           +{proj.images.length - 1} more
                         </div>
                       )}

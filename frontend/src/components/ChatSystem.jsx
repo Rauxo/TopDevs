@@ -246,7 +246,7 @@ const ChatSystem = ({ type }) => { // type: 'user' or 'company'
                  {type === "company" && activeConv.status === "pending" && (
                    <button 
                     onClick={() => handleAccept(activeConv._id)}
-                    className="px-6 py-3 bg-blue-600 text-white text-xs font-black uppercase tracking-widest rounded-2xl hover:bg-blue-700 transition-all flex items-center gap-2 border-none cursor-pointer shadow-xl shadow-blue-500/20"
+                    className="px-6 py-3 bg-blue-600 text-white text-xs font-black uppercase tracking-widest rounded hover:bg-blue-700 transition-all flex items-center gap-2 border-none cursor-pointer shadow-blue-500/20"
                    >
                      Approve Access <CheckCircle2 size={16} />
                    </button>
@@ -294,7 +294,7 @@ const ChatSystem = ({ type }) => { // type: 'user' or 'company'
                       placeholder="Type a message..." 
                       value={newMessage}
                       onChange={(e) => setNewMessage(e.target.value)}
-                      className="w-full px-8 py-5 bg-slate-100/60 border-2 border-transparent rounded-[28px] outline-none focus:bg-white focus:border-blue-500/30 focus:shadow-[0_0_0_4px_rgba(59,130,246,0.1)] transition-all font-bold text-slate-800"
+                      className="w-full px-8 py-5 bg-slate-100/60 border-2 border-transparent rounded-[28px] outline-none focus:bg-white focus:border-blue-500/30 focus: transition-all font-bold text-slate-800"
                     />
                   </div>
                   <button 

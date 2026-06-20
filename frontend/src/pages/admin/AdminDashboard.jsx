@@ -99,7 +99,7 @@ const AdminDashboard = () => {
                     <p className="text-[10px] text-slate-400 uppercase font-bold">{job.company?.name || "Unknown Company"}</p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="px-2 py-1 bg-blue-100 text-blue-700 text-[9px] font-black uppercase rounded-lg">Live</span>
+                    <span className="px-2 py-1 bg-blue-100 text-blue-700 text-[9px] font-black uppercase rounded">Live</span>
                   </div>
                </div>
              ))}

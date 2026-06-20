@@ -99,7 +99,7 @@ const EditProfile = () => {
                 value={formData.username}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-blue-500 outline-none transition-all"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded focus:border-blue-500 outline-none transition-all"
               />
             </div>
 
@@ -111,7 +111,7 @@ const EditProfile = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-blue-500 outline-none transition-all"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded focus:border-blue-500 outline-none transition-all"
               />
             </div>
 
@@ -122,7 +122,7 @@ const EditProfile = () => {
                 value={formData.about}
                 onChange={handleChange}
                 rows="4"
-                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:border-blue-500 outline-none transition-all resize-none"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded focus:border-blue-500 outline-none transition-all resize-none"
                 placeholder="Tell us about yourself..."
               ></textarea>
             </div>

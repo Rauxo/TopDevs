@@ -267,7 +267,7 @@ function CompanyDashboard() {
                             onClick={(e) => checkVerification(e, `/company/applicants/${job._id}`)}
                             className="text-blue-600 font-bold text-xs hover:underline cursor-pointer border-none bg-transparent p-0"
                           >
-                            View Apps
+                            View Application
                           </button>
                           <button
                             onClick={(e) => handleDeleteJob(e, job._id)}

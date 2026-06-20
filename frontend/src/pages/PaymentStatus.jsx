@@ -40,7 +40,7 @@ const PaymentStatus = () => {
 
   return (
     <div className="min-h-[calc(100vh-72px)] bg-[#f8fafc] flex items-center justify-center p-6">
-      <div className="bg-white rounded-[40px] shadow-2xl max-w-md w-full p-12 text-center border border-white">
+      <div className="bg-white rounded border border-slate-200 max-w-md w-full p-12 text-center">
         {status === "loading" && (
           <div className="flex flex-col items-center">
             <Loader2 size={64} className="text-blue-500 animate-spin mb-8" />
@@ -51,14 +51,14 @@ const PaymentStatus = () => {
 
         {status === "success" && (
           <div className="flex flex-col items-center animate-in zoom-in-95 duration-500">
-            <div className="w-24 h-24 bg-blue-100 rounded-[32px] flex items-center justify-center mb-8 text-blue-600 shadow-lg shadow-blue-500/10">
+            <div className="w-24 h-24 bg-blue-50 border border-blue-100 rounded flex items-center justify-center mb-8 text-blue-600">
               <CheckCircle size={48} />
             </div>
             <h2 className="text-3xl font-black text-slate-900 mb-4">Payment Success!</h2>
             <p className="text-slate-500 font-bold mb-10">{message}</p>
             <button 
               onClick={() => navigate("/messages")}
-              className="w-full py-5 bg-blue-600 text-white font-black uppercase tracking-widest rounded-2xl hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/20 border-none cursor-pointer flex items-center justify-center gap-2"
+              className="w-full py-4 bg-blue-600 text-white font-bold rounded hover:bg-blue-700 transition-colors border-none cursor-pointer flex items-center justify-center gap-2"
             >
               Start Messaging <Sparkles size={18} />
             </button>
@@ -67,14 +67,14 @@ const PaymentStatus = () => {
 
         {status === "failed" && (
           <div className="flex flex-col items-center animate-in zoom-in-95 duration-500">
-            <div className="w-24 h-24 bg-red-100 rounded-[32px] flex items-center justify-center mb-8 text-red-600 shadow-lg shadow-red-500/10">
+            <div className="w-24 h-24 bg-red-50 border border-red-100 rounded flex items-center justify-center mb-8 text-red-600">
               <XCircle size={48} />
             </div>
             <h2 className="text-3xl font-black text-slate-900 mb-4">Payment Failed</h2>
             <p className="text-slate-500 font-bold mb-10">{message}</p>
             <button 
               onClick={() => navigate("/pricing")}
-              className="w-full py-5 bg-slate-900 text-white font-black uppercase tracking-widest rounded-2xl hover:bg-slate-800 transition-all shadow-xl shadow-slate-900/10 border-none cursor-pointer"
+              className="w-full py-4 bg-slate-900 text-white font-bold rounded hover:bg-slate-800 transition-colors border-none cursor-pointer"
             >
               Try Again
             </button>

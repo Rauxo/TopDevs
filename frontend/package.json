@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@cashfreepayments/cashfree-js": "^1.0.7",
     "@lottiefiles/dotlottie-react": "^0.19.0",
     "@monaco-editor/react": "^4.7.0",
     "@tailwindcss/vite": "^4.2.4",

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../API/AuthContext";
 import API from "../API/api";
 import { Check, Zap, Shield, Rocket } from "lucide-react";
+import { load } from "@cashfreepayments/cashfree-js";
 import { useNavigate } from "react-router-dom";
 
 const Pricing = () => {
@@ -30,13 +31,19 @@ const Pricing = () => {
   const handleCheckout = async (planId) => {
     try {
       const res = await API.post("/payment/create-order", { planId });
-      const { paymentUrl } = res.data;
+      const { payment_session_id } = res.data;
 
-      if (paymentUrl) {
-        // Redirect to CodeShop payment page
-        window.location.href = paymentUrl;
+      if (payment_session_id) {
+        const cashfree = await load({
+          mode: "sandbox", 
+        });
+
+        cashfree.checkout({
+          paymentSessionId: payment_session_id,
+          redirectTarget: "_self",
+        });
       } else {
-        alert("Failed to get payment URL. Please try again.");
+        alert("Failed to create checkout session. Please try again.");
       }
     } catch (err) {
       console.error(err);

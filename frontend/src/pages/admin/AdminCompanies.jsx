@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AdminLayout from "./AdminLayout";
-import { Building2,Clock , CheckCircle2, XCircle, Eye, ShieldCheck, Mail, Phone, MapPin, FileText, ExternalLink, Ban } from "lucide-react";
+import { Building2, Clock, ShieldCheck, Mail, Phone, MapPin, FileText, ExternalLink, Ban, Eye } from "lucide-react";
 import API from "../../API/api";
 
 const AdminCompanies = () => {
@@ -51,140 +51,142 @@ const AdminCompanies = () => {
 
   return (
     <AdminLayout>
-      <div className="mb-10">
+      <div className="mb-8">
         <h1 className="text-3xl font-black text-slate-900 tracking-tight">Company Management</h1>
         <p className="text-slate-500 font-medium">Verify credentials and manage corporate partnerships</p>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-10">
-        {/* Company List */}
-        <div className="xl:col-span-2 space-y-6">
-          <div className="bg-white rounded-[32px] shadow-sm border border-slate-100 overflow-hidden">
-             <div className="overflow-x-auto">
-               <table className="w-full text-left">
-                 <thead>
-                   <tr className="bg-slate-50/50 border-b border-slate-100">
-                     <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">Company</th>
-                     <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">Status</th>
-                     <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400 text-right">Actions</th>
-                   </tr>
-                 </thead>
-                 <tbody className="divide-y divide-slate-50">
-                   {loading ? (
-                     <tr><td colSpan="3" className="px-8 py-20 text-center text-slate-400 italic">Synchronizing corporate data...</td></tr>
-                   ) : companies.map((comp) => (
-                     <tr key={comp._id} className={`hover:bg-slate-50/50 transition-colors group ${selectedCompany?._id === comp._id ? "bg-blue-50/30" : ""}`}>
-                        <td className="px-8 py-5">
-                           <div className="flex items-center gap-4">
-                             <img src={`http://localhost:5000/${comp.companyIcon}`} className="w-12 h-12 rounded-xl object-cover border border-slate-200" alt="icon" />
-                             <div>
-                               <p className="font-bold text-slate-800 text-sm">{comp.name}</p>
-                               <p className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">{comp.email}</p>
-                             </div>
-                           </div>
-                        </td>
-                        <td className="px-8 py-5">
-                           {comp.isVerified ? (
-                             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-100 text-blue-700 text-[10px] font-black uppercase tracking-widest rounded">
-                               <ShieldCheck size={12} /> Verified
-                             </span>
-                           ) : (
-                             <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100 text-amber-700 text-[10px] font-black uppercase tracking-widest rounded">
-                               <Clock size={12} /> Pending
-                             </span>
-                           )}
-                        </td>
-                        <td className="px-8 py-5 text-right space-x-2">
-                           <button 
-                             onClick={() => setSelectedCompany(comp)}
-                             className="p-2.5 bg-white border border-slate-200 rounded-xl text-slate-600 hover:text-blue-600 hover:border-blue-200 transition-all cursor-pointer"
-                             title="View Details"
-                           >
-                             <Eye size={18} />
-                           </button>
-                           <button 
-                             onClick={() => handleBlock(comp._id)}
-                             className={`p-2.5 border rounded-xl transition-all cursor-pointer ${comp.isVerified ? "bg-white border-slate-200 text-red-400 hover:bg-red-50" : "bg-white border-slate-200 text-blue-400 hover:bg-blue-50"}`}
-                             title={comp.isVerified ? "Block Company" : "Unblock/Verify"}
-                           >
-                             <Ban size={18} />
-                           </button>
-                        </td>
-                     </tr>
-                   ))}
-                 </tbody>
-               </table>
-             </div>
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
+        {/* Company Table */}
+        <div className="xl:col-span-2">
+          <div className="bg-white rounded border border-slate-200 overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b-2 border-slate-900">
+                    <th className="px-6 py-4 text-[10px] font-black uppercase tracking-wider text-slate-900">Company</th>
+                    <th className="px-6 py-4 text-[10px] font-black uppercase tracking-wider text-slate-900">Status</th>
+                    <th className="px-6 py-4 text-[10px] font-black uppercase tracking-wider text-slate-900 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {loading ? (
+                    <tr><td colSpan="3" className="px-6 py-20 text-center text-slate-500 text-sm font-bold">Synchronizing corporate data...</td></tr>
+                  ) : companies.map((comp) => (
+                    <tr key={comp._id} className={`hover:bg-slate-50 transition-colors ${selectedCompany?._id === comp._id ? "bg-blue-50/50" : ""}`}>
+                      <td className="px-6 py-4">
+                        <div className="flex items-center gap-4">
+                          <img src={`http://localhost:5000/${comp.companyIcon}`} className="w-10 h-10 rounded object-cover border border-slate-200 bg-slate-50" alt="icon" />
+                          <div>
+                            <p className="font-bold text-slate-900 text-sm">{comp.name}</p>
+                            <p className="text-xs text-slate-500 mt-0.5">{comp.email}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="px-6 py-4">
+                        {comp.isVerified ? (
+                          <span className="inline-flex items-center gap-1.5 px-2 py-1 bg-slate-100 text-slate-700 text-[10px] font-bold uppercase tracking-wide rounded border border-slate-200">
+                            <ShieldCheck size={11} /> Verified
+                          </span>
+                        ) : (
+                          <span className="inline-flex items-center gap-1.5 px-2 py-1 bg-white text-amber-700 text-[10px] font-bold uppercase tracking-wide rounded border border-amber-200">
+                            <Clock size={11} /> Pending
+                          </span>
+                        )}
+                      </td>
+                      <td className="px-6 py-4 text-right">
+                        <div className="flex justify-end gap-1 items-center">
+                          <button
+                            onClick={() => setSelectedCompany(comp)}
+                            className="p-2 bg-white border border-slate-200 rounded text-slate-600 hover:text-blue-600 hover:border-blue-200 transition-all cursor-pointer"
+                            title="View Details"
+                          >
+                            <Eye size={16} />
+                          </button>
+                          <button
+                            onClick={() => handleBlock(comp._id)}
+                            className={`p-2 border rounded transition-all cursor-pointer ${comp.isVerified ? "bg-white border-slate-200 text-red-400 hover:bg-red-50" : "bg-white border-slate-200 text-blue-500 hover:bg-blue-50"}`}
+                            title={comp.isVerified ? "Block Company" : "Unblock/Verify"}
+                          >
+                            <Ban size={16} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
         {/* Details Panel */}
         <div className="xl:col-span-1">
           {selectedCompany ? (
-            <div className="bg-slate-900 text-white rounded-[40px] p-8 shadow-2xl sticky top-8">
-              <div className="flex items-center gap-6 mb-10">
-                <img src={`http://localhost:5000/${selectedCompany.companyIcon}`} className="w-20 h-20 rounded-3xl object-cover border-2 border-white/10" alt="logo" />
-                <div>
-                  <h3 className="text-2xl font-black">{selectedCompany.name}</h3>
-                  <p className="text-blue-500 font-bold text-xs uppercase tracking-widest">
+            <div className="bg-white border border-slate-200 rounded p-6 sticky top-8">
+              <div className="flex items-center gap-4 mb-6 pb-6 border-b border-slate-100">
+                <img src={`http://localhost:5000/${selectedCompany.companyIcon}`} className="w-14 h-14 rounded object-cover border border-slate-200 bg-slate-50" alt="logo" />
+                <div className="overflow-hidden">
+                  <h3 className="text-lg font-black text-slate-900 truncate">{selectedCompany.name}</h3>
+                  <p className={`text-[10px] font-bold uppercase tracking-wide ${selectedCompany.isVerified ? "text-blue-600" : "text-amber-600"}`}>
                     {selectedCompany.isVerified ? "Authenticated Partner" : "Verification Required"}
                   </p>
                 </div>
               </div>
 
-              <div className="space-y-6 mb-10">
-                 <div className="flex items-center gap-3 text-slate-400">
-                    <Mail size={18} className="text-blue-500" />
-                    <span className="text-sm font-medium">{selectedCompany.email}</span>
-                 </div>
-                 <div className="flex items-center gap-3 text-slate-400">
-                    <Phone size={18} className="text-blue-500" />
-                    <span className="text-sm font-medium">{selectedCompany.phone}</span>
-                 </div>
-                 <div className="flex items-start gap-3 text-slate-400">
-                    <MapPin size={18} className="text-blue-500 shrink-0" />
-                    <span className="text-sm font-medium leading-relaxed">{selectedCompany.address}</span>
-                 </div>
+              <div className="space-y-4 mb-6">
+                <div className="flex items-center gap-3 text-slate-600">
+                  <Mail size={16} className="text-blue-600 shrink-0" />
+                  <span className="text-sm font-medium break-all">{selectedCompany.email}</span>
+                </div>
+                <div className="flex items-center gap-3 text-slate-600">
+                  <Phone size={16} className="text-blue-600 shrink-0" />
+                  <span className="text-sm font-medium">{selectedCompany.phone}</span>
+                </div>
+                <div className="flex items-start gap-3 text-slate-600">
+                  <MapPin size={16} className="text-blue-600 shrink-0 mt-0.5" />
+                  <span className="text-sm font-medium leading-relaxed">{selectedCompany.address}</span>
+                </div>
               </div>
 
-              <div className="p-6 bg-white/5 rounded-3xl border border-white/10 mb-10">
-                <h4 className="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-4 flex items-center gap-2">
-                  <FileText size={14} /> Legal Documentation
+              <div className="p-4 bg-slate-50 rounded border border-slate-200 mb-6">
+                <h4 className="text-[10px] font-black uppercase tracking-wider text-slate-500 mb-3 flex items-center gap-2">
+                  <FileText size={12} /> Legal Documentation
                 </h4>
-                <a 
-                  href={`http://localhost:5000/${selectedCompany.legalDocument}`} 
-                  target="_blank" 
+                <a
+                  href={`http://localhost:5000/${selectedCompany.legalDocument}`}
+                  target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-between p-4 bg-blue-500/10 hover:bg-blue-500/20 text-blue-500 rounded-2xl transition-all no-underline font-bold text-sm border border-blue-500/20"
+                  className="flex items-center justify-between p-3 bg-white hover:bg-blue-50 text-blue-600 rounded border border-slate-200 hover:border-blue-200 transition-all no-underline font-bold text-sm"
                 >
-                  Verify Documents <ExternalLink size={18} />
+                  View Documents <ExternalLink size={16} />
                 </a>
               </div>
 
               {!selectedCompany.isVerified && (
-                <button 
+                <button
                   onClick={() => handleVerify(selectedCompany._id)}
                   disabled={actionLoading}
-                  className="w-full py-5 bg-blue-600 hover:bg-blue-500 text-white font-black rounded-2xl shadow-xl shadow-blue-900/40 transition-all active:scale-[0.98] flex items-center justify-center gap-2 border-none cursor-pointer disabled:opacity-50"
+                  className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded transition-all flex items-center justify-center gap-2 border-none cursor-pointer disabled:opacity-50 mb-3 text-sm"
                 >
                   {actionLoading ? "Processing..." : (
-                    <>Approve & Verify Company <ShieldCheck size={20} /></>
+                    <>Approve & Verify <ShieldCheck size={18} /></>
                   )}
                 </button>
               )}
-              
-              <button 
+
+              <button
                 onClick={() => setSelectedCompany(null)}
-                className="w-full mt-4 py-4 text-slate-500 font-bold text-sm hover:text-white transition-colors border-none bg-transparent cursor-pointer"
+                className="w-full py-2.5 text-slate-600 font-bold text-sm hover:bg-slate-100 rounded transition-colors border border-slate-200 bg-white cursor-pointer"
               >
-                Close Inspector
+                Close
               </button>
             </div>
           ) : (
-            <div className="h-full bg-slate-100/50 border-2 border-dashed border-slate-200 rounded-[40px] flex flex-col items-center justify-center p-12 text-center text-slate-400">
-               <Building2 size={64} className="mb-6 text-slate-300" />
-               <p className="font-bold text-lg">Select a company</p>
-               <p className="text-sm max-w-[200px]">Click the eye icon to inspect credentials and documents</p>
+            <div className="h-full bg-slate-50 border border-dashed border-slate-300 rounded flex flex-col items-center justify-center p-12 text-center text-slate-400 min-h-[300px]">
+              <Building2 size={40} className="mb-4 text-slate-300" />
+              <p className="font-bold text-sm text-slate-500">Select a company</p>
+              <p className="text-xs mt-1 text-slate-400">Click the eye icon to inspect credentials</p>
             </div>
           )}
         </div>

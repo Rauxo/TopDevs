@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AdminLayout from "./AdminLayout";
-import { Briefcase, Building2, MapPin, Trash2, Search, ExternalLink } from "lucide-react";
+import { Briefcase, MapPin, Trash2, Search, ExternalLink } from "lucide-react";
 import API from "../../API/api";
 
 const AdminJobs = () => {
@@ -34,87 +34,87 @@ const AdminJobs = () => {
     }
   };
 
-  const filteredJobs = jobs.filter(j => 
+  const filteredJobs = jobs.filter(j =>
     j.jobTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
     j.company?.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <AdminLayout>
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
           <h1 className="text-3xl font-black text-slate-900 tracking-tight">Job Moderation</h1>
           <p className="text-slate-500 font-medium">Review and moderate active job opportunities</p>
         </div>
-        
-        <div className="relative group w-full md:w-80">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-500 transition-colors" size={18} />
-          <input 
-            type="text" 
-            placeholder="Search jobs or companies..." 
-            className="w-full pl-12 pr-4 py-3.5 bg-white border border-slate-200 rounded-2xl outline-none focus:border-blue-500 transition-all font-medium text-sm"
+
+        <div className="relative w-full md:w-72">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+          <input
+            type="text"
+            placeholder="Search jobs or companies..."
+            className="w-full pl-12 pr-4 py-3 bg-white border border-slate-200 rounded outline-none focus:border-blue-600 transition-all font-medium text-sm text-slate-900"
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
       </div>
 
-      <div className="bg-white rounded-[32px] shadow-sm border border-slate-100 overflow-hidden">
+      <div className="bg-white rounded border border-slate-200 overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left">
+          <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-slate-50/50 border-b border-slate-100">
-                <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">Position</th>
-                <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">Company</th>
-                <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">Location</th>
-                <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400 text-right">Actions</th>
+              <tr className="border-b-2 border-slate-900">
+                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-wider text-slate-900">Position</th>
+                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-wider text-slate-900">Company</th>
+                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-wider text-slate-900">Location</th>
+                <th className="px-6 py-4 text-[10px] font-black uppercase tracking-wider text-slate-900 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-50">
+            <tbody className="divide-y divide-slate-100">
               {loading ? (
-                <tr><td colSpan="4" className="px-8 py-20 text-center text-slate-400 italic">Fetching job database...</td></tr>
+                <tr><td colSpan="4" className="px-6 py-20 text-center text-slate-500 text-sm font-bold">Fetching job database...</td></tr>
               ) : filteredJobs.length > 0 ? (
                 filteredJobs.map((job) => (
-                  <tr key={job._id} className="hover:bg-slate-50/50 transition-colors group">
-                    <td className="px-8 py-5">
-                       <div>
-                         <p className="font-bold text-slate-800 text-sm">{job.jobTitle}</p>
-                         <p className="text-[10px] text-slate-400 font-bold uppercase">{job.jobType || "Full-time"}</p>
-                       </div>
+                  <tr key={job._id} className="hover:bg-slate-50 transition-colors">
+                    <td className="px-6 py-4">
+                      <p className="font-bold text-slate-900 text-sm">{job.jobTitle}</p>
+                      <p className="text-xs text-slate-500 mt-0.5 uppercase font-bold">{job.jobType || "Full-time"}</p>
                     </td>
-                    <td className="px-8 py-5">
-                       <div className="flex items-center gap-3">
-                         <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-xs">
-                           {job.company?.name.charAt(0)}
-                         </div>
-                         <span className="text-sm font-medium text-slate-700">{job.company?.name || "Unknown"}</span>
-                       </div>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded border border-slate-200 bg-slate-50 flex items-center justify-center text-slate-900 font-bold text-xs shrink-0">
+                          {job.company?.name.charAt(0)}
+                        </div>
+                        <span className="text-sm font-bold text-slate-700">{job.company?.name || "Unknown"}</span>
+                      </div>
                     </td>
-                    <td className="px-8 py-5">
-                       <div className="flex items-center gap-2 text-slate-500 text-sm">
-                         <MapPin size={14} className="text-blue-500" />
-                         {job.location}
-                       </div>
+                    <td className="px-6 py-4">
+                      <div className="flex items-center gap-2 text-slate-500 text-sm">
+                        <MapPin size={14} className="text-blue-600 shrink-0" />
+                        {job.location}
+                      </div>
                     </td>
-                    <td className="px-8 py-5 text-right space-x-2">
-                       <button 
-                         onClick={() => window.open(`/jobs/${job._id}`, '_blank')}
-                         className="p-3 text-slate-400 hover:text-blue-500 hover:bg-blue-50 rounded-xl transition-all border-none bg-transparent cursor-pointer"
-                         title="View Job"
-                       >
-                         <ExternalLink size={20} />
-                       </button>
-                       <button 
-                         onClick={() => handleDelete(job._id)}
-                         className="p-3 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all border-none bg-transparent cursor-pointer"
-                         title="Remove Job"
-                       >
-                         <Trash2 size={20} />
-                       </button>
+                    <td className="px-6 py-4 text-right">
+                      <div className="flex justify-end gap-1 items-center">
+                        <button
+                          onClick={() => window.open(`/jobs/${job._id}`, '_blank')}
+                          className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded transition-all border-none bg-transparent cursor-pointer"
+                          title="View Job"
+                        >
+                          <ExternalLink size={18} />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(job._id)}
+                          className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded transition-all border-none bg-transparent cursor-pointer"
+                          title="Remove Job"
+                        >
+                          <Trash2 size={18} />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))
               ) : (
-                <tr><td colSpan="4" className="px-8 py-20 text-center text-slate-400 italic">No job postings found matching your search.</td></tr>
+                <tr><td colSpan="4" className="px-6 py-20 text-center text-slate-500 text-sm font-bold">No job postings found matching your search.</td></tr>
               )}
             </tbody>
           </table>

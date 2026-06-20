@@ -19,69 +19,69 @@ const AdminLayout = ({ children }) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const navItems = [
-    { label: "Dashboard", path: "/admin/dashboard", icon: <LayoutDashboard size={20} /> },
-    { label: "User Management", path: "/admin/users", icon: <Users size={20} /> },
-    { label: "Company Management", path: "/admin/companies", icon: <Building2 size={20} /> },
-    { label: "Job Moderation", path: "/admin/jobs", icon: <Briefcase size={20} /> },
-    { label: "Subscription Plans", path: "/admin/plans", icon: <CreditCard size={20} /> },
-    { label: "Learning Center", path: "/admin/learning", icon: <GraduationCap size={20} /> },
+    { label: "Dashboard", path: "/admin/dashboard", icon: <LayoutDashboard size={18} /> },
+    { label: "User Management", path: "/admin/users", icon: <Users size={18} /> },
+    { label: "Company Management", path: "/admin/companies", icon: <Building2 size={18} /> },
+    { label: "Job Moderation", path: "/admin/jobs", icon: <Briefcase size={18} /> },
+    { label: "Subscription Plans", path: "/admin/plans", icon: <CreditCard size={18} /> },
+    { label: "Learning Center", path: "/admin/learning", icon: <GraduationCap size={18} /> },
   ];
 
   const handleLogout = () => {
     localStorage.removeItem("adminToken");
     localStorage.removeItem("role");
-    navigate("/admin/login");
+    window.location.reload(); // Reloads to trigger AdminProtectedRoute login screen
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex">
+    <div className="min-h-screen bg-white flex font-sans">
       {/* Sidebar - Desktop */}
-      <aside className="w-72 bg-slate-900 hidden lg:flex flex-col fixed inset-y-0 left-0 z-50">
-        <div className="p-8 border-b border-white/5">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-blue-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
+      <aside className="w-64 bg-slate-50 border-r border-slate-200 hidden lg:flex flex-col fixed inset-y-0 left-0 z-50">
+        <div className="p-6">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-10 h-10 bg-white border border-slate-200 rounded flex items-center justify-center text-blue-600">
               <ShieldCheck size={24} />
             </div>
-            <span className="text-white font-black text-xl tracking-tight">Admin Console</span>
+            <span className="font-bold text-slate-900 text-base">Admin Console</span>
           </div>
+
+          <nav className="space-y-1">
+            {navItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={`flex items-center gap-3 px-4 py-2.5 rounded text-sm font-bold transition-colors no-underline ${
+                  location.pathname === item.path 
+                    ? "bg-slate-900 text-white" 
+                    : "text-slate-600 hover:bg-slate-200"
+                }`}
+              >
+                {item.icon} {item.label}
+              </Link>
+            ))}
+          </nav>
         </div>
 
-        <nav className="flex-1 p-6 space-y-2">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl text-sm font-bold transition-all no-underline ${
-                location.pathname === item.path 
-                  ? "bg-blue-600 text-white shadow-lg shadow-blue-900/20" 
-                  : "text-slate-400 hover:bg-white/5 hover:text-white"
-              }`}
-            >
-              {item.icon} {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="p-6 border-t border-white/5">
+        <div className="mt-auto p-6 border-t border-slate-200">
           <button 
             onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-4 py-3.5 text-red-400 font-bold text-sm hover:bg-red-500/10 rounded transition-all border-none bg-transparent cursor-pointer"
+            className="w-full flex items-center justify-center gap-3 px-4 py-2.5 text-slate-900 font-bold text-sm hover:bg-slate-200 rounded transition-colors border border-slate-300 bg-white cursor-pointer"
           >
-            <LogOut size={20} /> Terminate Session
+            <LogOut size={18} /> Terminate Session
           </button>
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 lg:ml-72 min-h-screen flex flex-col">
+      <main className="flex-1 lg:ml-64 flex flex-col min-h-screen bg-white">
         {/* Mobile Header */}
-        <header className="lg:hidden h-20 bg-slate-900 flex items-center justify-between px-6 sticky top-0 z-40">
-           <div className="flex items-center gap-3 text-white">
-             <ShieldCheck className="text-blue-500" size={24} />
+        <header className="lg:hidden h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6 sticky top-0 z-40">
+           <div className="flex items-center gap-3 text-slate-900">
+             <ShieldCheck className="text-blue-600" size={24} />
              <span className="font-bold uppercase tracking-widest text-xs">Admin Console</span>
            </div>
-           <button onClick={() => setMobileOpen(true)} className="p-2 text-white bg-white/10 rounded-lg">
-             <Menu size={24} />
+           <button onClick={() => setMobileOpen(true)} className="p-2 text-slate-600 bg-slate-50 border border-slate-200 rounded cursor-pointer">
+             <Menu size={20} />
            </button>
         </header>
 
@@ -93,35 +93,35 @@ const AdminLayout = ({ children }) => {
       {/* Mobile Sidebar Overlay */}
       {mobileOpen && (
         <div className="fixed inset-0 z-[9999] lg:hidden">
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setMobileOpen(false)}></div>
-          <aside className="absolute inset-y-0 left-0 w-80 bg-slate-900 p-6 flex flex-col animate-slide-right">
-             <div className="flex items-center justify-between mb-10">
-               <div className="flex items-center gap-3 text-white">
-                 <ShieldCheck className="text-blue-500" size={32} />
-                 <span className="font-black text-xl">Console</span>
+          <div className="absolute inset-0 bg-black/60" onClick={() => setMobileOpen(false)}></div>
+          <aside className="absolute inset-y-0 left-0 w-64 bg-slate-50 border-r border-slate-200 p-6 flex flex-col animate-slide-right">
+             <div className="flex items-center justify-between mb-8">
+               <div className="flex items-center gap-3 text-slate-900">
+                 <ShieldCheck className="text-blue-600" size={28} />
+                 <span className="font-bold text-base">Console</span>
                </div>
-               <button onClick={() => setMobileOpen(false)} className="text-white p-2">
-                 <X size={24} />
+               <button onClick={() => setMobileOpen(false)} className="text-slate-500 p-2 border-none bg-transparent cursor-pointer">
+                 <X size={20} />
                </button>
              </div>
-             <nav className="space-y-2 flex-1">
+             <nav className="space-y-1 flex-1">
                 {navItems.map((item) => (
                   <Link
                     key={item.path}
                     to={item.path}
                     onClick={() => setMobileOpen(false)}
-                    className={`flex items-center gap-3 px-4 py-4 rounded-2xl text-sm font-bold no-underline ${
+                    className={`flex items-center gap-3 px-4 py-3 rounded text-sm font-bold no-underline ${
                       location.pathname === item.path 
-                        ? "bg-blue-600 text-white" 
-                        : "text-slate-400 hover:bg-white/5"
+                        ? "bg-slate-900 text-white" 
+                        : "text-slate-600 hover:bg-slate-200"
                     }`}
                   >
                     {item.icon} {item.label}
                   </Link>
                 ))}
              </nav>
-             <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-4 text-red-400 font-bold text-sm bg-red-500/10 rounded border-none cursor-pointer">
-               <LogOut size={20} /> Logout
+             <button onClick={handleLogout} className="w-full flex items-center justify-center gap-3 px-4 py-3 text-slate-900 font-bold text-sm bg-white border border-slate-300 rounded cursor-pointer mt-auto">
+               <LogOut size={18} /> Logout
              </button>
           </aside>
         </div>

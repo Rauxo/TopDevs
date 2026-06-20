@@ -8,6 +8,8 @@ Cashfree.XClientId = process.env.CASHFREE_APP_ID;
 Cashfree.XClientSecret = process.env.CASHFREE_SECRET_KEY;
 Cashfree.XEnvironment = CFEnvironment.SANDBOX;
 
+const cashfree = new Cashfree();
+
 exports.createOrder = async (req, res) => {
   try {
     const { planId } = req.body;
@@ -31,7 +33,7 @@ exports.createOrder = async (req, res) => {
       },
     };
 
-    const response = await Cashfree.PGCreateOrder("2023-08-01", request);
+    const response = await cashfree.PGCreateOrder(request);
 
     if (response.data && response.data.payment_session_id) {
       res.status(200).json({
@@ -60,7 +62,7 @@ exports.verifyPayment = async (req, res) => {
     const type = req.user ? "User" : "Company";
 
     // Fetch the order status directly from Cashfree
-    const response = await Cashfree.PGFetchOrder("2023-08-01", order_id);
+    const response = await cashfree.PGFetchOrder(order_id);
 
     if (response.data && response.data.order_status === "PAID") {
       // Payment verified, upgrade user plan

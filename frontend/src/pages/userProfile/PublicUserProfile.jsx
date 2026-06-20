@@ -110,121 +110,89 @@ const PublicUserProfile = () => {
               <p className="text-blue-900 text-sm font-medium mt-2">
                 Member since {new Date(user.createdAt).getFullYear()}
               </p>
+
+              {user.selectedLanguages?.length > 0 && (
+                <div className="flex flex-wrap gap-3 mt-6">
+                  {user.selectedLanguages.map((sl, index) => {
+                    const radius = 16;
+                    const circumference = 2 * Math.PI * radius;
+                    const strokeDashoffset = circumference - (sl.progress / 100) * circumference;
+                    return (
+                      <div key={index} className="flex items-center gap-3 bg-white border border-slate-200 px-3 py-2 rounded">
+                        <div className="relative w-10 h-10 flex items-center justify-center">
+                          <svg className="transform -rotate-90 w-10 h-10">
+                            <circle cx="20" cy="20" r={radius} stroke="currentColor" strokeWidth="3" fill="transparent" className="text-slate-100" />
+                            <circle cx="20" cy="20" r={radius} stroke="currentColor" strokeWidth="3" fill="transparent" strokeDasharray={circumference} strokeDashoffset={strokeDashoffset} className="text-blue-600 transition-all duration-1000 ease-in-out" />
+                          </svg>
+                          <span className="absolute text-[10px] font-bold text-slate-800">{sl.progress}%</span>
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold text-slate-900">{sl.language?.name}</p>
+                          {sl.completionDate && (
+                            <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-0.5">
+                              {Math.ceil((new Date(sl.completionDate) - new Date(sl.startDate)) / (1000 * 60 * 60 * 24))} Days
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
         </div>
 
         <div className="border-t border-slate-200 mt-12">
-          <div className="flex justify-center -mt-px">
-            <div className="flex items-center gap-2 py-4 text-xs font-bold uppercase tracking-widest border-t border-blue-600 text-blue-600">
-              <FolderGit2 size={14} /> Projects
+          <div className="flex justify-start">
+            <div className="flex items-center gap-2 py-4 text-xs font-bold uppercase tracking-widest text-slate-900">
+              <FolderGit2 size={14} className="text-blue-600" /> Projects
             </div>
           </div>
         </div>
 
         {/* Projects Section */}
-        <div className="mt-8">
+        <div className="mt-4">
           {projects.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {projects.map((proj) => (
-                <div key={proj._id} className="border border-slate-200 rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-all">
-                  <div className="aspect-video relative overflow-hidden bg-slate-100 group cursor-pointer" onClick={() => setFullScreenImage(`http://localhost:5000/${proj.images[0]}`)}>
+                <div key={proj._id} className="border border-slate-200 rounded bg-white hover:border-blue-600 transition-colors overflow-hidden flex flex-col">
+                  <div className="aspect-video relative overflow-hidden bg-slate-100 group cursor-pointer border-b border-slate-100" onClick={() => setFullScreenGallery({ images: proj.images.map(img => `http://localhost:5000/${img}`), currentIndex: 0, isOpen: true })}>
                       <img src={`http://localhost:5000/${proj.images[0]}`} alt={proj.title} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
                       {proj.images.length > 1 && (
-                        <div className="absolute bottom-2 right-2 px-2 py-1 bg-black/60 backdrop-blur-sm text-white text-xs font-bold rounded flex items-center gap-1">
-                          +{proj.images.length - 1} more
+                        <div className="absolute bottom-2 right-2 px-2 py-1 bg-slate-900/80 text-white text-[10px] font-bold rounded flex items-center gap-1">
+                          +{proj.images.length - 1}
                         </div>
                       )}
                   </div>
-                  <div className="p-5">
-                    <h4 className="font-bold text-lg text-slate-800 mb-2">{proj.title}</h4>
-                    <p className="text-sm text-slate-500 mb-4 line-clamp-2">{proj.description}</p>
-                    <div className="flex items-center gap-3">
-                      <a href={proj.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-sm font-bold text-slate-700 hover:text-blue-600">
-                        <FolderGit2  size={16} /> GitHub
+                  <div className="p-4 flex-1 flex flex-col">
+                    <h4 className="font-bold text-base text-slate-900 mb-1">{proj.title}</h4>
+                    <p className="text-xs text-slate-500 mb-4 line-clamp-2 flex-1">{proj.description}</p>
+                    <div className="flex items-center gap-3 mt-auto">
+                      <a href={proj.githubLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-blue-600 bg-slate-50 px-3 py-1.5 rounded border border-slate-200 hover:border-blue-200 transition-colors">
+                        <FolderGit2 size={14} /> Code
                       </a>
                       {proj.liveLink && (
-                        <a href={proj.liveLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-sm font-bold text-blue-600 hover:text-blue-700">
-                          <LinkIcon size={16} /> Live Demo
+                        <a href={proj.liveLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs font-bold text-blue-700 hover:text-white bg-blue-50 hover:bg-blue-600 px-3 py-1.5 rounded border border-blue-100 transition-colors">
+                          <LinkIcon size={14} /> Live Demo
                         </a>
                       )}
                     </div>
-                    
-                    {proj.images.length > 1 && (
-                      <div className="flex gap-2 mt-4 pt-4 border-t border-slate-100 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-slate-200">
-                          {proj.images.map((img, idx) => (
-                            <img 
-                              key={idx} 
-                              src={`http://localhost:5000/${img}`} 
-                              alt="thumbnail" 
-                              className="w-12 h-12 rounded-lg object-cover cursor-pointer hover:opacity-80 transition-opacity flex-shrink-0"
-                              onClick={(e) => { e.stopPropagation(); setFullScreenImage(`http://localhost:5000/${img}`); }}
-                            />
-                          ))}
-                      </div>
-                    )}
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="text-center py-20 bg-slate-50 rounded-[32px] border border-dashed border-slate-200">
-              <div className="text-slate-300 mb-4 flex justify-center">
-                <FolderGit2 size={48} />
+            <div className="text-center py-16 bg-slate-50 rounded border border-slate-200">
+              <div className="text-slate-300 mb-3 flex justify-center">
+                <FolderGit2 size={32} />
               </div>
-              <p className="text-slate-400 italic">No projects showcased yet.</p>
+              <p className="text-slate-500 text-sm font-medium">No projects showcased yet.</p>
             </div>
           )}
         </div>
 
-        {/* Learning Progress Section */}
-        <div className="mt-12">
-          <h2 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2 uppercase tracking-widest text-xs">
-            <GraduationCap size={16} className="text-blue-500" /> Learning
-            Progress
-          </h2>
-          {user.selectedLanguages?.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {user.selectedLanguages.map((sl, index) => (
-                <div
-                  key={index}
-                  className="p-6 border border-slate-100 rounded-2xl bg-white shadow-sm"
-                >
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="font-bold text-slate-900">
-                      {sl.language?.name || "Language"}
-                    </h3>
-                    <span className="text-blue-600 font-black text-sm">
-                      {sl.progress}%
-                    </span>
-                  </div>
-                  <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden mb-3">
-                    <div
-                      className="bg-blue-500 h-full rounded-full"
-                      style={{ width: `${sl.progress}%` }}
-                    ></div>
-                  </div>
-                  {sl.completionDate && (
-                    <div className="text-[10px] font-bold text-blue-500 uppercase tracking-widest">
-                      Completed in{" "}
-                      {Math.ceil(
-                        (new Date(sl.completionDate) - new Date(sl.startDate)) /
-                          (1000 * 60 * 60 * 24),
-                      )}{" "}
-                      days
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-20 bg-slate-50 rounded-[32px] border border-dashed border-slate-200">
-              <p className="text-slate-400 italic">
-                No learning progress to show.
-              </p>
-            </div>
-          )}
-        </div>
+
       </div>
       
       {/* Full Screen Image Viewer */}

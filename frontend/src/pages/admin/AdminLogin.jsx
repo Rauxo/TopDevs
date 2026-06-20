@@ -67,7 +67,7 @@ const AdminLogin = () => {
             className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded shadow-sm transition-all flex items-center justify-center gap-2 mt-4 cursor-pointer border-none"
           >
             {loading ? "Authenticating..." : (
-              <>Initialize Dashboard <ArrowRight size={18} /></>
+              <> Login  <ArrowRight size={18} /></>
             )}
           </button>
         </form>

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../API/AuthContext";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import { LayoutDashboard, Briefcase, PlusCircle, LogOut, AlertTriangle, MessageSquare, Trash2 } from "lucide-react";
+import { LayoutDashboard, Briefcase, PlusCircle, LogOut, AlertTriangle, MessageSquare, Trash2, Building2 } from "lucide-react";
 import API from "../../API/api";
 
 function CompanyDashboard() {
@@ -32,7 +32,7 @@ function CompanyDashboard() {
 
   const handleLogout = async () => {
     await companyLogout();
-    navigate("/company/login");
+    navigate("/");
   };
 
   const handleDeleteJob = async (e, jobId) => {
@@ -58,75 +58,75 @@ function CompanyDashboard() {
   };
 
   if (!company) return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+    <div className="flex justify-center items-center min-h-screen bg-white">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-slate-50 flex">
+    <div className="min-h-screen bg-white flex font-sans">
       {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-slate-200 hidden md:flex flex-col fixed top-[72px] h-[calc(100vh-72px)] z-10">
+      <aside className="w-64 bg-slate-50 border-r border-slate-200 hidden md:flex flex-col fixed top-[72px] h-[calc(100vh-72px)] z-10">
         <div className="p-6">
-          <div className="flex items-center gap-3 mb-10">
-            <img src={`http://localhost:5000/${company.companyIcon}`} className="w-10 h-10 rounded-xl object-cover" alt="logo" />
-            <span className="font-bold text-slate-800 truncate">{company.name}</span>
+          <div className="flex items-center gap-3 mb-8">
+            <img src={`http://localhost:5000/${company.companyIcon}`} className="w-10 h-10 rounded object-cover border border-slate-200 bg-white" alt="logo" />
+            <span className="font-bold text-slate-900 truncate text-base">{company.name}</span>
           </div>
 
           <nav className="space-y-1">
             <button
               onClick={() => setActiveTab("overview")}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
-                activeTab === "overview" ? "bg-blue-600 text-white shadow-lg shadow-blue-100" : "text-slate-600 hover:bg-slate-50"
+              className={`w-full flex items-center gap-3 px-4 py-2.5 rounded text-sm font-bold transition-colors border-none cursor-pointer ${
+                activeTab === "overview" ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-200 bg-transparent"
               }`}
             >
               <LayoutDashboard size={18} /> Overview
             </button>
             <button
               onClick={() => setActiveTab("jobs")}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
-                activeTab === "jobs" ? "bg-blue-600 text-white shadow-lg shadow-blue-100" : "text-slate-600 hover:bg-slate-50"
+              className={`w-full flex items-center gap-3 px-4 py-2.5 rounded text-sm font-bold transition-colors border-none cursor-pointer ${
+                activeTab === "jobs" ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-200 bg-transparent"
               }`}
             >
               <Briefcase size={18} /> Manage Jobs
             </button>
             <button
               onClick={() => setActiveTab("messages")}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold transition-all ${
-                activeTab === "messages" ? "bg-blue-600 text-white shadow-lg shadow-blue-100" : "text-slate-600 hover:bg-slate-50"
+              className={`w-full flex items-center gap-3 px-4 py-2.5 rounded text-sm font-bold transition-colors border-none cursor-pointer ${
+                activeTab === "messages" ? "bg-slate-900 text-white" : "text-slate-600 hover:bg-slate-200 bg-transparent"
               }`}
             >
               <MessageSquare size={18} /> Messages
             </button>
             <button
               onClick={(e) => checkVerification(e, "/company/create-job")}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded text-sm font-bold text-slate-600 hover:bg-slate-50 border-none bg-transparent transition-all cursor-pointer"
+              className="w-full flex items-center gap-3 px-4 py-2.5 rounded text-sm font-bold text-slate-600 hover:bg-slate-200 border-none bg-transparent transition-colors cursor-pointer"
             >
               <PlusCircle size={18} /> Post New Job
             </button>
           </nav>
         </div>
 
-        <div className="mt-auto p-6 border-t border-slate-100">
-          <button onClick={handleLogout} className="w-full flex items-center gap-3 px-4 py-3 text-red-500 font-bold text-sm hover:bg-red-50 rounded transition-all">
+        <div className="mt-auto p-6 border-t border-slate-200">
+          <button onClick={handleLogout} className="w-full flex items-center justify-center gap-3 px-4 py-2.5 text-slate-900 font-bold text-sm hover:bg-slate-100 rounded transition-colors border border-slate-300 bg-white cursor-pointer">
             <LogOut size={18} /> Logout
           </button>
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 md:ml-64 p-6 md:p-10">
-        <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+      <main className="flex-1 md:ml-64 p-6 md:p-10 bg-white">
+        <header className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-2xl font-extrabold text-slate-900">
-              Welcome back, {company.name.split(' ')[0]}!
+            <h1 className="text-3xl font-black text-slate-900 tracking-tight">
+              Welcome back, {company.name.split(' ')[0]}
             </h1>
-            <p className="text-slate-500 text-sm mt-1">Here's what's happening with your recruitment.</p>
+            <p className="text-slate-500 text-sm mt-1 font-medium">Manage your jobs, applications, and company profile.</p>
           </div>
           <div className="flex gap-3">
             <button 
               onClick={(e) => checkVerification(e, "/company/create-job")} 
-              className="px-6 py-2.5 bg-blue-600 text-white font-bold rounded shadow-blue-100 hover:-translate-y-0.5 transition-all border-none cursor-pointer"
+              className="px-6 py-2.5 bg-blue-600 text-white font-bold rounded hover:bg-blue-700 transition-colors border-none cursor-pointer text-sm"
             >
               Post a Job
             </button>
@@ -135,89 +135,96 @@ function CompanyDashboard() {
 
         {/* Account Status */}
         {!company.isVerified && (
-          <div className="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-xl mb-8 flex items-center gap-4">
-            <span className="text-amber-500"><AlertTriangle size={24} /></span>
+          <div className="bg-slate-50 border border-slate-200 p-4 rounded mb-8 flex items-center gap-4">
+            <span className="text-slate-400"><AlertTriangle size={20} /></span>
             <div>
-              <p className="text-amber-800 font-bold">Account Verification Pending</p>
-              <p className="text-amber-700 text-xs">Our team is reviewing your documents. You'll be notified once verified.</p>
+              <p className="text-slate-900 font-bold text-sm">Account Verification Pending</p>
+              <p className="text-slate-500 text-xs mt-0.5">Our team is reviewing your documents. You'll be notified once verified.</p>
             </div>
           </div>
         )}
 
         {/* Content Tabs */}
         {activeTab === "overview" && (
-          <div className="space-y-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
-                { label: "Active Jobs", value: jobs.length, color: "blue" },
-                { label: "Total Applications", value: jobs.reduce((acc, job) => acc + (job.applicationCount || 0), 0), color: "emerald" },
-                { label: "Unread Messages", value: "0", color: "slate" },
-                { label: "New Candidates", value: "0", color: "orange" },
+                { label: "Active Jobs", value: jobs.length },
+                { label: "Total Applications", value: jobs.reduce((acc, job) => acc + (job.applicationCount || 0), 0) },
+                { label: "Unread Messages", value: "0" },
+                { label: "New Candidates", value: "0" },
               ].map((stat, i) => (
-                <div key={i} className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-                  <p className="text-slate-500 text-xs font-bold uppercase tracking-wider mb-2">{stat.label}</p>
-                  <p className="text-3xl font-extrabold text-slate-900">{stat.value}</p>
+                <div key={i} className="bg-white p-6 rounded border border-slate-200 hover:border-slate-300 transition-colors">
+                  <p className="text-slate-500 text-[10px] font-bold uppercase tracking-wider mb-2">{stat.label}</p>
+                  <p className="text-3xl font-black text-slate-900">{stat.value}</p>
                 </div>
               ))}
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2 bg-white p-8 rounded-[32px] shadow-sm border border-slate-100">
-                <h3 className="text-lg font-bold text-slate-900 mb-6">Recent Job Postings</h3>
-                <div className="space-y-4">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2 bg-white p-6 md:p-8 rounded border border-slate-200">
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="text-lg font-black text-slate-900">Recent Job Postings</h3>
+                  <button onClick={() => setActiveTab("jobs")} className="text-blue-600 text-xs font-bold hover:underline bg-transparent border-none cursor-pointer">View All</button>
+                </div>
+                <div className="space-y-3">
                   {jobs.slice(0, 3).map(job => (
-                    <div key={job._id} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl hover:bg-slate-100 transition-colors">
+                    <div key={job._id} className="flex items-center justify-between p-4 bg-white border border-slate-200 rounded hover:border-slate-300 transition-colors">
                       <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center text-blue-600 font-bold">
+                        <div className="w-10 h-10 rounded bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-900 font-black shrink-0">
                           {job.jobTitle.charAt(0)}
                         </div>
                         <div>
-                          <p className="font-bold text-slate-800 text-sm">{job.jobTitle}</p>
-                          <p className="text-slate-500 text-[10px]">{job.location} • {new Date(job.createdAt).toLocaleDateString()}</p>
+                          <p className="font-bold text-slate-900 text-sm">{job.jobTitle}</p>
+                          <p className="text-slate-500 text-xs mt-0.5">{job.location} • {new Date(job.createdAt).toLocaleDateString()}</p>
                         </div>
                       </div>
-                      <span className="text-xs font-bold text-blue-600">Active</span>
+                      <span className="text-[10px] font-bold text-slate-700 bg-slate-100 px-2 py-1 rounded uppercase tracking-wide border border-slate-200 shrink-0 ml-2">Active</span>
                     </div>
                   ))}
-                  {jobs.length === 0 && <p className="text-center py-10 text-slate-400">No jobs posted yet.</p>}
-                  {jobs.length > 0 && <button onClick={() => setActiveTab("jobs")} className="w-full text-center text-sm font-bold text-blue-600 pt-2">View all jobs</button>}
+                  {jobs.length === 0 && (
+                    <div className="text-center py-10 bg-slate-50 border border-slate-200 rounded">
+                      <Briefcase size={24} className="mx-auto text-slate-300 mb-2" />
+                      <p className="text-sm font-bold text-slate-500">No jobs posted yet.</p>
+                    </div>
+                  )}
                 </div>
               </div>
 
-              <div className="bg-white p-8 rounded-[32px] shadow-sm border border-slate-100">
-                <h3 className="text-lg font-bold text-slate-900 mb-6">Company Profile</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4 mb-6">
-                    <img src={`http://localhost:5000/${company.companyIcon}`} className="w-16 h-16 rounded-2xl object-cover" alt="logo" />
-                    <div>
-                      <p className="font-extrabold text-slate-800">{company.name}</p>
-                      <p className="text-xs text-slate-500">{company.email}</p>
+              <div className="bg-white p-6 md:p-8 rounded border border-slate-200">
+                <h3 className="text-lg font-black text-slate-900 mb-6">Company Profile</h3>
+                <div className="space-y-5">
+                  <div className="flex items-center gap-4 pb-5 border-b border-slate-100">
+                    <img src={`http://localhost:5000/${company.companyIcon}`} className="w-12 h-12 rounded object-cover border border-slate-200 bg-white" alt="logo" />
+                    <div className="overflow-hidden">
+                      <p className="font-bold text-slate-900 text-sm truncate">{company.name}</p>
+                      <p className="text-xs text-slate-500 truncate">{company.email}</p>
                     </div>
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-3 text-sm">
                     <div className="flex flex-col gap-1 mb-4">
-                      <span className="text-slate-400 text-xs font-bold uppercase">About</span>
-                      <p className="text-slate-600 text-xs line-clamp-3">{company.about || "No description."}</p>
+                      <span className="text-slate-500 text-[10px] font-bold uppercase tracking-wider">About</span>
+                      <p className="text-slate-700 text-sm leading-relaxed">{company.about || "No description provided."}</p>
                     </div>
-                    <div className="flex justify-between text-xs">
-                      <span className="text-slate-500">Founded</span>
-                      <span className="font-bold text-slate-700">{company.founded || "N/A"}</span>
+                    <div className="flex justify-between items-center py-1 border-b border-slate-50 last:border-0">
+                      <span className="text-slate-500 text-xs font-bold">Founded</span>
+                      <span className="font-bold text-slate-900 text-sm">{company.founded || "N/A"}</span>
                     </div>
-                    <div className="flex justify-between text-xs">
-                      <span className="text-slate-500">Team Size</span>
-                      <span className="font-bold text-slate-700">{company.teamSize || "N/A"}</span>
+                    <div className="flex justify-between items-center py-1 border-b border-slate-50 last:border-0">
+                      <span className="text-slate-500 text-xs font-bold">Team Size</span>
+                      <span className="font-bold text-slate-900 text-sm">{company.teamSize || "N/A"}</span>
                     </div>
-                    <div className="flex justify-between text-xs">
-                      <span className="text-slate-500">Phone</span>
-                      <span className="font-bold text-slate-700">{company.phone}</span>
+                    <div className="flex justify-between items-center py-1 border-b border-slate-50 last:border-0">
+                      <span className="text-slate-500 text-xs font-bold">Phone</span>
+                      <span className="font-bold text-slate-900 text-sm">{company.phone}</span>
                     </div>
-                    <div className="flex justify-between text-xs">
-                      <span className="text-slate-500">Address</span>
-                      <span className="font-bold text-slate-700 text-right max-w-[150px]">{company.address}</span>
+                    <div className="flex flex-col items-start py-1 mt-2">
+                      <span className="text-slate-500 text-xs font-bold">Address</span>
+                      <span className="font-bold text-slate-900 text-sm mt-1 leading-snug">{company.address}</span>
                     </div>
                   </div>
-                  <div className="pt-6">
-                    <Link to="/company/edit-profile" className="block w-full text-center py-3 bg-slate-100 text-slate-700 font-bold text-sm rounded-xl hover:bg-slate-200 transition-all no-underline">
+                  <div className="pt-4 border-t border-slate-100">
+                    <Link to="/company/edit-profile" className="block w-full text-center py-2.5 bg-slate-900 text-white font-bold text-sm rounded hover:bg-black transition-colors no-underline">
                       Edit Profile
                     </Link>
                   </div>
@@ -228,50 +235,50 @@ function CompanyDashboard() {
         )}
 
         {activeTab === "jobs" && (
-          <div className="bg-white p-8 rounded-[32px] shadow-sm border border-slate-100">
-            <div className="flex items-center justify-between mb-8">
-              <h3 className="text-xl font-bold text-slate-900">Manage Your Job Postings</h3>
-              <span className="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold rounded">{jobs.length} Total</span>
+          <div className="bg-white p-6 md:p-8 rounded border border-slate-200">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-lg font-black text-slate-900">Manage Your Job Postings</h3>
+              <span className="px-3 py-1 bg-slate-100 text-slate-900 text-xs font-bold rounded border border-slate-200">{jobs.length} Total</span>
             </div>
             
             <div className="overflow-x-auto">
-              <table className="w-full text-left">
+              <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-slate-100">
-                    <th className="pb-4 font-bold text-slate-400 text-xs uppercase tracking-wider">Job Role</th>
-                    <th className="pb-4 font-bold text-slate-400 text-xs uppercase tracking-wider">Date Posted</th>
-                    <th className="pb-4 font-bold text-slate-400 text-xs uppercase tracking-wider">Applications</th>
-                    <th className="pb-4 font-bold text-slate-400 text-xs uppercase tracking-wider">Status</th>
-                    <th className="pb-4 font-bold text-slate-400 text-xs uppercase tracking-wider text-right">Actions</th>
+                  <tr className="border-b-2 border-slate-900">
+                    <th className="pb-3 font-black text-slate-900 text-[10px] uppercase tracking-wider">Job Role</th>
+                    <th className="pb-3 font-black text-slate-900 text-[10px] uppercase tracking-wider">Date Posted</th>
+                    <th className="pb-3 font-black text-slate-900 text-[10px] uppercase tracking-wider">Applications</th>
+                    <th className="pb-3 font-black text-slate-900 text-[10px] uppercase tracking-wider">Status</th>
+                    <th className="pb-3 font-black text-slate-900 text-[10px] uppercase tracking-wider text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-50">
+                <tbody className="divide-y divide-slate-100">
                   {jobs.map(job => (
-                    <tr key={job._id} className="group">
-                      <td className="py-4">
-                        <p className="font-bold text-slate-800">{job.jobTitle}</p>
-                        <p className="text-[10px] text-slate-400">{job.location}</p>
+                    <tr key={job._id} className="hover:bg-slate-50 transition-colors">
+                      <td className="py-4 pr-4">
+                        <p className="font-bold text-slate-900 text-sm">{job.jobTitle}</p>
+                        <p className="text-xs text-slate-500 mt-0.5">{job.location}</p>
                       </td>
-                      <td className="py-4 text-sm text-slate-500">{new Date(job.createdAt).toLocaleDateString()}</td>
-                      <td className="py-4">
-                        <span className={`px-2 py-1 text-[10px] font-bold rounded ${job.applicationCount > 0 ? "bg-blue-100 text-blue-700" : "bg-slate-100 text-slate-700"}`}>
-                          {job.applicationCount || 0} Applications
+                      <td className="py-4 pr-4 text-sm font-bold text-slate-700">{new Date(job.createdAt).toLocaleDateString()}</td>
+                      <td className="py-4 pr-4">
+                        <span className={`px-2 py-1 text-[10px] font-bold rounded border ${job.applicationCount > 0 ? "bg-slate-900 text-white border-slate-900" : "bg-white text-slate-600 border-slate-200"}`}>
+                          {job.applicationCount || 0} Apps
                         </span>
                       </td>
-                      <td className="py-4">
-                        <span className="px-2 py-1 bg-blue-50 text-blue-600 text-[10px] font-bold rounded">Active</span>
+                      <td className="py-4 pr-4">
+                        <span className="px-2 py-1 bg-white text-slate-900 border border-slate-200 text-[10px] font-bold rounded uppercase tracking-wide">Active</span>
                       </td>
                       <td className="py-4">
-                        <div className="flex justify-end gap-4 items-center">
+                        <div className="flex justify-end gap-3 items-center">
                           <button 
                             onClick={(e) => checkVerification(e, `/company/applicants/${job._id}`)}
-                            className="text-blue-600 font-bold text-xs hover:underline cursor-pointer border-none bg-transparent p-0"
+                            className="px-3 py-1.5 bg-blue-600 text-white font-bold text-xs rounded hover:bg-blue-700 transition-colors cursor-pointer border-none"
                           >
                             View Application
                           </button>
                           <button
                             onClick={(e) => handleDeleteJob(e, job._id)}
-                            className="text-red-500 hover:text-red-600 cursor-pointer border-none bg-transparent p-0 flex items-center"
+                            className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors cursor-pointer border-none bg-transparent flex items-center"
                             title="Delete Job"
                           >
                             <Trash2 size={16} />
@@ -282,21 +289,25 @@ function CompanyDashboard() {
                   ))}
                 </tbody>
               </table>
-              {jobs.length === 0 && <div className="text-center py-20 text-slate-400 italic">No jobs found. Start by posting one!</div>}
+              {jobs.length === 0 && (
+                <div className="text-center py-16 bg-slate-50 rounded border border-slate-200 mt-4">
+                  <p className="text-sm font-bold text-slate-500">No jobs found. Start by posting one!</p>
+                </div>
+              )}
             </div>
           </div>
         )}
 
         {activeTab === "messages" && (
-           <div className="bg-white p-20 rounded-[32px] shadow-sm border border-slate-100 text-center">
-             <div className="w-20 h-20 bg-blue-50 rounded-[28px] flex items-center justify-center mx-auto mb-8 text-blue-500">
-               <MessageSquare size={32} />
+           <div className="bg-white p-12 md:p-20 rounded border border-slate-200 text-center flex flex-col items-center justify-center">
+             <div className="w-16 h-16 bg-slate-50 border border-slate-200 rounded flex items-center justify-center mb-6 text-slate-900">
+               <MessageSquare size={24} />
              </div>
-             <h3 className="text-2xl font-black text-slate-900 mb-4">Corporate Communications</h3>
-             <p className="text-slate-500 mb-10 max-w-sm mx-auto font-medium">Manage your candidate requests and active conversations in the professional messaging terminal.</p>
+             <h3 className="text-2xl font-black text-slate-900 mb-3">Corporate Communications</h3>
+             <p className="text-slate-500 mb-8 max-w-sm text-sm font-medium">Manage candidate requests and active conversations in the professional messaging terminal.</p>
              <Link 
               to="/messages"
-              className="inline-flex items-center gap-2 px-10 py-4 bg-blue-600 text-white font-black uppercase tracking-widest text-xs rounded hover:bg-blue-700 transition-all shadow-blue-600/20 no-underline"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-blue-600 text-white font-bold text-sm rounded hover:bg-blue-700 transition-colors no-underline"
              >
                Go to Messages
              </Link>

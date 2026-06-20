@@ -9,7 +9,7 @@ const ChatPage = () => {
   const navigate = useNavigate();
 
   if (!user && !company) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" replace state={{ requireAuth: "user-login" }} />;
   }
 
   const type = user ? "user" : "company";

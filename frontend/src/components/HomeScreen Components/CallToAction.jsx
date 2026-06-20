@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { AuthContext } from "../../API/AuthContext";
 
 function CallToAction() {
   const navigate = useNavigate();
+  const { openAuthModal } = useContext(AuthContext);
 
   return (
     <section className="w-full py-24 bg-slate-900 text-white text-center">
@@ -17,7 +19,7 @@ function CallToAction() {
         
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
           <button
-            onClick={() => navigate("/create")}
+            onClick={() => openAuthModal("user-register")}
             className="px-10 py-4 font-bold text-lg text-white bg-blue-600 rounded hover:bg-blue-600 transition-colors cursor-pointer border-none flex items-center justify-center gap-2 w-full sm:w-auto"
           >
             Create Free Account <ArrowRight size={20} />

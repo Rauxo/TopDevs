@@ -5,7 +5,7 @@ import logo from "../assets/TopDevs.png";
 import { Home, Briefcase, Building2, GraduationCap, Trophy, Terminal, LogOut, Key, Sparkles, ChevronUp, ChevronDown, Check, Search as SearchIcon } from "lucide-react";
 
 function Navbar() {
-  const { user, company, logout, companyLogout } = useContext(AuthContext);
+  const { user, company, logout, companyLogout, openAuthModal } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -55,8 +55,8 @@ function Navbar() {
 
   const isActive = (path) =>
     location.pathname === path
-      ? "inline-flex items-center gap-1 px-3.5 py-2 rounded-xl text-sm font-semibold bg-black/10 text-blue-700 transition-all"
-      : "inline-flex items-center gap-1 px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-800 hover:bg-black/8 transition-all";
+      ? "inline-flex items-center gap-1 px-3.5 py-2 rounded-xl text-sm font-semibold  text-blue-700 transition-all"
+      : "inline-flex items-center gap-1 px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-800 transition-all";
 
   const handleLogout = async () => {
     if (company) await companyLogout();
@@ -87,7 +87,7 @@ function Navbar() {
 
         {/* Search — hidden on mobile */}
         <form
-          className="hidden md:flex items-center flex-1 max-w-[380px] bg-white/60 rounded-xl border border-white/50 overflow-hidden focus-within:bg-white focus-within:border-blue-500 focus-within:shadow-[0_0_0_3px_rgba(59,130,246,0.15)] transition-all"
+          className="hidden md:flex items-center flex-1 max-w-[380px] bg-white/60 rounded-xl border  overflow-hidden focus-within:bg-white border-blue-500 shadow-[0_0_0_3px_rgba(59,130,246,0.15)] transition-all"
           onSubmit={handleSearch}
         >
           <input
@@ -95,7 +95,7 @@ function Navbar() {
             placeholder="Search username…"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="flex-1 h-11 px-4 border-none bg-transparent text-sm text-slate-800 placeholder-slate-500 outline-none font-[inherit]"
+            className="flex-1 h-11 px-4 border-none bg-transparent border border-blue-500 text-sm text-slate-800 placeholder-slate-500 outline-none font-[inherit]"
           />
           <button
             type="submit"
@@ -198,20 +198,20 @@ function Navbar() {
           ) : (
             <>
               <li>
-                <Link
-                  to="/login"
-                  className="inline-block px-[18px] py-2 rounded text-sm font-semibold text-slate-800 border-2 border-black/15 hover:bg-black/7 transition-all no-underline"
+                <button
+                  onClick={() => openAuthModal("user-login")}
+                  className="inline-block px-[18px] py-2 rounded text-sm font-semibold text-slate-800 border-2 border-black/15 hover:bg-black/7 transition-all bg-transparent cursor-pointer"
                 >
                   Login
-                </Link>
+                </button>
               </li>
               <li>
-                <Link
-                  to="/create"
-                  className="inline-block px-[18px] py-2 rounded text-sm font-bold text-white bg-[#2376ca] hover:bg-[#1d68b8] hover:-translate-y-px transition-all no-underline"
+                <button
+                  onClick={() => openAuthModal("user-register")}
+                  className="inline-block px-[18px] py-2 rounded text-sm font-bold text-white bg-[#2376ca] hover:bg-[#1d68b8] hover:-translate-y-px transition-all border-none cursor-pointer"
                 >
                   Register
-                </Link>
+                </button>
               </li>
             </>
           )}
@@ -329,18 +329,18 @@ function Navbar() {
             </>
           ) : (
             <>
-              <Link
-                to="/login"
-                className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+              <button
+                onClick={() => { openAuthModal("user-login"); setMobileOpen(false); }}
+                className="flex items-center gap-3 w-full text-left px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded hover:bg-slate-100 transition-colors mb-0.5 border-none bg-transparent cursor-pointer"
               >
                 <Key size={18} /> Login
-              </Link>
-              <Link
-                to="/create"
-                className="flex items-center gap-3 px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded hover:bg-slate-100 transition-colors mb-0.5 no-underline"
+              </button>
+              <button
+                onClick={() => { openAuthModal("user-register"); setMobileOpen(false); }}
+                className="flex items-center gap-3 w-full text-left px-4 py-3 text-slate-700 font-semibold text-[0.95rem] rounded hover:bg-slate-100 transition-colors mb-0.5 border-none bg-transparent cursor-pointer"
               >
                 <Sparkles size={18} /> Register
-              </Link>
+              </button>
             </>
           )}
         </div>

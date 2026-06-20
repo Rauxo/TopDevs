@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }) => {
   if (loading) return <p>Loading...</p>;
 
   if (!user) {
-    return <Navigate to="/" />;
+    return <Navigate to="/" replace state={{ requireAuth: "user-login" }} />;
   }
 
   return children;

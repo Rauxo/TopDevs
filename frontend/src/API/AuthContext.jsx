@@ -104,8 +104,25 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authModalMode, setAuthModalMode] = useState("user-login");
+
+  const openAuthModal = (mode = "user-login") => {
+    setAuthModalMode(mode);
+    setIsAuthModalOpen(true);
+  };
+
+  const closeAuthModal = () => {
+    setIsAuthModalOpen(false);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, setUser, company, setCompany, login, companyLogin, logout, companyLogout, register, companyRegister, loading, refreshAuth }}>
+    <AuthContext.Provider value={{ 
+      user, setUser, company, setCompany, 
+      login, companyLogin, logout, companyLogout, 
+      register, companyRegister, loading, refreshAuth,
+      isAuthModalOpen, authModalMode, openAuthModal, closeAuthModal
+    }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,7 +1,8 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { Rocket, Target, ArrowRight } from "lucide-react";
+import { AuthContext } from "../../API/AuthContext";
 import Features from "../../components/HomeScreen Components/Features";
 import OurGoal from "../../components/HomeScreen Components/OurGoal";
 import WhoWeAre from "../../components/HomeScreen Components/WhoWeAre";
@@ -11,6 +12,16 @@ import VideoShowcase from "../../components/VideoShowcase";
 
 function HomeScreen() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { openAuthModal } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (location.state?.requireAuth) {
+      openAuthModal(location.state.requireAuth);
+      // Clear the state so it doesn't reopen if they close and navigate back
+      navigate(".", { replace: true, state: {} });
+    }
+  }, [location, openAuthModal, navigate]);
 
   return (
     <>
@@ -37,13 +48,13 @@ function HomeScreen() {
 
             <div className="flex flex-wrap gap-4">
               <button
-                onClick={() => navigate("/create")}
+                onClick={() => openAuthModal("user-register")}
                 className="px-8 py-4 font-bold text-base text-white bg-blue-600 rounded hover:bg-blue-700 transition-colors cursor-pointer border-none flex items-center gap-2"
               >
                 Get Started <ArrowRight size={20} />
               </button>
               <button
-                onClick={() => navigate("/login")}
+                onClick={() => openAuthModal("user-login")}
                 className="px-8 py-4 font-bold text-base text-slate-900 bg-white border-2 border-slate-900 rounded hover:bg-slate-50 transition-colors cursor-pointer"
               >
                 Login

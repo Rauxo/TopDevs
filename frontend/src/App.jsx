@@ -1,12 +1,8 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import Login from "./pages/auth/Login";
-import Create from "./pages/auth/Create";
 import UserDashboard from "./pages/userProfile/UserDashboard";
 import EditProfile from "./pages/userProfile/EditProfile";
 import PublicUserProfile from "./pages/userProfile/PublicUserProfile";
 import ProtectedRoute from "./Protected Routes/ProtectedRoute";
-import CompanyLogin from "./pages/company/auth/CompanyLogin";
-import CompanyCreate from "./pages/company/auth/CompanyCreate";
 import CompanyDashboard from "./pages/company/CompanyDashboard";
 import CompanyProtectedRoute from "./Protected Routes/CompanyProtectedRoute";
 import HomeScreen from "./pages/HomeScreen/HomeScreen";
@@ -42,6 +38,7 @@ import ContactUs from "./pages/ContactUs";
 import ChatPage from "./pages/ChatPage";
 import Pricing from "./pages/Pricing";
 import PaymentStatus from "./pages/PaymentStatus";
+import AuthModal from "./components/auth/AuthModal";
 // import Lenis from "lenis";
 // import { gsap } from "gsap";
 // import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -76,8 +73,6 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<HomeScreen />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/create" element={<Create />} />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/companies" element={<Companies />} />
           <Route path="/jobs/:id" element={<JobDetail />} />
@@ -136,8 +131,6 @@ function App() {
           />
 
           {/* Company Routes */}
-          <Route path="/company/login" element={<CompanyLogin />} />
-          <Route path="/company/create" element={<CompanyCreate />} />
           <Route
             path="/company/dashboard"
             element={
@@ -224,6 +217,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>
+      <AuthModal />
     </BrowserRouter>
   );
 }

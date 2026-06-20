@@ -6,7 +6,7 @@ import { AuthContext } from "../../API/AuthContext";
 
 const JobDetailPane = ({ jobId, onClose }) => {
   const navigate = useNavigate();
-  const { user, loading: authLoading } = useContext(AuthContext);
+  const { user, loading: authLoading, openAuthModal } = useContext(AuthContext);
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
   const [applying, setApplying] = useState(false);
@@ -60,7 +60,7 @@ const JobDetailPane = ({ jobId, onClose }) => {
     e.preventDefault();
     if (!user) {
       alert("Please login as a user to apply");
-      navigate("/login");
+      openAuthModal("user-login");
       return;
     }
 
@@ -141,7 +141,7 @@ const JobDetailPane = ({ jobId, onClose }) => {
                        {alreadyApplied ? "Applied" : "Apply now"}
                      </button>
                    ) : (
-                     <button onClick={() => navigate("/login")} className="w-full md:w-auto px-6 py-2 bg-blue-600 text-white font-bold rounded hover:bg-blue-700 transition-colors text-sm">
+                     <button onClick={() => openAuthModal("user-login")} className="w-full md:w-auto px-6 py-2 bg-blue-600 text-white font-bold rounded hover:bg-blue-700 transition-colors text-sm">
                        Sign in to Apply
                      </button>
                    )}

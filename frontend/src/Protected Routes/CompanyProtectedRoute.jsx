@@ -8,7 +8,7 @@ const CompanyProtectedRoute = ({ children }) => {
   if (loading) return <div>Loading...</div>;
 
   if (!company) {
-    return <Navigate to="/company/login" />;
+    return <Navigate to="/" replace state={{ requireAuth: "company-login" }} />;
   }
 
   return children;

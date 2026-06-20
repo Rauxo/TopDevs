@@ -92,7 +92,7 @@ const AdminLayout = ({ children }) => {
 
       {/* Mobile Sidebar Overlay */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[100] lg:hidden">
+        <div className="fixed inset-0 z-[9999] lg:hidden">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setMobileOpen(false)}></div>
           <aside className="absolute inset-y-0 left-0 w-80 bg-slate-900 p-6 flex flex-col animate-slide-right">
              <div className="flex items-center justify-between mb-10">

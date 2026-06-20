@@ -229,7 +229,7 @@ const PublicUserProfile = () => {
       
       {/* Full Screen Image Viewer */}
       {fullScreenGallery.isOpen && (
-        <div className="fixed inset-0 z-[60] bg-black/90 flex items-center justify-center p-4 backdrop-blur-sm" onClick={() => setFullScreenGallery({ ...fullScreenGallery, isOpen: false })}>
+        <div className="fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center p-4 backdrop-blur-sm" onClick={() => setFullScreenGallery({ ...fullScreenGallery, isOpen: false })}>
           <button className="absolute top-6 right-6 text-white hover:text-slate-300 transition-colors p-2 bg-black/50 rounded-full z-10" onClick={() => setFullScreenGallery({ ...fullScreenGallery, isOpen: false })}>
             <X size={24} />
           </button>

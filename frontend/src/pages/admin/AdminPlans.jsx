@@ -124,7 +124,7 @@ const AdminPlans = () => {
 
         {/* Add Plan Modal */}
         {showAddModal && (
-          <div className="fixed inset-0 z-[1200] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300">
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-300">
             <div className="bg-white rounded-[40px] shadow-2xl max-w-md w-full p-10 animate-in zoom-in-95 duration-300">
               <h2 className="text-2xl font-black text-slate-900 mb-8">Create New Plan</h2>
               <form onSubmit={handleAddPlan} className="space-y-6">

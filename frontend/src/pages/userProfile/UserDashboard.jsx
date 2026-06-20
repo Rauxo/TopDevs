@@ -506,7 +506,7 @@ function UserDashboard() {
       {/* Full Screen Image Viewer */}
       {fullScreenGallery.isOpen && (
         <div
-          className="fixed inset-0 z-[60] bg-black/90 flex items-center justify-center p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] bg-black/90 flex items-center justify-center p-4 backdrop-blur-sm"
           onClick={() =>
             setFullScreenGallery({ ...fullScreenGallery, isOpen: false })
           }

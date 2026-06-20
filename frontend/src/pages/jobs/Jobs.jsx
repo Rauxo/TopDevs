@@ -125,7 +125,7 @@ const Jobs = () => {
 
         {/* Right Pane - Mobile Overlay */}
         {isMobilePaneOpen && (
-          <div className="fixed inset-0 z-[100] lg:hidden bg-white flex flex-col">
+          <div className="fixed inset-0 z-[9999] lg:hidden bg-white flex flex-col">
             <JobDetailPane jobId={selectedJobId} onClose={() => setIsMobilePaneOpen(false)} />
           </div>
         )}

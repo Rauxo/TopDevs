@@ -197,7 +197,7 @@ const JobDetailPane = ({ jobId, onClose }) => {
 
         {/* Application Modal */}
         {showModal && (
-          <div className="fixed inset-0 z-[1100] flex items-center justify-center p-4 bg-black/50">
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/50">
             <div className="bg-white w-full max-w-lg rounded-lg shadow-xl overflow-hidden flex flex-col max-h-[90vh]">
               <div className="px-6 py-4 border-b border-slate-200 flex justify-between items-center bg-slate-50">
                 <h2 className="text-lg font-bold text-slate-900">Apply to {job.company?.name || "Company"}</h2>

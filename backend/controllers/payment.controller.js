@@ -1,14 +1,13 @@
 const planModel = require("../models/plan.model");
 const userModel = require("../models/user.models");
 const companyModel = require("../models/company.model");
-const { Cashfree, CFEnvironment } = require("cashfree-pg");
+const { Cashfree } = require("cashfree-pg");
 
-// Ensure environment variables are configured
-Cashfree.XClientId = process.env.CASHFREE_APP_ID;
-Cashfree.XClientSecret = process.env.CASHFREE_SECRET_KEY;
-Cashfree.XEnvironment = CFEnvironment.SANDBOX;
-
-const cashfree = new Cashfree();
+const cashfree = new Cashfree(
+  Cashfree.SANDBOX,
+  process.env.CASHFREE_APP_ID,
+  process.env.CASHFREE_SECRET_KEY,
+);
 
 exports.createOrder = async (req, res) => {
   try {
@@ -33,7 +32,19 @@ exports.createOrder = async (req, res) => {
       },
     };
 
-    const response = await cashfree.PGCreateOrder(request);
+    const response = await cashfree.PGCreateOrder({
+      order_amount: plan.price,
+      order_currency: "INR",
+      order_id: orderId,
+      customer_details: {
+        customer_id: user._id.toString(),
+        customer_phone: user.phone || "9999999999",
+        customer_email: user.email || "test@topdevs.com",
+      },
+      order_meta: {
+        return_url: `http://localhost:5173/payment-status?order_id=${orderId}`,
+      },
+    });
 
     if (response.data && response.data.payment_session_id) {
       res.status(200).json({
@@ -62,7 +73,7 @@ exports.verifyPayment = async (req, res) => {
     const type = req.user ? "User" : "Company";
 
     // Fetch the order status directly from Cashfree
-    const response = await cashfree.PGFetchOrder(order_id);
+    const response = await Cashfree.PGFetchOrder("2023-08-01", order_id);
 
     if (response.data && response.data.order_status === "PAID") {
       // Payment verified, upgrade user plan

@@ -12,6 +12,7 @@ import {
   Link as LinkIcon,
   ChevronLeft,
   ChevronRight,
+  Trash2,
 } from "lucide-react";
 import API from "../../API/api";
 import UserLevelTick from "../../components/UserLevelTick";
@@ -48,6 +49,17 @@ function UserDashboard() {
       setProjects(res.data.projects);
     } catch (err) {
       console.error("Error fetching projects", err);
+    }
+  };
+
+  const handleDeleteProject = async (projectId) => {
+    if (!window.confirm("Are you sure you want to delete this project?")) return;
+    try {
+      await API.delete(`/project/${projectId}`);
+      setProjects((prev) => prev.filter((p) => p._id !== projectId));
+    } catch (err) {
+      console.error("Error deleting project", err);
+      alert("Failed to delete project. Please try again.");
     }
   };
 
@@ -273,25 +285,34 @@ function UserDashboard() {
                         <p className="text-xs text-slate-500 mb-4 line-clamp-2 flex-1">
                           {proj.description}
                         </p>
-                        <div className="flex items-center gap-3 mt-auto">
-                          <a
-                            href={proj.githubLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-blue-600 bg-slate-50 px-3 py-1.5 rounded border border-slate-200 hover:border-blue-200 transition-colors"
-                          >
-                            <FolderGit2 size={14} /> Code
-                          </a>
-                          {proj.liveLink && (
+                        <div className="flex items-center justify-between mt-auto">
+                          <div className="flex items-center gap-3">
                             <a
-                              href={proj.liveLink}
+                              href={proj.githubLink}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="flex items-center gap-1.5 text-xs font-bold text-blue-700 hover:text-white bg-blue-50 hover:bg-blue-600 px-3 py-1.5 rounded border border-blue-100 transition-colors"
+                              className="flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-blue-600 bg-slate-50 px-3 py-1.5 rounded border border-slate-200 hover:border-blue-200 transition-colors"
                             >
-                              <LinkIcon size={14} /> Live Demo
+                              <FolderGit2 size={14} /> Code
                             </a>
-                          )}
+                            {proj.liveLink && (
+                              <a
+                                href={proj.liveLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-1.5 text-xs font-bold text-blue-700 hover:text-white bg-blue-50 hover:bg-blue-600 px-3 py-1.5 rounded border border-blue-100 transition-colors"
+                              >
+                                <LinkIcon size={14} /> Live Demo
+                              </a>
+                            )}
+                          </div>
+                          <button
+                            onClick={() => handleDeleteProject(proj._id)}
+                            className="p-1.5 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded transition-colors border-none bg-transparent cursor-pointer"
+                            title="Delete project"
+                          >
+                            <Trash2 size={15} />
+                          </button>
                         </div>
                       </div>
                     </div>

@@ -5,7 +5,7 @@ import { X, User, Lock, Eye, EyeOff, Mail, Camera, Building2, Phone, MapPin, Ima
 import logo from "../../assets/TopDevs.png";
 
 const AuthModal = () => {
-  const { isAuthModalOpen, authModalMode, closeAuthModal, openAuthModal, login, register, companyLogin, companyRegister } = useContext(AuthContext);
+  const { isAuthModalOpen, authModalMode, closeAuthModal, openAuthModal, login, register, companyLogin, companyRegister, verifyOtp, resendOtp } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
@@ -18,6 +18,9 @@ const AuthModal = () => {
   const [userProfilePic, setUserProfilePic] = useState(null);
   const [userPreview, setUserPreview] = useState(null);
   const userFileInputRef = useRef(null);
+
+  const [otpForm, setOtpForm] = useState({ otp: "" });
+  const [registeredUserId, setRegisteredUserId] = useState(null);
 
   const [compLoginForm, setCompLoginForm] = useState({ email: "", password: "" });
   
@@ -56,11 +59,33 @@ const AuthModal = () => {
     formData.append("password", userRegForm.password);
     if (userProfilePic) formData.append("profilePic", userProfilePic);
     try {
-      await register(formData);
-      alert("Account created successfully! Please login.");
+      const res = await register(formData);
+      setRegisteredUserId(res.userId);
+      openAuthModal("user-verify-otp");
+    } catch (err) {
+      setError(err.response?.data?.message || "Registration failed. Please try again.");
+    } finally { setLoading(false); }
+  };
+
+  const handleVerifyOtpSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true); setError("");
+    try {
+      await verifyOtp({ userId: registeredUserId, otp: otpForm.otp });
+      alert("Account verified successfully! Please sign in.");
       openAuthModal("user-login");
     } catch (err) {
-      setError("Registration failed. Please try again.");
+      setError(err.response?.data?.message || "Invalid OTP. Please try again.");
+    } finally { setLoading(false); }
+  };
+
+  const handleResendOtp = async () => {
+    setLoading(true); setError("");
+    try {
+      await resendOtp({ userId: registeredUserId });
+      alert("A new OTP has been sent to your email.");
+    } catch (err) {
+      setError(err.response?.data?.message || "Failed to resend OTP.");
     } finally { setLoading(false); }
   };
 
@@ -169,6 +194,26 @@ const AuthModal = () => {
       </button>
       <div className="text-center mt-2 text-sm text-slate-600">
         Already have an account? <button type="button" onClick={() => openAuthModal("user-login")} className="text-blue-600 font-bold hover:underline">Sign in</button>
+      </div>
+    </form>
+  );
+
+  const renderUserVerifyOtp = () => (
+    <form onSubmit={handleVerifyOtpSubmit} className="flex flex-col gap-4">
+      <div className="text-center text-sm text-slate-600 mb-2">
+        We've sent a 6-digit OTP to your email. Please enter it below to verify your account.
+      </div>
+      <div>
+        <label className={labelClass}>OTP</label>
+        <div className="relative">
+          <input type="text" value={otpForm.otp} onChange={(e) => setOtpForm({ ...otpForm, otp: e.target.value })} className={`${inputClass} tracking-[0.5em] font-mono text-center font-bold text-lg`} placeholder="------" required maxLength={6} />
+        </div>
+      </div>
+      <button type="submit" disabled={loading} className={btnClass}>
+        {loading ? "Verifying..." : <>Verify Account <Check size={16} /></>}
+      </button>
+      <div className="text-center mt-2 text-sm text-slate-600">
+        Didn't receive it? <button type="button" onClick={handleResendOtp} disabled={loading} className="text-blue-600 font-bold hover:underline disabled:opacity-50">Resend OTP</button>
       </div>
     </form>
   );
@@ -309,6 +354,7 @@ const AuthModal = () => {
           <h2 className="text-xl font-bold text-slate-900 mb-1">
             {authModalMode === "user-login" && "Welcome Back"}
             {authModalMode === "user-register" && "Create an Account"}
+            {authModalMode === "user-verify-otp" && "Verify Your Email"}
             {authModalMode === "company-login" && "Company Portal"}
             {authModalMode === "company-register" && "Register Company"}
           </h2>
@@ -324,6 +370,7 @@ const AuthModal = () => {
 
           {authModalMode === "user-login" && renderUserLogin()}
           {authModalMode === "user-register" && renderUserRegister()}
+          {authModalMode === "user-verify-otp" && renderUserVerifyOtp()}
           {authModalMode === "company-login" && renderCompLogin()}
           {authModalMode === "company-register" && renderCompRegister()}
         </div>

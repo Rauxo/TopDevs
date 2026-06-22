@@ -58,6 +58,16 @@ export const AuthProvider = ({ children }) => {
     return res.data;
   };
 
+  const verifyOtp = async (data) => {
+    const res = await API.post("/auth/verify-otp", data);
+    return res.data;
+  };
+
+  const resendOtp = async (data) => {
+    const res = await API.post("/auth/resend-otp", data);
+    return res.data;
+  };
+
   const companyRegister = async (formData) => {
     const res = await API.post("/company/create", formData, {
       headers: {
@@ -121,6 +131,7 @@ export const AuthProvider = ({ children }) => {
       user, setUser, company, setCompany, 
       login, companyLogin, logout, companyLogout, 
       register, companyRegister, loading, refreshAuth,
+      verifyOtp, resendOtp,
       isAuthModalOpen, authModalMode, openAuthModal, closeAuthModal
     }}>
       {children}

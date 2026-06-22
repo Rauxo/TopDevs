@@ -26,6 +26,16 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  isVerified: {
+    type: Boolean,
+    default: false,
+  },
+  otp: {
+    type: String,
+  },
+  otpExpiry: {
+    type: Date,
+  },
   plan: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Plan",

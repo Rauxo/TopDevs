@@ -2,6 +2,7 @@ const userModel = require("../models/user.models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const blacklistModel = require("../models/blacklist.model");
+const sendEmail = require("../utils/sendEmail");
 
 //controller to create account
 exports.createAccount = async (req, res) => {
@@ -21,32 +22,53 @@ exports.createAccount = async (req, res) => {
     const Usernameexisting = await userModel.findOne({ username });
 
     if (Emailexisting) {
-      return res.status(400).json({
-        message: "User email already exists",
-      });
+      if (Emailexisting.isVerified) {
+        return res.status(400).json({
+          message: "User email already exists",
+        });
+      } else {
+        await userModel.deleteOne({ email });
+      }
     }
 
     if (Usernameexisting) {
-      return res.status(400).json({
-        message: "Username already exists",
-      });
+      if (Usernameexisting.isVerified) {
+        return res.status(400).json({
+          message: "Username already exists",
+        });
+      } else {
+        await userModel.deleteOne({ username });
+      }
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
 
     const newUser = await userModel.create({
       username,
       email,
       password: hashedPassword,
       profileImg,
+      otp,
+      otpExpiry,
+      isVerified: false
     });
 
-    const userObj = newUser.toObject();
-    delete userObj.password;
+    const emailSent = await sendEmail({
+      email,
+      subject: "Verify your TopDevs account",
+      message: "Thank you for registering on TopDevs. Please use the following OTP to verify your email address and complete your registration.",
+      otp,
+    });
+
+    if (!emailSent) {
+      return res.status(500).json({ message: "Failed to send OTP email" });
+    }
 
     return res.status(201).json({
-      message: "User registered successfully",
-      user: userObj,
+      message: "OTP sent to email. Please verify to complete registration.",
+      userId: newUser._id,
     });
   } catch (error) {
     return res.status(500).json({
@@ -73,6 +95,14 @@ exports.login = async (req, res) => {
         message: "User Not Found.",
       });
     }
+
+    if (!user.isVerified) {
+      return res.status(403).json({
+        message: "Please verify your account first.",
+        userId: user._id
+      });
+    }
+
     //  Compare password
     const isMatch = await bcrypt.compare(password, user.password);
 
@@ -104,6 +134,100 @@ exports.login = async (req, res) => {
     return res.status(500).json({
       message: "Something went wrong.",
     });
+  }
+};
+
+// OTP Verification
+exports.verifyOtp = async (req, res) => {
+  try {
+    const { userId, otp } = req.body;
+
+    if (!userId || !otp) {
+      return res.status(400).json({ message: "User ID and OTP are required" });
+    }
+
+    const user = await userModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (user.isVerified) {
+      return res.status(400).json({ message: "User is already verified" });
+    }
+
+    if (user.otp !== otp || user.otpExpiry < new Date()) {
+      return res.status(400).json({ message: "Invalid or expired OTP" });
+    }
+
+    user.isVerified = true;
+    user.otp = undefined;
+    user.otpExpiry = undefined;
+    await user.save();
+
+    // Generate token (JWT)
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "strict",
+    });
+
+    const userObj = user.toObject();
+    delete userObj.password;
+
+    return res.status(200).json({
+      message: "Account verified and logged in successfully",
+      user: userObj,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+// Resend OTP
+exports.resendOtp = async (req, res) => {
+  try {
+    const { userId } = req.body;
+
+    if (!userId) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
+
+    const user = await userModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (user.isVerified) {
+      return res.status(400).json({ message: "User is already verified" });
+    }
+
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
+
+    user.otp = otp;
+    user.otpExpiry = otpExpiry;
+    await user.save();
+
+    const emailSent = await sendEmail({
+      email: user.email,
+      subject: "Resend: Verify your TopDevs account",
+      message: "Please use the following OTP to verify your email address and complete your registration.",
+      otp,
+    });
+
+    if (!emailSent) {
+      return res.status(500).json({ message: "Failed to send OTP email" });
+    }
+
+    return res.status(200).json({ message: "OTP sent to email successfully" });
+  } catch (error) {
+    return res.status(500).json({ message: "Something went wrong" });
   }
 };
 

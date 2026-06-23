@@ -10,6 +10,7 @@ const SolvePage = () => {
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [code, setCode] = useState("");
+  const [language, setLanguage] = useState("javascript");
   const [timer, setTimer] = useState(0);
   const [isRunning, setIsRunning] = useState(true);
   const [loading, setLoading] = useState(true);
@@ -26,6 +27,10 @@ const SolvePage = () => {
         setQuestions(res.data);
         if (res.data.length > 0) {
           setCode(res.data[0].boilerplateCode);
+          if (res.data[0].level && res.data[0].level.language) {
+            const langName = res.data[0].level.language.name.toLowerCase();
+            setLanguage(langName === 'c++' || langName === 'c' ? 'cpp' : langName);
+          }
         }
       } catch (err) {
         console.error("Error fetching questions", err);
@@ -171,7 +176,7 @@ const SolvePage = () => {
           <div className="flex-1 bg-[#1e1e1e]">
             <Editor
               height="100%"
-              defaultLanguage="javascript"
+              language={language}
               theme="vs-dark"
               value={code}
               onChange={(value) => setCode(value)}

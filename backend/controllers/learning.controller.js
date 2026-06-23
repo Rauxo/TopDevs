@@ -4,6 +4,68 @@ const Question = require("../models/question.model");
 const User = require("../models/user.models");
 const Settings = require("../models/settings.model");
 const Submission = require("../models/submission.model");
+const axios = require("axios");
+
+const getPistonConfig = (languageName, userCode) => {
+    const lang = languageName.toLowerCase();
+    switch(lang) {
+        case 'python':
+            return {
+                language: 'python',
+                version: '*',
+                content: `import sys\nimport json\n\n${userCode}\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    try:\n        parsed = json.loads(input_data)\n        print(solve(parsed))\n    except:\n        print(solve(input_data))\n`
+            };
+        case 'go':
+            return {
+                language: 'go',
+                version: '*',
+                content: `package main\nimport (\n\t"fmt"\n\t"io/ioutil"\n\t"os"\n)\n\n${userCode}\n\nfunc main() {\n\tbytes, _ := ioutil.ReadAll(os.Stdin)\n\tfmt.Print(solve(string(bytes)))\n}\n`
+            };
+        case 'c++':
+        case 'cpp':
+            return {
+                language: 'c++',
+                version: '*',
+                content: `#include <iostream>\n#include <string>\nusing namespace std;\n\n${userCode}\n\nint main() {\n    string input;\n    getline(cin, input);\n    cout << solve(input);\n    return 0;\n}\n`
+            };
+        case 'java':
+            return {
+                language: 'java',
+                version: '*',
+                content: `import java.util.Scanner;\n\npublic class Main {\n\n${userCode}\n\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        if(scanner.hasNextLine()) {\n            System.out.print(solve(scanner.nextLine()));\n        }\n    }\n}\n`
+            };
+        case 'javascript':
+        case 'js':
+        default:
+            return {
+                language: 'javascript',
+                version: '*',
+                content: `const fs = require('fs');\n\n${userCode}\n\nconst input = fs.readFileSync('/dev/stdin', 'utf-8').trim();\ntry {\n    const parsed = JSON.parse(input);\n    console.log(solve(parsed));\n} catch (e) {\n    console.log(solve(input));\n}\n`
+            };
+    }
+};
+
+const executeWithPiston = async (languageName, code, input) => {
+    const config = getPistonConfig(languageName, code);
+    const payload = {
+        language: config.language,
+        version: config.version,
+        files: [{ content: config.content }],
+        stdin: String(input)
+    };
+    try {
+        const response = await axios.post("https://emkc.org/api/v2/piston/execute", payload);
+        if (response.data.compile && response.data.compile.code !== 0) {
+            throw new Error(response.data.compile.output);
+        }
+        if (response.data.run.code !== 0) {
+            throw new Error(response.data.run.output);
+        }
+        return response.data.run.output;
+    } catch (error) {
+        throw new Error(error.response?.data?.message || error.message);
+    }
+};
 
 exports.getLanguages = async (req, res) => {
   try {
@@ -107,7 +169,10 @@ exports.getLevelContent = async (req, res) => {
 exports.getQuestions = async (req, res) => {
   try {
     const { levelId } = req.params;
-    const questions = await Question.find({ level: levelId });
+    const questions = await Question.find({ level: levelId }).populate({
+        path: 'level',
+        populate: { path: 'language' }
+    });
     res.status(200).json(questions);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -117,8 +182,13 @@ exports.getQuestions = async (req, res) => {
 exports.submitCode = async (req, res) => {
   try {
     const { questionId, code, timeTaken } = req.body;
-    const question = await Question.findById(questionId).populate('level');
+    const question = await Question.findById(questionId).populate({
+        path: 'level',
+        populate: { path: 'language' }
+    });
     if (!question) return res.status(404).json({ message: "Question not found" });
+
+    const languageName = question.level.language.name;
 
     let isCorrect = false;
     let errorMessage = "";
@@ -130,31 +200,12 @@ exports.submitCode = async (req, res) => {
     }
 
     try {
-        if (code.includes('process') || code.includes('require') || code.includes('import')) {
-            throw new Error("Malicious code detected: usage of process/require/import is forbidden.");
-        }
-
-        const runner = new Function('input', `
-            ${code}
-            if (typeof solve !== 'function') {
-                throw new Error("Your code must define a function named 'solve' (e.g. function solve(input) { ... })");
-            }
-            return solve(input);
-        `);
-
         for (const testCase of question.testCases) {
-            let inputData;
-            try {
-                inputData = JSON.parse(testCase.input);
-            } catch {
-                inputData = testCase.input;
-            }
-
-            const output = runner(inputData);
+            const output = await executeWithPiston(languageName, code, testCase.input);
             if (String(output).trim() === String(testCase.expectedOutput).trim()) {
                 passedTests++;
             } else {
-                errorMessage = `Test case failed! Input: ${testCase.input} | Expected: ${testCase.expectedOutput} | Output: ${output}`;
+                errorMessage = `Test case failed! Input: ${testCase.input} | Expected: ${testCase.expectedOutput} | Output: ${String(output).trim()}`;
                 break;
             }
         }
@@ -162,7 +213,7 @@ exports.submitCode = async (req, res) => {
         if (passedTests === totalTests) isCorrect = true;
     } catch (err) {
         isCorrect = false;
-        errorMessage = `Runtime Error: ${err.message}`;
+        errorMessage = `Execution Error: ${err.message}`;
     }
 
     const submission = await Submission.create({
@@ -228,8 +279,13 @@ exports.submitCode = async (req, res) => {
 exports.runCode = async (req, res) => {
   try {
     const { questionId, code } = req.body;
-    const question = await Question.findById(questionId);
+    const question = await Question.findById(questionId).populate({
+        path: 'level',
+        populate: { path: 'language' }
+    });
     if (!question) return res.status(404).json({ message: "Question not found" });
+
+    const languageName = question.level.language.name;
 
     let isCorrect = false;
     let errorMessage = "";
@@ -241,31 +297,12 @@ exports.runCode = async (req, res) => {
     }
 
     try {
-        if (code.includes('process') || code.includes('require') || code.includes('import')) {
-            throw new Error("Malicious code detected: usage of process/require/import is forbidden.");
-        }
-
-        const runner = new Function('input', `
-            ${code}
-            if (typeof solve !== 'function') {
-                throw new Error("Your code must define a function named 'solve' (e.g. function solve(input) { ... })");
-            }
-            return solve(input);
-        `);
-
         for (const testCase of question.testCases) {
-            let inputData;
-            try {
-                inputData = JSON.parse(testCase.input);
-            } catch {
-                inputData = testCase.input;
-            }
-
-            const output = runner(inputData);
+            const output = await executeWithPiston(languageName, code, testCase.input);
             if (String(output).trim() === String(testCase.expectedOutput).trim()) {
                 passedTests++;
             } else {
-                errorMessage = `Test case failed! Input: ${testCase.input} | Expected: ${testCase.expectedOutput} | Output: ${output}`;
+                errorMessage = `Test case failed! Input: ${testCase.input} | Expected: ${testCase.expectedOutput} | Output: ${String(output).trim()}`;
                 break;
             }
         }
@@ -273,7 +310,7 @@ exports.runCode = async (req, res) => {
         if (passedTests === totalTests) isCorrect = true;
     } catch (err) {
         isCorrect = false;
-        errorMessage = `Runtime Error: ${err.message}`;
+        errorMessage = `Execution Error: ${err.message}`;
     }
 
     if (isCorrect) {

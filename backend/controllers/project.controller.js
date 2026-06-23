@@ -16,7 +16,7 @@ exports.createProject = async (req, res) => {
         return res.status(400).json({ success: false, message: "GitHub link is required." });
     }
     
-    const images = req.files.map(file => file.path.replace(/\\/g, '/')); // Normalize path for windows
+    const images = req.files.map(file => file.path.replace(/\\/g, '/'));
 
     const newProject = new Project({
       user: req.user._id,

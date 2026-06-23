@@ -29,7 +29,7 @@ exports.sendMessage = async (req, res) => {
       });
     }
 
-    // Find or create conversation
+    //  conversation
     let conversation = await conversationModel.findOne({
       $and: [
         { "participants.participantId": senderId },
@@ -38,7 +38,7 @@ exports.sendMessage = async (req, res) => {
     });
 
     if (!conversation) {
-      // User to User check (prohibited)
+      // User to User check 
       if (senderType === "User" && receiverType === "User") {
         return res.status(403).json({ message: "Direct user-to-user messaging is not allowed." });
       }
@@ -83,7 +83,7 @@ exports.getConversations = async (req, res) => {
       "participants.participantId": userId
     }).sort({ updatedAt: -1 });
 
-    // Populate participant details manually or via complex populate
+    // Populate participant details
     const populatedConversations = await Promise.all(conversations.map(async (conv) => {
       const otherParticipant = conv.participants.find(p => p.participantId.toString() !== userId.toString());
       let details = null;

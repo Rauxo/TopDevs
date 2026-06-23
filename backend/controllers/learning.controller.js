@@ -214,13 +214,21 @@ exports.submitCode = async (req, res) => {
         return res.status(400).json({ message: "Configuration Error: No test cases available for this question." });
     }
 
+    // Validate all test cases have required fields
+    const badCase = question.testCases.find(tc => tc.expectedOutput === undefined || tc.expectedOutput === null || tc.expectedOutput === '');
+    if (badCase) {
+        return res.status(400).json({ message: "Configuration Error: A test case is missing its expected output. Please contact the admin." });
+    }
+
     try {
         for (const testCase of question.testCases) {
-            const output = await executeWithJDoodle(languageName, code, testCase.input);
-            if (String(output).trim() === String(testCase.expectedOutput).trim()) {
+            const rawOutput = await executeWithJDoodle(languageName, code, testCase.input);
+            // Keep only lines before any traceback/error block
+            const output = rawOutput.split('Traceback')[0].split('Error:')[0].trim();
+            if (output === String(testCase.expectedOutput).trim()) {
                 passedTests++;
             } else {
-                errorMessage = `Test case failed! Input: ${testCase.input} | Expected: ${testCase.expectedOutput} | Output: ${String(output).trim()}`;
+                errorMessage = `Test case failed!\nInput: ${testCase.input}\nExpected: ${testCase.expectedOutput}\nYour Output: ${output}`;
                 break;
             }
         }
@@ -311,13 +319,21 @@ exports.runCode = async (req, res) => {
         return res.status(400).json({ message: "Configuration Error: No test cases available for this question." });
     }
 
+    // Validate all test cases have required fields
+    const badCase = question.testCases.find(tc => tc.expectedOutput === undefined || tc.expectedOutput === null || tc.expectedOutput === '');
+    if (badCase) {
+        return res.status(400).json({ message: "Configuration Error: A test case is missing its expected output. Please contact the admin." });
+    }
+
     try {
         for (const testCase of question.testCases) {
-            const output = await executeWithJDoodle(languageName, code, testCase.input);
-            if (String(output).trim() === String(testCase.expectedOutput).trim()) {
+            const rawOutput = await executeWithJDoodle(languageName, code, testCase.input);
+            // Keep only lines before any traceback/error block
+            const output = rawOutput.split('Traceback')[0].split('Error:')[0].trim();
+            if (output === String(testCase.expectedOutput).trim()) {
                 passedTests++;
             } else {
-                errorMessage = `Test case failed! Input: ${testCase.input} | Expected: ${testCase.expectedOutput} | Output: ${String(output).trim()}`;
+                errorMessage = `Test case failed!\nInput: ${testCase.input}\nExpected: ${testCase.expectedOutput}\nYour Output: ${output}`;
                 break;
             }
         }

@@ -6,64 +6,79 @@ const Settings = require("../models/settings.model");
 const Submission = require("../models/submission.model");
 const axios = require("axios");
 
-const getPistonConfig = (languageName, userCode) => {
+// JDoodle Language Config (api.jdoodle.com)
+const getJDoodleConfig = (languageName, userCode) => {
     const lang = languageName.toLowerCase();
-    switch(lang) {
+    let language, versionIndex, content;
+
+    switch (lang) {
         case 'python':
-            return {
-                language: 'python',
-                version: '*',
-                content: `import sys\nimport json\n\n${userCode}\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    try:\n        parsed = json.loads(input_data)\n        print(solve(parsed))\n    except:\n        print(solve(input_data))\n`
-            };
+            language = 'python3';
+            versionIndex = '4';
+            content = `import sys\nimport json\n\n${userCode}\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().strip()\n    try:\n        parsed = json.loads(input_data)\n        print(solve(parsed))\n    except:\n        print(solve(input_data))\n`;
+            break;
         case 'go':
-            return {
-                language: 'go',
-                version: '*',
-                content: `package main\nimport (\n\t"fmt"\n\t"io/ioutil"\n\t"os"\n)\n\n${userCode}\n\nfunc main() {\n\tbytes, _ := ioutil.ReadAll(os.Stdin)\n\tfmt.Print(solve(string(bytes)))\n}\n`
-            };
+            language = 'go';
+            versionIndex = '4';
+            content = `package main\nimport (\n\t"fmt"\n\t"io/ioutil"\n\t"os"\n)\n\n${userCode}\n\nfunc main() {\n\tbytes, _ := ioutil.ReadAll(os.Stdin)\n\tfmt.Print(solve(string(bytes)))\n}\n`;
+            break;
         case 'c++':
         case 'cpp':
-            return {
-                language: 'c++',
-                version: '*',
-                content: `#include <iostream>\n#include <string>\nusing namespace std;\n\n${userCode}\n\nint main() {\n    string input;\n    getline(cin, input);\n    cout << solve(input);\n    return 0;\n}\n`
-            };
+            language = 'cpp17';
+            versionIndex = '1';
+            content = `#include <iostream>\n#include <string>\nusing namespace std;\n\n${userCode}\n\nint main() {\n    string input;\n    getline(cin, input);\n    cout << solve(input);\n    return 0;\n}\n`;
+            break;
         case 'java':
-            return {
-                language: 'java',
-                version: '*',
-                content: `import java.util.Scanner;\n\npublic class Main {\n\n${userCode}\n\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        if(scanner.hasNextLine()) {\n            System.out.print(solve(scanner.nextLine()));\n        }\n    }\n}\n`
-            };
+            language = 'java';
+            versionIndex = '4';
+            content = `import java.util.Scanner;\n\npublic class Main {\n\n${userCode}\n\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        if(scanner.hasNextLine()) {\n            System.out.print(solve(scanner.nextLine()));\n        }\n    }\n}\n`;
+            break;
         case 'javascript':
         case 'js':
         default:
-            return {
-                language: 'javascript',
-                version: '*',
-                content: `const fs = require('fs');\n\n${userCode}\n\nconst input = fs.readFileSync('/dev/stdin', 'utf-8').trim();\ntry {\n    const parsed = JSON.parse(input);\n    console.log(solve(parsed));\n} catch (e) {\n    console.log(solve(input));\n}\n`
-            };
+            language = 'nodejs';
+            versionIndex = '4';
+            content = `${userCode}\n\nconst readline = require('readline');\nconst rl = readline.createInterface({ input: process.stdin });\nlet inputData = '';\nrl.on('line', line => inputData += line);\nrl.on('close', () => {\n    try {\n        const parsed = JSON.parse(inputData.trim());\n        console.log(solve(parsed));\n    } catch (e) {\n        console.log(solve(inputData.trim()));\n    }\n});\n`;
+            break;
     }
+
+    return { language, versionIndex, content };
 };
 
-const executeWithPiston = async (languageName, code, input) => {
-    const config = getPistonConfig(languageName, code);
+const executeWithJDoodle = async (languageName, code, input) => {
+    const { language, versionIndex, content } = getJDoodleConfig(languageName, code);
+
     const payload = {
-        language: config.language,
-        version: config.version,
-        files: [{ content: config.content }],
-        stdin: String(input)
+        clientId:     process.env.JDOODLE_CLIENT_ID,
+        clientSecret: process.env.JDOODLE_CLIENT_SECRET,
+        script:       content,
+        language:     language,
+        versionIndex: versionIndex,
+        stdin:        String(input)
     };
+
     try {
-        const response = await axios.post("https://emkc.org/api/v2/piston/execute", payload);
-        if (response.data.compile && response.data.compile.code !== 0) {
-            throw new Error(response.data.compile.output);
+        const response = await axios.post('https://api.jdoodle.com/v1/execute', payload);
+        const result = response.data;
+
+        if (result.error) {
+            throw new Error(result.error);
         }
-        if (response.data.run.code !== 0) {
-            throw new Error(response.data.run.output);
+
+        // statusCode 200 = success, 429 = daily limit reached
+        if (result.statusCode === 429) {
+            throw new Error('Daily execution limit reached (200/day). Try again tomorrow.');
         }
-        return response.data.run.output;
+        if (result.statusCode && result.statusCode !== 200) {
+            throw new Error(`Execution failed: ${result.output || result.statusCode}`);
+        }
+
+        return result.output || '';
     } catch (error) {
-        throw new Error(error.response?.data?.message || error.message);
+        if (error.response) {
+            throw new Error(error.response.data?.error || `JDoodle API Error: ${error.response.status}`);
+        }
+        throw new Error(error.message);
     }
 };
 
@@ -201,7 +216,7 @@ exports.submitCode = async (req, res) => {
 
     try {
         for (const testCase of question.testCases) {
-            const output = await executeWithPiston(languageName, code, testCase.input);
+            const output = await executeWithJDoodle(languageName, code, testCase.input);
             if (String(output).trim() === String(testCase.expectedOutput).trim()) {
                 passedTests++;
             } else {
@@ -298,7 +313,7 @@ exports.runCode = async (req, res) => {
 
     try {
         for (const testCase of question.testCases) {
-            const output = await executeWithPiston(languageName, code, testCase.input);
+            const output = await executeWithJDoodle(languageName, code, testCase.input);
             if (String(output).trim() === String(testCase.expectedOutput).trim()) {
                 passedTests++;
             } else {

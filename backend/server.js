@@ -17,6 +17,7 @@ const messageRoutes = require("./routes/message.routes");
 const paymentRoutes = require("./routes/payment.routes");
 const learningRoutes = require("./routes/learning.routes");
 const projectRoutes = require("./routes/project.routes");
+const contactRoutes = require("./routes/contact.routes");
 
 //connect databse 
 connectDB();
@@ -84,6 +85,7 @@ app.use("/api/v1/message", messageRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/learning", learningRoutes);
 app.use("/api/v1/project", projectRoutes);
+app.use("/api/v1/contact", contactRoutes);
 
 server.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}`);

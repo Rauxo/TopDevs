@@ -260,7 +260,8 @@ exports.logout = async (req, res) => {
 
 exports.getProfile = async (req, res) => {
   try {
-    return res.status(200).json({ user: req.user });
+    const user = await userModel.findById(req.user._id).select("-password").populate("selectedLanguages.language");
+    return res.status(200).json({ user });
   } catch (error) {
     return res.status(500).json({ message: "Something went wrong" });
   }
@@ -373,10 +374,20 @@ exports.getLeaderboard = async (req, res) => {
       return res.status(200).json({ users });
     } else {
       const users = await userModel.find(matchStage)
-        .select("username profileImg about createdAt profileLevel")
+        .select("username profileImg about createdAt profileLevel selectedLanguages")
         .sort({ profileLevel: -1, createdAt: 1 })
         .limit(10);
-      return res.status(200).json({ users });
+        
+      const usersWithProgress = users.map(u => {
+        const userObj = u.toObject();
+        userObj.progress = userObj.selectedLanguages?.length > 0 
+          ? Math.max(...userObj.selectedLanguages.map(sl => sl.progress || 0))
+          : 0;
+        delete userObj.selectedLanguages;
+        return userObj;
+      });
+      
+      return res.status(200).json({ users: usersWithProgress });
     }
   } catch (error) {
     console.error("Leaderboard error:", error);

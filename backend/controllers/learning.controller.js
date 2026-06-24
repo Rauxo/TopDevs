@@ -254,7 +254,7 @@ exports.submitCode = async (req, res) => {
       user.points += question.points;
 
       // Update progress
-      const langId = question.level.language.toString();
+      const langId = question.level.language._id.toString();
       const selectedLang = user.selectedLanguages.find(sl => sl.language.toString() === langId);
 
       if (selectedLang) {

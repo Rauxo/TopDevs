@@ -32,19 +32,7 @@ exports.createOrder = async (req, res) => {
       },
     };
 
-    const response = await cashfree.PGCreateOrder({
-      order_amount: plan.price,
-      order_currency: "INR",
-      order_id: orderId,
-      customer_details: {
-        customer_id: user._id.toString(),
-        customer_phone: user.phone || "9999999999",
-        customer_email: user.email || "test@topdevs.com",
-      },
-      order_meta: {
-        return_url: `http://localhost:5173/payment-status?order_id=${orderId}`,
-      },
-    });
+    const response = await cashfree.PGCreateOrder(request);
 
     if (response.data && response.data.payment_session_id) {
       res.status(200).json({
@@ -68,12 +56,14 @@ exports.createOrder = async (req, res) => {
 
 exports.verifyPayment = async (req, res) => {
   try {
+    console.log("try to verify the payment.")
     const { order_id, planId } = req.body;
     const userId = req.user?._id || req.company?._id;
     const type = req.user ? "User" : "Company";
 
     // Fetch the order status directly from Cashfree
-    const response = await Cashfree.PGFetchOrder("2023-08-01", order_id);
+    const response = await cashfree.PGFetchOrder(order_id);
+    console.log("the verifying response is:- ", response)
 
     if (response.data && response.data.order_status === "PAID") {
       // Payment verified, upgrade user plan
